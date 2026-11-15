@@ -48,9 +48,13 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 .brand-icon{width:88px;height:49px;border-radius:9px;background:#fff;box-shadow:none}
 .brand-icon .brand-photo{padding:1px;object-fit:contain}
 @media(max-width:400px){.brand-icon{width:66px;height:43px}.brand{gap:7px}.brand-text strong{font-size:clamp(10px,3.5vw,14px);white-space:normal}}
+</style><style>
+.app-background-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.17;pointer-events:none;z-index:-1}
+[data-theme=dark] .app-background-photo{opacity:.11}
 </style></head>
 <body>
 <div class="app" id="app">
+<img class="app-background-photo" src="assets/latar-utama.jpg" alt="" aria-hidden="true" decoding="async" onerror="this.remove()">
 <svg class="watermark" viewBox="0 0 260 620" aria-hidden="true">
  <g fill="none" stroke="#3477cb" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
   <path d="M95 105q3-55 37-57 40 2 43 57zM84 107h97"/>

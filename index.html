@@ -34,6 +34,20 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 .unit-photo{width:100%;height:118px;object-fit:contain;background:transparent;border-radius:9px;margin:4px 0}.param-photo{width:100%;max-height:180px;object-fit:contain;margin-top:9px}
 </style><style>
 .param-with-photo{display:flex;align-items:center;gap:10px}.param-copy{flex:1;min-width:0}.param-with-photo .param-photo{flex:0 0 auto;width:clamp(64px,22vw,110px);height:clamp(64px,22vw,110px);margin:0;object-fit:contain}.tile-square{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:9px;background:#ffffff26;overflow:hidden}.tile-square .unit-photo{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:contain;padding:3px;box-sizing:border-box}.tile-square:has(img) svg{visibility:hidden}
+</style><style>
+.hub details.glass>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0}
+.hub details.glass>summary::-webkit-details-marker{display:none}
+.hub details.glass>summary::after{content:"";box-sizing:border-box;width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#174875 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/19px no-repeat}
+.hub details[open]>summary::after{transform:rotate(180deg)}
+#guideToggle{display:grid;place-items:center;background:#174875;color:#fff;border-radius:8px;width:32px;height:32px}#guideToggle .chevron{color:#fff}
+[data-theme=dark] .hub details.glass>summary::after,[data-theme=dark] #guideToggle{background-color:#346da5}
+.tile,.param-with-photo{position:relative;isolation:isolate;overflow:hidden}
+.tile>.card-watermark,.param-with-photo>.card-watermark{position:absolute;z-index:-1;pointer-events:none;right:0;bottom:0;width:74%;height:100%;object-fit:contain;object-position:right bottom;opacity:.13}
+.param-with-photo>.card-watermark{width:68%;opacity:.09}
+</style><style>
+.brand-icon{width:88px;height:49px;border-radius:9px;background:#fff;box-shadow:none}
+.brand-icon .brand-photo{padding:1px;object-fit:contain}
+@media(max-width:400px){.brand-icon{width:66px;height:43px}.brand{gap:7px}.brand-text strong{font-size:clamp(10px,3.5vw,14px);white-space:normal}}
 </style></head>
 <body>
 <div class="app" id="app">
@@ -47,7 +61,7 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
  </g>
 </svg>
 <header class="topbar">
- <div class="brand"><div class="brand-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 18 7.5 6l4.1 8 3.1-4 6.3 8" stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg><img class="brand-photo" src="assets/logo-gpe.png" alt="Logo GPE" onerror="this.remove()"></div><div class="brand-text"><small>GPE • PRODUCTIVITY TOOL</small><strong>LEADER PARAMETER</strong></div></div>
+ <div class="brand"><div class="brand-icon"><img class="brand-photo" src="assets/logo-gpe.png" alt="Logo GPE" onerror="this.parentElement.hidden=true"></div><div class="brand-text"><small>GPE • PRODUCTIVITY TOOL</small><strong>LEADER PARAMETER</strong></div></div>
  <div class="top-actions"><button class="icon-btn" id="themeToggle" type="button" aria-label="Aktifkan mode gelap">☾</button><button class="icon-btn" id="headerStandards" aria-label="Lihat tabel standar fleet" title="Tabel standar fleet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h9m4 0h3M4 17h3m4 0h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="7" r="2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="17" r="2" stroke="currentColor" stroke-width="2"/></svg></button><button class="icon-btn" id="resetBtn" aria-label="Reset sesi" title="Reset sesi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 11a8 8 0 1 1 2.1 5.4M4 5v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
 </header><div class="livebar"></div>
 <main class="screen" id="homeScreen">
@@ -269,8 +283,8 @@ const parameters={
 };
 const n=(key,label,value='',min=0,max)=>({key,label,value,min,max});
 const calcs=[
- ['loader','PTY Loader','60 ÷ (spotting + loading dalam menit) × muatan per trip × EWH',[n('t','Spotting + loading (menit)'),n('v','Muatan per trip'),n('s','Secondary work (menit/jam)',0,0,59.99)],({t,v,s})=>60/t*v*(60-s)/60,'payload'],
- ['hauler','PTY Hauler','3600 ÷ cycle time hauler (detik) × muatan per trip',[n('t','Cycle time hauler (detik)'),n('v','Muatan per trip')],({t,v})=>3600/t*v,'payload'],
+ ['loader','PTY Loader','60 ÷ (spotting + loading dalam menit) × kapasitas vessel × EWH',[n('t','Spotting + loading (menit)'),n('v','Kapasitas vessel (BCM)'),n('s','Secondary work (menit/jam)',0,0,59.99)],({t,v,s})=>60/t*v*(60-s)/60,'payload'],
+ ['hauler','PTY Hauler','3600 ÷ cycle time hauler (detik) × kapasitas vessel',[n('t','Cycle time hauler (detik)'),n('v','Kapasitas vessel (BCM)')],({t,v})=>3600/t*v,'payload'],
  ['match','Matching Fleet','Cycle time hauler ÷ (spotting + loading), keduanya dalam menit. Bulatkan ke atas untuk estimasi jumlah hauler.',[n('h','Cycle time hauler (menit)'),n('t','Spotting + loading (menit)')],({h,t})=>Math.ceil(h/t),'hauler'],
  ['matchpty','Kebutuhan Hauler dari PTY','PTY loader ÷ PTY satu hauler, dengan satuan produksi sama. Bulatkan ke atas.',[n('l','PTY loader'),n('h','PTY satu hauler')],({l,h})=>Math.ceil(l/h),'hauler'],
  ['dozer','Kebutuhan Dozer Disposal','Kapasitas blade efektif = volume per dumping ÷ jumlah pass. PTY dozer = 3600 ÷ CT × blade efektif × EK. Kebutuhan = debit masuk ÷ PTY dozer, dibulatkan ke atas.',[n('q','Material masuk (m³ lepas/jam)'),n('v','Volume per dumping (m³ lepas)'),n('p','Jumlah pass dozing per dumping'),n('t','Cycle time satu pass (detik)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({q,v,p,t,e})=>({value:Math.ceil(q/(3600/t*v/p*e)),note:'PTY per dozer '+number(3600/t*v/p*e)+' m³ lepas/jam'}),'dozer'],
@@ -431,16 +445,16 @@ function parameterRows(title,rows){
   const name=title==='Hauler'?haulers[label]:null;
   const description='<div class="param-copy"><strong>'+escapeHtml(label)+'</strong><ul>'+
    copy.split(/ · |(?<=\.) (?=[A-Z])/).map(part=>'<li>'+escapeHtml(part)+'</li>').join('')+'</ul></div>';
-  return '<div class="param-row param-with-photo">'+description+(name?unitPhoto(name,'param-photo'):'')+'</div>';
+  return '<div class="param-row param-with-photo">'+description+(name?unitPhoto(name,'param-photo')+unitPhoto(name,'card-watermark'):'')+'</div>';
  }).join('');
  const group=groups[title];
- return group?'<div class="param-with-photo"><div class="param-copy">'+list+'</div>'+unitPhoto(group,'param-photo')+'</div>':list;
+ return group?'<div class="param-with-photo"><div class="param-copy">'+list+'</div>'+unitPhoto(group,'param-photo')+unitPhoto(group,'card-watermark')+'</div>':list;
 }
 function tiles(items){
  const photos={measure:'excavator',calc:'hd465',param:'dt-volvo'};
  return items.map(([key,label,desc,i,color])=>{
   const photo=photos[key];
-  return '<button class="tile" style="--tile:'+color+'" data-page="'+key+'"><span class="tile-square">'+icon(i)+(photo?unitPhoto(photo,'unit-photo'):'')+'</span><b>'+escapeHtml(label)+'</b><small>'+escapeHtml(desc)+'</small></button>';
+  return '<button class="tile" style="--tile:'+color+'" data-page="'+key+'"><span class="tile-square">'+icon(i)+(photo?unitPhoto(photo,'unit-photo'):'')+'</span><b>'+escapeHtml(label)+'</b><small>'+escapeHtml(desc)+'</small>'+(photo?unitPhoto(photo,'card-watermark'):'')+'</button>';
  }).join('');
 }
 function renderSafety(content){
@@ -457,9 +471,9 @@ function renderCalculator(){
  const visible=fields.filter(f=>!geometry||!['w','r'].includes(f.key));
  const input=(key,label,value='',optional=false)=>'<div><label for="field-'+key+'">'+escapeHtml(label)+'</label><input type="text" inputmode="decimal" id="field-'+key+'" value="'+value+'" '+(optional?'placeholder="Opsional"':'')+'></div>';
  $('calcDetail').innerHTML='<h2>'+escapeHtml(title)+'</h2><form id="calcForm" novalidate><div class="calc-grid">'+
-  ((payload||geometry)?'<div><label for="calcHauler">Jenis hauler</label><select id="calcHauler">'+choices.map(([k])=>'<option>'+k+'</option>').join('')+(payload?'<option>Muatan manual</option>':'')+'</select></div>':'')+
+  ((payload||geometry)?'<div><label for="calcHauler">Jenis hauler</label><select id="calcHauler">'+choices.map(([k])=>'<option>'+k+'</option>').join('')+(payload?'<option>Kapasitas vessel manual</option>':'')+'</select></div>':'')+
   (autoTarget?'<div><label for="calcLoader">Excavator</label><select id="calcLoader">'+[...new Set(PAIRS.map(p=>p.loader))].map(x=>'<option>'+x+'</option>').join('')+'</select></div>':'')+
-  visible.map(f=>input(f.key,payload&&f.key==='v'?'Muatan (BCM/trip)':f.label,f.value)).join('')+
+  visible.map(f=>input(f.key,payload&&f.key==='v'?'Kapasitas vessel (BCM)':f.label,f.value)).join('')+
   (autoTarget?'<div><label for="targetMode">Mode target</label><select id="targetMode"><option value="auto">Otomatis</option><option value="custom">Custom</option></select></div>':'')+
   (compare?input('benchmark',geometry?'Lebar aktual (m)':'Target (BCM/jam)','',true):'')+
   '</div><p id="calcPreset" class="hint"></p><button class="action-btn" id="calcRun" type="button">Hitung</button></form><div id="calcOutput" role="status" aria-live="polite"></div><p class="hint">'+escapeHtml(formula)+'</p>';

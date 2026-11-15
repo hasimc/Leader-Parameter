@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#163c72">
+<title>GPE Loader Analytic</title>
+<style>
+:root{--navy:#153766;--blue:#2468d3;--blue2:#3984f5;--sky:#eaf2ff;--sky2:#dceaff;--green:#48bd78;--ink:#183350;--muted:#6d829c;--line:#d7e2f1;--danger:#c65c3f;--amber:#dda02c;--surface:rgba(236,244,255,.82);--shadow:0 9px 26px rgba(36,83,148,.12)}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#edf3fb}button,select,input{font:inherit}button{cursor:pointer}.app{height:100dvh;min-height:0;position:relative;overflow:hidden;background:radial-gradient(ellipse at 93% 35%,rgba(120,174,249,.16),transparent 30%),radial-gradient(ellipse at 4% 78%,rgba(108,188,218,.12),transparent 34%),linear-gradient(150deg,#f5f8fd,#eaf1fa);isolation:isolate}.watermark{position:absolute;z-index:0;width:min(52vw,360px);height:auto;right:-4%;top:20%;opacity:.10;pointer-events:none}.topbar{height:calc(64px + env(safe-area-inset-top));padding:7px 16px 7px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(110deg,#193d72,#12315f);color:#fff;position:relative;z-index:2}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#4c91f8,#2870de);display:grid;place-items:center;box-shadow:inset 0 1px 0 #ffffff88,0 4px 12px #071e4428;flex:none}.brand-text small{display:block;color:#b9cee9;font-size:9px;letter-spacing:.12em;font-weight:800}.brand-text strong{font-size:15px;letter-spacing:.035em;white-space:nowrap}.top-actions{display:flex;gap:7px}.icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid #ffffff25;background:#ffffff12;color:#fff;display:grid;place-items:center}.icon-btn:hover{background:#ffffff24}.livebar{position:absolute;z-index:3;left:0;right:0;top:calc(64px + env(safe-area-inset-top));height:3px;background:linear-gradient(90deg,var(--green) 0 19%,#4a8ff3 19% 100%)}.screen{position:absolute;z-index:1;inset:calc(67px + env(safe-area-inset-top)) 0 0;display:flex;flex-direction:column;min-height:0}.home-content{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;padding:11px 14px calc(env(safe-area-inset-bottom) + 8px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;max-width:660px;width:100%;margin:0 auto}.home-content::-webkit-scrollbar{display:none}.glass{background:linear-gradient(135deg,rgba(237,245,255,.87),rgba(222,236,253,.78));border:1px solid rgba(255,255,255,.92);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:17px;position:relative}.glass:after{content:"";position:absolute;left:18px;right:18px;top:1px;height:1px;background:#fff9;border-radius:2px;pointer-events:none}.guide{min-height:54px;padding:9px 13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex:none}.guide-main{min-width:0}.eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#788ca5;font-weight:800}.guide-title{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;margin-top:2px}.guide-summary{font-size:10px;color:var(--muted);margin-top:1px}.guide-side{display:flex;align-items:center;gap:7px;flex:none}.step-tag{font-size:9px;color:#2868c8;font-weight:800;background:#e5efff;border-radius:99px;padding:5px 8px}.chevron{color:#2468d3;transition:transform .2s}.guide.open .chevron{transform:rotate(180deg)}.guide-popover{position:static;z-index:auto;flex:1 0 100%;width:100%;margin-top:2px;padding:10px 12px;background:rgba(250,252,255,.84);border:1px solid #d5e3f6;border-radius:12px;box-shadow:inset 0 1px 0 #ffffffb0;backdrop-filter:blur(12px)}.guide-popover[hidden]{display:none}.guide-step{display:flex;gap:9px;align-items:flex-start;font-size:11px;line-height:1.35;color:#435b76;padding:5px 0}.guide-step b{color:#1d416f}.step-no{width:19px;height:19px;border-radius:50%;background:#e4efff;color:#2168d2;display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}.panel{padding:11px 13px;flex:none}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}.panel h2{font-size:14px;line-height:1.15;margin:0;color:#1b3b62;letter-spacing:-.01em}.panel-sub{font-size:10px;color:var(--muted);margin-top:3px}.tiny-action{border:0;background:#e5efff;color:#2868c8;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:800;white-space:nowrap}.pair-selects{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:7px}.select-wrap label{display:block;font-size:8px;letter-spacing:.11em;color:#7389a2;font-weight:800;margin:0 0 3px 2px}.select-wrap select{appearance:none;width:100%;height:32px;border-radius:9px;border:1px solid #cbdcf2;background:rgba(255,255,255,.83);color:#234565;font-weight:750;font-size:12px;padding:0 27px 0 10px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%235f7690' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}.target-note{font-size:8px;letter-spacing:.025em;color:#37659e;background:rgba(224,237,255,.75);padding:5px 8px;border-radius:8px;margin-bottom:5px}.targets{display:grid;grid-template-columns:1fr 1fr;gap:6px}.target{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:3px 1px}.target+.target{border-left:1px solid #d1deef;padding-left:11px}.target-label{font-size:10px;color:#45607d;font-weight:700}.target-value{font-size:15px;font-weight:850;color:#236bd7;font-variant-numeric:tabular-nums}.target-value.unset{font-size:9px;color:#7a8da4;font-weight:700}.history-card{padding:9px 13px 8px;flex:1;min-height:112px;display:flex;flex-direction:column;overflow:hidden}.history-card .panel-head{margin-bottom:4px;align-items:center}.history-count{font-size:9px;color:#3468a7;background:#e3edfb;padding:5px 8px;border-radius:99px;font-weight:800;white-space:nowrap}.history-columns,.phase-row{display:grid;grid-template-columns:minmax(0,1fr) 68px 72px;align-items:center;gap:5px}.history-columns{font-size:8px;letter-spacing:.09em;color:#7c90a8;font-weight:800;padding:3px 0 5px;border-bottom:1px solid #d5e0ed}.history-columns span:nth-child(2),.phase-time{text-align:left}.history-columns span:last-child,.phase-status{text-align:right}.phase-list{min-height:0;overflow:hidden}.phase-row{min-height:27px;border-bottom:1px solid rgba(199,215,235,.55);font-size:10px}.phase-name{display:flex;align-items:center;gap:7px;min-width:0;color:#35516f;font-weight:750}.phase-dot{width:8px;height:8px;border-radius:50%;background:#317bea;box-shadow:0 0 0 3px #dceaff;flex:none}.phase-dot.loading{background:#51b979;box-shadow:0 0 0 3px #e0f4e8}.phase-meta{font-size:8px;color:#8798ab;font-weight:600;margin-left:2px;white-space:nowrap}.phase-time{font-variant-numeric:tabular-nums;font-weight:800;color:#294967;font-size:11px}.status-pill{display:inline-flex;justify-content:center;min-width:54px;border-radius:99px;padding:4px 6px;font-size:8px;font-weight:850}.status-good{background:#e4f5eb;color:#258252}.status-warn{background:#fff0e9;color:#b65d3f}.status-neutral{background:#e9eff6;color:#657b93}.empty-log{min-height:42px;display:grid;place-items:center;text-align:center;color:#8495a8;font-size:10px}.log-foot{font-size:8px;color:#8193a8;margin-top:4px}.measure-area{flex:none;padding:9px 10px 10px}.measure-head{display:flex;align-items:center;justify-content:space-between;padding:0 3px 7px}.measure-head h2{font-size:14px;margin:0;color:#1b3b62}.measure-head span{font-size:9px;color:#6b819a}.controls{display:grid;grid-template-columns:minmax(0,1fr) 82px;gap:7px}.measure-button{height:78px;border:0;border-radius:14px;background:linear-gradient(130deg,#3987f8 0%,#276bd5 58%,#1b55bb 100%);color:#fff;text-align:left;padding:9px 12px;display:grid;grid-template-columns:minmax(0,1fr) 1px 122px;align-items:center;gap:10px;box-shadow:0 8px 18px #1d59b928,inset 0 1px 0 #ffffff60;position:relative;overflow:hidden}.measure-button:before{content:"";position:absolute;left:-20%;top:-65%;width:58%;height:210%;background:linear-gradient(90deg,transparent,#ffffff15,transparent);transform:rotate(22deg);pointer-events:none}.timer-info,.measure-action{position:relative;z-index:1}.phase-label{font-size:8px;font-weight:850;letter-spacing:.08em;color:#d9e8ff;display:flex;align-items:center;gap:6px}.live-dot{width:6px;height:6px;border-radius:50%;background:#53d783;box-shadow:0 0 0 3px #53d78332}.timer-value{font-size:26px;line-height:1.15;font-weight:800;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-top:3px}.measure-separator{height:46px;background:#ffffff50;position:relative;z-index:1}.measure-action{text-align:center}.measure-action strong{display:block;font-size:14px;letter-spacing:.08em}.measure-action small{display:block;font-size:8px;color:#d6e6ff;margin-top:3px;line-height:1.2}.results-button{height:78px;border-radius:14px;border:1.5px solid #3b7de1;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(226,238,255,.84));color:#2868c8;box-shadow:0 7px 16px #265a9e18,inset 0 1px 0 white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:4px}.results-button svg{width:20px;height:20px}.results-button span{font-size:8px;line-height:1.15;font-weight:850;text-align:center}.session-tools{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:0 2px}.session-hint{font-size:8px;color:#8092a7}.small-link{border:0;background:transparent;color:#3e6fab;font-size:9px;font-weight:750;padding:3px 4px}.screen-results{display:none;position:absolute;z-index:4;top:calc(64px + env(safe-area-inset-top));right:0;bottom:0;left:0;overflow:auto;padding:14px 15px calc(env(safe-area-inset-bottom) + 18px)}.results-wrap{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:11px}.results-top{display:flex;align-items:center;gap:10px}.back-btn{width:38px;height:38px;border:1px solid #d6e2f2;border-radius:12px;background:#ffffffbb;color:#215da9;display:grid;place-items:center;box-shadow:0 4px 12px #244d8010}.results-title h1{margin:0;font-size:19px;color:#183b67}.results-title p{margin:3px 0 0;color:#71859d;font-size:11px}.result-pair{margin-left:auto;background:#e4efff;color:#2d66af;padding:7px 9px;border-radius:10px;font-size:10px;font-weight:800}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.summary-card{padding:12px 10px;border-radius:15px;background:linear-gradient(145deg,rgba(239,246,255,.95),rgba(222,235,252,.86));border:1px solid #ffffff;box-shadow:var(--shadow);backdrop-filter:blur(14px)}.summary-card small{display:block;color:#778ca6;font-size:8px;line-height:1.2;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.summary-card strong{display:block;font-size:17px;color:#1d5fb9;margin-top:5px;font-variant-numeric:tabular-nums}.summary-card em{display:block;font-style:normal;color:#7d90a6;font-size:8px;margin-top:2px}.result-panel{padding:14px;border-radius:17px;background:linear-gradient(135deg,rgba(239,246,255,.94),rgba(220,235,253,.84));border:1px solid #ffffff;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.result-panel h2{font-size:14px;margin:0 0 8px;color:#1b3b62}.overall{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:12px;background:#ffffffaa;border:1px solid #ffffff}.overall-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#e4f2ff;color:#2468d3;flex:none}.overall strong{display:block;font-size:12px;color:#264868}.overall p{font-size:10px;line-height:1.45;color:#687f98;margin:3px 0 0}.recommendation-list{margin:8px 0 0;padding-left:16px;color:#4d6682;font-size:10px;line-height:1.5}.recommendation-list li+li{margin-top:3px}.result-table-wrap{overflow:auto;border-radius:11px;border:1px solid #d7e3f2;background:#ffffffb8}.result-table{border-collapse:collapse;width:100%;min-width:470px;font-size:10px}.result-table th{text-align:left;color:#758aa2;background:#edf4ff;font-size:8px;letter-spacing:.07em;padding:8px}.result-table td{padding:8px;border-top:1px solid #e3ebf5;color:#35516e;font-variant-numeric:tabular-nums}.result-actions{display:flex;gap:8px}.action-btn{border:0;border-radius:10px;padding:10px 12px;background:#2468d3;color:#fff;font-size:10px;font-weight:800;box-shadow:0 5px 13px #1d59b923}.action-btn.secondary{background:#ffffffc9;color:#2c64a7;border:1px solid #cbdcf2;box-shadow:none}.empty-results{padding:18px;border:1px dashed #bfd1e7;border-radius:12px;text-align:center;color:#71859b;font-size:11px;background:#ffffff80}.modal-backdrop{position:fixed;inset:0;z-index:20;background:#0c234b70;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}.modal-backdrop.show{display:flex}.modal{width:min(440px,100%);border:1px solid #ffffff;border-radius:20px;padding:17px;background:linear-gradient(145deg,#f7faff,#e7f0fc);box-shadow:0 22px 60px #0d2c523b}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.modal h2{font-size:16px;margin:0;color:#193e6e}.modal-desc{font-size:10px;line-height:1.45;color:#6d829a;margin:4px 0 14px}.modal-close{border:0;width:30px;height:30px;border-radius:9px;background:#e2ecf9;color:#345d8b;font-size:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:9px;font-weight:800;color:#58718e;margin:0 0 5px}.field input{width:100%;height:40px;border:1px solid #c9d9ec;border-radius:10px;padding:0 10px;background:#ffffffd9;color:#244664;font-size:14px;font-weight:750}.modal-note{margin-top:11px;padding:9px 10px;border-radius:10px;background:#e4efff;color:#49698d;font-size:9px;line-height:1.45}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:13px}.modal-actions button{border:0;border-radius:10px;padding:9px 13px;font-size:10px;font-weight:800}.cancel{background:#e5edf7;color:#516b86}.save{background:#2468d3;color:#fff}.toast{position:fixed;z-index:30;left:50%;bottom:calc(env(safe-area-inset-bottom) + 18px);transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#183c6d;color:#fff;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:750;box-shadow:0 10px 28px #153a6633;transition:.2s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+.pair-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.pair-chip{display:inline-flex;align-items:center;min-height:22px;padding:4px 8px;border-radius:999px;background:rgba(215,231,251,.72);border:1px solid rgba(255,255,255,.8);color:#416384;font-size:9px;font-weight:750}.pair-chip.caution{background:rgba(255,239,214,.76);color:#966a26}.standards-modal{width:min(760px,100%);max-height:calc(100dvh - 28px);display:flex;flex-direction:column;overflow:hidden}.standards-table-wrap{max-height:56dvh;overflow:auto;border:1px solid #d7e3f2;border-radius:11px;background:#ffffffb8}.standards-table{min-width:790px}.standards-table th,.standards-table td{white-space:normal;line-height:1.35}.standards-table td:first-child,.standards-table th:first-child{text-align:center;width:40px}.standards-table td:nth-child(4),.standards-table td:nth-child(5){font-variant-numeric:tabular-nums;white-space:nowrap}.standard-note{display:inline-flex;padding:4px 7px;border-radius:99px;background:#fff1db;color:#946822;font-size:8px;font-weight:800;white-space:nowrap}.standards-modal .modal-note{flex:none}.standards-modal .modal-actions{flex:none}
+@media(max-height:760px){.home-content{gap:6px;padding-top:7px}.guide{min-height:48px;padding:7px 11px}.panel{padding:8px 11px}.history-card{min-height:95px}.phase-row{min-height:23px}.measure-area{padding:7px 8px}.measure-button,.results-button{height:68px}.measure-button{grid-template-columns:minmax(0,1fr) 1px 108px;padding:7px 10px}.timer-value{font-size:23px}.results-button span{font-size:7px}.controls{grid-template-columns:minmax(0,1fr) 74px}.summary-card{padding:9px 8px}}
+@media(max-width:360px){.home-content{padding-left:9px;padding-right:9px}.topbar{padding-left:11px;padding-right:11px}.brand-text strong{font-size:13px}.top-actions{gap:4px}.icon-btn{width:34px;height:34px}.controls{grid-template-columns:minmax(0,1fr) 74px}.measure-button{grid-template-columns:minmax(0,1fr) 1px 91px;gap:7px}.timer-value{font-size:22px}.measure-action strong{font-size:12px}.measure-action small{font-size:7px}.panel h2{font-size:13px}}
+</style>
+<style>
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;align-items:end}.calc-grid label{font-size:13px}.calc-grid input,.calc-grid select{min-width:0}.hub #calcOutput:not(:empty){margin-top:12px;font-size:16px;font-weight:700;scroll-margin-bottom:16px}.calc-result{padding:12px;background:#e8f4f3;border-radius:12px;color:#104e43}.calc-result strong{display:block;font-size:clamp(28px,8vw,46px);line-height:1.1}.calc-result p{margin:8px 0 0}.param-row{padding:8px 0;border-bottom:1px solid #cbd9e7}.param-row:last-child{border:0}.param-row ul,.hub-card ol{padding-left:22px;margin:5px 0}.hub-card li+li{margin-top:4px}
+</style><style>
+.calc-result{padding:16px;border:1px solid #a9d7ce;background:linear-gradient(145deg,#f5fffc,#dcefeb);box-shadow:0 8px 20px #173f5220}.calc-result h3{margin:0 0 7px;font-size:16px}.calc-result strong{font-size:clamp(34px,10vw,52px)}.calc-result p,.calc-result span{font-size:15px;line-height:1.5}.calc-advice{margin-top:13px;padding:11px;background:#ffffffb3;border-radius:9px}.calc-advice p{margin:0}.screen-results .overall p,.screen-results .recommendation-list{font-size:14px;line-height:1.55}.screen-results .overall strong{font-size:15px}
+</style></head>
+<body>
+<div class="app" id="app">
+<svg class="watermark" viewBox="0 0 260 620" aria-hidden="true">
+ <g fill="none" stroke="#3477cb" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M95 105q3-55 37-57 40 2 43 57zM84 107h97"/>
+  <path d="M99 130q34-20 68 0l29 40-14 111-13 89h-71l-13-89-14-111z" fill="#4386d4" fill-opacity=".11"/>
+  <path d="M105 135l31 25 30-25M135 160l-19 70 25 47 32-60M96 170l-23 90 15 65M115 370l-6 138-10 52h39l10-53 15-137M162 370l9 138 21 52h-40l-17-53-10-137"/>
+  <path d="M111 200l25 17 27-17M115 237h44" stroke="#52b17a" stroke-width="8"/>
+  <path d="M96 560h43m22 0h42"/>
+ </g>
+</svg>
+<header class="topbar">
+ <div class="brand"><div class="brand-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 18 7.5 6l4.1 8 3.1-4 6.3 8" stroke="white" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="brand-text"><small>GPE • PRODUCTIVITY TOOL</small><strong>LOADER ANALYTIC</strong></div></div>
+ <div class="top-actions"><button class="icon-btn" id="headerStandards" aria-label="Lihat tabel standar fleet" title="Tabel standar fleet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h9m4 0h3M4 17h3m4 0h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="7" r="2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="17" r="2" stroke="currentColor" stroke-width="2"/></svg></button><button class="icon-btn" id="resetBtn" aria-label="Reset sesi" title="Reset sesi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 11a8 8 0 1 1 2.1 5.4M4 5v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+</header><div class="livebar"></div>
+<main class="screen" id="homeScreen">
+ <div class="home-content">
+  <section class="glass guide" id="guideCard">
+   <div class="guide-main"><div class="eyebrow">PANDUAN</div><div class="guide-title">Cara Penggunaan</div><div class="guide-summary">Ketuk untuk membuka langkah pengukuran</div></div>
+   <div class="guide-side"><span class="step-tag">3 LANGKAH</span><button class="small-link" id="guideToggle" aria-label="Buka panduan"><svg class="chevron" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m4 7 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+   <div class="guide-popover" id="guidePopover" hidden>
+    <div class="guide-step"><span class="step-no">1</span><span><b>Mulai spotting</b> saat hauler penuh mulai meninggalkan front atau klakson full terdengar.</span></div>
+    <div class="guide-step"><span class="step-no">2</span><span>Tekan <b>Ukur</b> tepat saat bucket pertama ditumpahkan. Timer berpindah ke loading.</span></div>
+    <div class="guide-step"><span class="step-no">3</span><span>Tekan lagi saat hauler full/maju. Siklus tersimpan dan spotting berikutnya langsung berjalan.</span></div>
+   </div>
+  </section>
+  <section class="glass panel" aria-labelledby="parametersTitle">
+   <div class="panel-head"><div><h2 id="parametersTitle">Parameter Waktu</h2><div class="panel-sub">Standar waktu sesuai pasangan unit</div></div><button class="tiny-action" id="openStandards">TABEL FLEET</button></div>
+   <div class="pair-selects"><div class="select-wrap"><label for="loaderSelect">LOADER</label><select id="loaderSelect"></select></div><div class="select-wrap"><label for="haulerSelect">HAULER</label><select id="haulerSelect"></select></div></div>
+   <div class="target-note" id="targetNote">Standar tetap sesuai tabel fleet yang dipilih.</div>
+   <div class="targets"><div class="target"><span class="target-label">Spotting</span><strong class="target-value" id="spotTargetView">00:20</strong></div><div class="target"><span class="target-label">Loading total</span><strong class="target-value" id="loadTargetView">01:54</strong></div></div>
+   <div class="pair-meta" id="pairInfo"></div>
+  </section>
+  <section class="glass history-card" aria-labelledby="historyTitle">
+   <div class="panel-head"><div><h2 id="historyTitle">Catatan Waktu</h2><div class="panel-sub">Daftar phase bertambah setiap pengukuran</div></div><span class="history-count" id="phaseCount">0 PHASE</span></div>
+   <div class="history-columns"><span>PHASE</span><span>DURASI</span><span>STATUS</span></div>
+   <div class="phase-list" id="phaseList"></div>
+   <div class="log-foot" id="logFoot">Data tersimpan otomatis di perangkat ini.</div>
+  </section>
+  <section class="glass measure-area" aria-labelledby="measureTitle">
+   <div class="measure-head"><h2 id="measureTitle">Pengukuran</h2><span id="cycleLabel">SIAP MEMULAI</span></div>
+   <div class="controls">
+    <button class="measure-button" id="measureBtn" type="button" aria-label="Mulai atau lanjutkan pengukuran">
+     <span class="timer-info"><span class="phase-label"><i class="live-dot"></i><span id="activePhase">SIAP • SPOTTING</span></span><span class="timer-value" id="timerValue">00:00.0</span></span>
+     <span class="measure-separator"></span><span class="measure-action"><strong>UKUR</strong><small id="measureHint">Mulai saat hauler meninggalkan front</small></span>
+    </button>
+    <button class="results-button" id="resultsBtn" type="button" aria-label="Buka hasil dan rekomendasi"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>HASIL &amp;<br>REKOMENDASI</span></button>
+   </div>
+   <div class="session-tools"><span class="session-hint" id="sessionHint">Siklus baru dimulai dari spotting.</span><button class="small-link" id="viewAllBtn">RIWAYAT LENGKAP ↗</button></div>
+  </section>
+ </div>
+</main>
+<section class="screen-results" id="resultsScreen" aria-label="Hasil dan rekomendasi">
+ <div class="results-wrap">
+  <div class="results-top"><button class="back-btn" id="backBtn" aria-label="Kembali"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m12 4-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="results-title"><h1>Hasil &amp; Rekomendasi</h1><p>Evaluasi waktu siklus loader</p></div><span class="result-pair" id="resultPair">PC1250 → HD465</span></div>
+  <div class="summary-grid"><div class="summary-card"><small>Siklus lengkap</small><strong id="sumCycles">0</strong><em>pengukuran</em></div><div class="summary-card"><small>Rata-rata spotting</small><strong id="sumSpot">—</strong><em id="sumSpotTarget">Target 00:47</em></div><div class="summary-card"><small>Rata-rata loading</small><strong id="sumLoad">—</strong><em id="sumLoadTarget">Target belum diatur</em></div></div>
+  <section class="result-panel"><h2>Kesimpulan</h2><div id="overallBox" class="overall"><span class="overall-icon"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M10 2.5 17 6v4.5c0 3.5-2.5 5.8-7 7-4.5-1.2-7-3.5-7-7V6z" stroke="currentColor" stroke-width="1.7"/><path d="m6.8 10 2.1 2.1 4.4-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong id="overallTitle">Belum ada hasil ukur</strong><p id="overallText">Selesaikan satu siklus untuk melihat evaluasi dan saran perbaikan.</p></div></div><ul class="recommendation-list" id="recommendations"></ul></section>
+  <section class="result-panel"><div class="panel-head"><div><h2>Riwayat Siklus</h2><div class="panel-sub">Semua siklus pada pasangan unit terpilih</div></div><div class="result-actions"><button class="action-btn secondary" id="exportBtn">Ekspor CSV</button></div></div><div id="cycleTableMount"></div></section>
+  <section class="result-panel"><div class="panel-head"><div><h2>Catatan Phase</h2><div class="panel-sub">Waktu spotting dan loading per siklus</div></div></div><div id="phaseTableMount"></div></section>
+ </div>
+</section>
+<div class="modal-backdrop" id="standardsModal" role="dialog" aria-modal="true" aria-labelledby="standardsTitle">
+ <div class="modal standards-modal"><div class="modal-head"><h2 id="standardsTitle">Tabel Standar Fleet</h2><button class="modal-close" data-close="standardsModal" aria-label="Tutup">×</button></div><p class="modal-desc">Standar spotting, loading total, kelas hauler, dan estimasi passes per kombinasi.</p><div class="standards-table-wrap" id="standardsTable"></div><div class="modal-note">Gunakan standar sesuai pasangan unit yang sedang dipilih. Catatan kecocokan fleet tetap ditampilkan sebagai pertimbangan operasional.</div><div class="modal-actions"><button class="save" data-close="standardsModal">Tutup</button></div></div>
+</div>
+<div class="modal-backdrop" id="resetModal" role="dialog" aria-modal="true" aria-labelledby="resetTitle"><div class="modal"><div class="modal-head"><h2 id="resetTitle">Reset sesi pengukuran?</h2><button class="modal-close" data-close="resetModal">×</button></div><p class="modal-desc">Riwayat phase dan siklus di perangkat ini akan dihapus. Standar fleet tetap tersedia.</p><div class="modal-actions"><button class="cancel" data-close="resetModal">Batal</button><button class="save" id="confirmReset">Hapus sesi</button></div></div></div>
+<div class="toast" id="toast"></div>
+<style>
+:root{--nav-safe:calc(70px + env(safe-area-inset-bottom))}
+.app .screen,.app .screen-results{bottom:var(--nav-safe)}
+.hub{overflow:auto;padding:16px 14px 22px}.hub-inner{width:min(100%,680px);margin:0 auto}
+.hub h1{font-size:25px;margin:0 0 12px;color:#17385e}.hub h2{font-size:18px;margin:0 0 9px}.hub p,.hub li,.hub td,.hub th{font-size:14px;line-height:1.5}.hub p{margin:6px 0 12px}
+.hero{position:relative;overflow:hidden;padding:24px 18px;margin-bottom:14px;background:linear-gradient(135deg,#16395f,#2166a5);color:white;border-radius:19px}.hero h1{color:white;max-width:75%;margin-bottom:4px}.hero p{max-width:70%;margin-bottom:0;color:#e0f0ff}.hero svg{position:absolute;right:12px;bottom:-32px;width:30%;height:155px;opacity:.44}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{min-height:100px;text-align:left;border:1px solid #ffffff38;color:white;border-radius:15px;padding:13px;background:linear-gradient(145deg,color-mix(in srgb,var(--tile),white 13%),var(--tile));box-shadow:0 6px 15px #19395924,inset 0 1px #ffffff40}.tile b,.tile small{display:block}.tile b{font-size:15px;margin-top:5px}.tile small{font-size:12px;margin-top:4px}.tile svg{width:23px;height:23px}
+.dock{position:absolute;bottom:0;left:0;right:0;height:var(--nav-safe);padding:5px 4px env(safe-area-inset-bottom);z-index:9;background:#f4f9fff5;border-top:1px solid #ccdaeb;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;backdrop-filter:blur(12px)}.dock button{border:0;background:none;color:#233f61;font-weight:750;font-size:10px;min-width:0;padding:3px 0;display:grid;place-items:center;gap:3px}.dock svg{width:22px;height:22px}.dock button[aria-current=page]{color:#086747}.dock .dock-home{background:linear-gradient(155deg,#337eea,#1749a2);color:white;border-radius:50%;width:62px;height:62px;margin:-16px auto 0;box-shadow:0 4px 14px #163c7266;border:3px solid white;align-content:center}.dock .dock-home[aria-current=page]{color:white;border-color:#bef5df}
+.hub-card{padding:13px;margin:0 0 9px}.hub details summary{cursor:pointer;font-weight:750;font-size:15px;padding:5px 0}.hub select,.hub input{width:100%;min-height:42px;border:1px solid #b5cbe1;border-radius:9px;background:#fff;color:#193b60;padding:8px}.hub label{display:block;font-size:14px;font-weight:700;margin:9px 0 4px}.hub .action-btn,.end-actions button{font-size:13px;min-height:42px}.hub output{display:block;margin-top:12px;font-size:18px;font-weight:800;color:#146746}.subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}.subgrid button{min-height:44px;text-align:left}.hub .hint{color:#526a84;font-size:13px}.hub a{color:#1555a6}.end-actions{display:flex;gap:8px;justify-content:flex-end}.measure-area{position:sticky;bottom:0;z-index:2}.history-card{flex:1 0 auto}.screen-results .result-table{min-width:0}.screen-results .result-table td{overflow-wrap:anywhere}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10h-6v-6H9v6H3z"/></symbol>
+<symbol id="i-time" viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M9 2h6m-3 4V2m0 8v5l3 2"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 7h8m-8 5h2m4 0h2m-8 5h2m4 0h2"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6C8 3 5 3 2 4v15c4-1 7 0 10 2 3-2 6-3 10-2V4c-3-1-6-1-10 2v15"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 6-8 10-8 10S4 18 4 12V6zM8 12l3 3 5-6"/></symbol>
+<symbol id="i-data" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="#496889"/><circle cx="16" cy="12" r="2" fill="#496889"/><circle cx="10" cy="18" r="2" fill="#496889"/></symbol>
+</defs></svg>
+<section class="screen hub" id="hubScreen"><div class="hub-inner" id="hubContent"></div></section>
+<nav class="dock" aria-label="Navigasi utama" id="dock"></nav>
+<div class="modal-backdrop" id="endModal" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="modal"><div class="modal-head"><h2 id="endTitle">Akhiri pengukuran?</h2></div><p class="modal-desc">Stopwatch akan berhenti. Hasil evaluasi memakai siklus yang sudah selesai. Catatan fase yang sudah tersimpan tetap tersedia.</p><div class="end-actions"><button class="action-btn secondary" id="continueMeasure">Lanjut Ukur</button><button class="action-btn" id="finishMeasure">Akhiri &amp; Lihat Hasil</button></div></div></div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const STORE='gpeLoaderAnalytic_v1';
+const PAIRS=[
+ {loader:'PC400',hauler:'Volvo DT / Umum',capacity:'40 Ton & On-Off Highway',spot:20,load:114,passes:'4–5',note:''},
+ {loader:'PC400',hauler:'HD465',capacity:'40 Ton & 45–50 Ton HD',spot:24,load:310,passes:'15–16',note:'Kurang ideal'},
+ {loader:'PC400',hauler:'HD785',capacity:'40 Ton & 60–90 Ton HD',spot:28,load:420,passes:'20+',note:'Tidak disarankan'},
+ {loader:'PC800',hauler:'Volvo DT / Umum',capacity:'80 Ton & On-Off Highway',spot:22,load:85,passes:'3–4',note:''},
+ {loader:'PC800',hauler:'HD465',capacity:'80 Ton & 45–50 Ton HD',spot:25,load:150,passes:'5–6',note:''},
+ {loader:'PC800',hauler:'HD785',capacity:'80 Ton & 60–90 Ton HD',spot:30,load:220,passes:'8–9',note:''},
+ {loader:'PC1250',hauler:'Volvo DT / Umum',capacity:'125 Ton & On-Off Highway',spot:25,load:70,passes:'2–3',note:'Sangat cepat'},
+ {loader:'PC1250',hauler:'HD465',capacity:'125 Ton & 45–50 Ton HD',spot:25,load:105,passes:'4',note:''},
+ {loader:'PC1250',hauler:'HD785',capacity:'125 Ton & 60–90 Ton HD',spot:32,load:140,passes:'—',note:''}
+];
+const blank=()=>({settings:{},phases:[],cycles:[],active:null});
+let data, migrated=false;
+try{data=JSON.parse(localStorage.getItem(STORE)||'null')}catch{data=null}
+if(!data){
+ data=blank();
+ try{
+  const old=JSON.parse(localStorage.getItem('ptyFleetObserver_v1')||'null');
+  if(old&&Array.isArray(old.records)){
+   for(const [k,v] of Object.entries(old.settings||{}))data.settings[k]={spot:v.spot||47,load:v.load||null};
+   const counts={};
+   for(const r of [...old.records].reverse()){
+    const key=`${r.loader}|${r.hauler}`,cycleNo=(counts[key]||0)+1;counts[key]=cycleNo;
+    const cycleId=`legacy-${r.id||Date.now()}-${cycleNo}`,at=r.at||new Date().toISOString();
+    data.phases.push({id:`${cycleId}-s`,cycleId,cycleNo,loader:r.loader,hauler:r.hauler,phase:'spotting',seconds:Number(r.spot)||0,at});
+    data.phases.push({id:`${cycleId}-l`,cycleId,cycleNo,loader:r.loader,hauler:r.hauler,phase:'loading',seconds:Number(r.load)||0,at});
+    data.cycles.push({id:cycleId,cycleNo,loader:r.loader,hauler:r.hauler,spot:Number(r.spot)||0,load:Number(r.load)||0,at});
+   }
+   migrated=true;
+  }
+ }catch{}
+}
+if(!Array.isArray(data.phases))data.phases=[];if(!Array.isArray(data.cycles))data.cycles=[];if(!data.settings)data.settings={};
+const normalizeHauler=x=>x==='DT Volvo'||x==='DT Umum'?'Volvo DT / Umum':x;for(const row of [...data.phases,...data.cycles])row.hauler=normalizeHauler(row.hauler);if(data.active)data.active.hauler=normalizeHauler(data.active.hauler);
+let ticker=null,toastTimer=null;
+const currentPair=()=>({loader:$('loaderSelect').value,hauler:$('haulerSelect').value});
+const pairKey=p=>`${p.loader}|${p.hauler}`;
+const currentKey=()=>pairKey(currentPair());
+function cfg(key=currentKey()) {return PAIRS.find(p=>pairKey(p)===key)||PAIRS[0];}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(data));migrated=false}catch{toast('Penyimpanan perangkat penuh')}}
+function fmt(sec, tenths=false){if(sec==null||!Number.isFinite(Number(sec)))return '—';let n=Math.max(0,Number(sec));let m=Math.floor(n/60),s=Math.floor(n%60);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}${tenths?'.'+Math.floor((n%1)*10):''}`}
+function avg(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:null}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function getPairPhases(){const p=currentPair();return data.phases.filter(x=>x.loader===p.loader&&x.hauler===p.hauler)}
+function getPairCycles(){const p=currentPair();return data.cycles.filter(x=>x.loader===p.loader&&x.hauler===p.hauler)}
+function phaseStatus(phase,secs,key){const c=cfg(key),target=phase==='spotting'?Number(c.spot)||null:Number(c.load)||null;if(!target)return {text:'ATUR TARGET',kind:'neutral'};return secs<=target?{text:'SESUAI',kind:'good'}:{text:'LEBIH',kind:'warn'}}
+function fillSelectors(loaderValue,haulerValue){
+ const loaders=[...new Set(PAIRS.map(p=>p.loader))];$('loaderSelect').innerHTML=loaders.map(x=>`<option>${x}</option>`).join('');
+ $('loaderSelect').value=loaders.includes(loaderValue)?loaderValue:'PC1250';
+ const haulers=PAIRS.filter(p=>p.loader===$('loaderSelect').value).map(p=>p.hauler);
+ $('haulerSelect').innerHTML=haulers.map(x=>`<option>${x}</option>`).join('');
+ $('haulerSelect').value=haulers.includes(haulerValue)?haulerValue:haulers[0];
+}
+function updateTargetCard(){const c=cfg();$('spotTargetView').textContent=fmt(c.spot);$('loadTargetView').textContent=fmt(c.load);$('targetNote').textContent='Standar tetap • berlaku untuk kombinasi unit terpilih';$('pairInfo').innerHTML=`<span class="pair-chip">${escapeHtml(c.capacity)}</span><span class="pair-chip">${escapeHtml(c.passes)} pass</span>${c.note?`<span class="pair-chip caution">${escapeHtml(c.note)}</span>`:''}`}
+function renderPhases(){
+ const all=getPairPhases();const active=data.active&&data.active.loader===currentPair().loader&&data.active.hauler===currentPair().hauler?data.active:null;
+ const shown=all.slice(-6).reverse();$('phaseCount').textContent=`${all.length}${active?' + AKTIF':''} PHASE`;
+ if(!shown.length){$('phaseList').innerHTML=`<div class="empty-log">${active?'Phase sedang berjalan; catatan muncul saat transisi.':'Belum ada phase tercatat untuk pasangan unit ini.'}</div>`;$('logFoot').textContent='Riwayat lengkap tersimpan otomatis di perangkat ini.';return}
+ $('phaseList').innerHTML=shown.map(row=>{let status=phaseStatus(row.phase,row.seconds,pairKey(row));let cycleNum=String(row.cycleNo||'—').padStart(2,'0');return `<div class="phase-row"><div class="phase-name"><i class="phase-dot ${row.phase==='loading'?'loading':''}"></i><span>${row.phase==='spotting'?'Spotting':'Loading'}</span><span class="phase-meta">S${cycleNum}</span></div><span class="phase-time">${fmt(row.seconds)}</span><span class="phase-status"><i class="status-pill status-${status.kind}">${status.text}</i></span></div>`}).join('');
+ $('logFoot').textContent=all.length>6?`Menampilkan 6 phase terakhir • ${all.length} phase tercatat`:`${all.length} phase tercatat • tersimpan otomatis`;
+}
+function renderMeasurement(){const active=data.active;const btn=$('measureBtn');if(!active){$('activePhase').textContent='SIAP • SPOTTING';$('timerValue').textContent='00:00.0';$('measureHint').textContent='Mulai saat hauler meninggalkan front';$('cycleLabel').textContent='SIAP MEMULAI';$('sessionHint').textContent='Siklus pertama dimulai dari spotting.';btn.setAttribute('aria-label','Mulai pengukuran spotting');$('loaderSelect').disabled=false;$('haulerSelect').disabled=false;return}
+ const elapsed=(Date.now()-active.startedAt)/1000;const phase=active.phase;$('activePhase').textContent=phase==='spotting'?'FASE AKTIF • SPOTTING':'FASE AKTIF • LOADING';$('timerValue').textContent=fmt(elapsed,true);$('measureHint').textContent=phase==='spotting'?'Ketuk saat bucket pertama ditumpahkan':'Ketuk saat klakson full / hauler mulai maju';$('cycleLabel').textContent=`SIKLUS ${String(active.cycleNo).padStart(2,'0')}`;$('sessionHint').textContent=phase==='spotting'?'Ukur sampai bucket pertama masuk ke bak.':'Ukur sampai hauler full atau bergerak maju.';btn.setAttribute('aria-label',phase==='spotting'?'Catat bucket pertama dan mulai loading':'Simpan loading dan mulai spotting berikutnya');$('loaderSelect').disabled=true;$('haulerSelect').disabled=true;
+}
+function renderHome(){updateTargetCard();renderPhases();renderMeasurement()}
+function toast(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function openModal(id){$(id).classList.add('show')};function closeModal(id){$(id).classList.remove('show')}
+function cycleNumberForPair(p){
+ return [...data.cycles,...data.phases].reduce((last,row)=>pairKey(row)===pairKey(p)?Math.max(last,Number(row.cycleNo)||0):last,0)+1;
+}
+function startSpotting(){const p=currentPair();data.active={phase:'spotting',startedAt:Date.now(),cycleId:`${Date.now()}-${Math.random().toString(16).slice(2,7)}`,cycleNo:cycleNumberForPair(p),loader:p.loader,hauler:p.hauler};save();renderHome();if(!ticker)ticker=setInterval(renderMeasurement,100)}
+function recordPhase(phase,secs,active){const row={id:`${Date.now()}-${Math.random().toString(16).slice(2,6)}`,cycleId:active.cycleId,cycleNo:active.cycleNo,loader:active.loader,hauler:active.hauler,phase,seconds:Math.max(0,secs),at:new Date().toISOString()};data.phases.push(row);return row}
+function measureClick(){const now=Date.now();if(!data.active){startSpotting();toast('Spotting dimulai');return}
+ const active=data.active;const elapsed=(now-active.startedAt)/1000;
+ if(active.phase==='spotting'){recordPhase('spotting',elapsed,active);data.active={...active,phase:'loading',startedAt:now};save();renderHome();toast('Spotting tersimpan • loading dimulai');return}
+ recordPhase('loading',elapsed,active);const spot=data.phases.find(x=>x.cycleId===active.cycleId&&x.phase==='spotting');const load=data.phases[data.phases.length-1];data.cycles.unshift({id:active.cycleId,cycleNo:active.cycleNo,loader:active.loader,hauler:active.hauler,spot:spot?.seconds??null,load:load.seconds,at:new Date().toISOString()});data.active={phase:'spotting',startedAt:now,cycleId:`${Date.now()}-${Math.random().toString(16).slice(2,7)}`,cycleNo:cycleNumberForPair(active),loader:active.loader,hauler:active.hauler};save();renderHome();toast('Siklus tersimpan • spotting berikutnya dimulai');}
+function switchResults(){if(data.active){openModal('endModal');$('continueMeasure').focus();return}displayResults()}
+function displayResults(){renderResults();$('homeScreen').style.display='none';$('resultsScreen').style.display='block';$('resultsScreen').scrollTop=0}
+function backHome(){$('resultsScreen').style.display='none';$('homeScreen').style.display='flex';renderHome()}
+function cycleEval(c,key){const t=cfg(key);let issues=[];if(t.spot&&c.spot>t.spot)issues.push('Spotting');if(t.load&&c.load>t.load)issues.push('Loading');return issues}
+function renderResults(){const p=currentPair(),key=pairKey(p),cycles=getPairCycles(),phases=getPairPhases(),c=cfg(key);$('resultPair').textContent=`${p.loader} → ${p.hauler}`;$('sumCycles').textContent=String(cycles.length);const as=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot)),al=avg(cycles.map(x=>x.load));$('sumSpot').textContent=as==null?'—':fmt(as);$('sumLoad').textContent=al==null?'—':fmt(al);$('sumSpotTarget').textContent=`Standar ${fmt(c.spot)}`;$('sumLoadTarget').textContent=`Standar ${fmt(c.load)}`;
+ const title=$('overallTitle'),desc=$('overallText'),box=$('overallBox'),list=$('recommendations');list.innerHTML='';box.style.borderColor='';box.style.background='';
+ if(!cycles.length){title.textContent='Belum ada siklus lengkap';desc.textContent='Selesaikan satu siklus spotting dan loading untuk melihat evaluasi.';list.innerHTML='<li>Standar waktu dan estimasi passes mengikuti tabel fleet untuk pasangan unit terpilih.</li>';}
+ else {let spotBad=as>c.spot,loadBad=al>c.load;if(spotBad||loadBad){title.textContent='Perlu evaluasi waktu';desc.textContent=`${spotBad?'Rata-rata spotting '+fmt(as)+' melebihi standar '+fmt(c.spot)+'. ':''}${loadBad?'Rata-rata loading '+fmt(al)+' melebihi standar '+fmt(c.load)+'.':''}`;box.style.background='#fff3ed';box.style.borderColor='#f3d0c2';if(spotBad)list.insertAdjacentHTML('beforeend','<li><b>Spotting lebih lama:</b> amati jalur masuk, manuver dan posisi hauler, antrean, aba-aba komunikasi, serta kejadian re-spot.</li>');if(loadBad)list.insertAdjacentHTML('beforeend','<li><b>Loading lebih lama:</b> amati waktu siklus bucket, sudut swing, kondisi material, pengisian bucket, posisi bak, dan kecocokan payload.</li>');}
+ else if(c.note==='Tidak disarankan'){title.textContent='Waktu sesuai, tetapi fleet tidak disarankan';desc.textContent=`Durasi berada dalam standar waktu; kombinasi ini memiliki estimasi ${c.passes} passes.`;box.style.background='#fff3ed';box.style.borderColor='#f3d0c2';list.innerHTML='<li>Tinjau pemilihan fleet. PC400 + HD785 membutuhkan 20+ passes menurut tabel acuan.</li><li>Jika kombinasi tetap digunakan, pantau payload dan waktu siklus aktual.</li>';}
+ else if(c.note==='Kurang ideal'){title.textContent='Waktu sesuai, kombinasi kurang ideal';desc.textContent=`Estimasi ${c.passes} passes membuat kombinasi ini kurang ideal menurut tabel acuan.`;box.style.background='#fff8e9';box.style.borderColor='#eddfbb';list.innerHTML='<li>Evaluasi kecocokan kapasitas loader dengan hauler dan jumlah pass aktual.</li><li>Pertimbangkan fleet yang memerlukan lebih sedikit passes bila tersedia.</li>';}
+ else {title.textContent=c.note==='Sangat cepat'?'Waktu sesuai • kombinasi sangat cepat':'Rata-rata sesuai standar';desc.textContent=`Spotting ${fmt(as)} / ${fmt(c.spot)} • Loading ${fmt(al)} / ${fmt(c.load)}.`;box.style.background='#effaf3';box.style.borderColor='#c9e9d4';list.innerHTML=c.note==='Sangat cepat'?'<li>Catatan acuan menyebut kombinasi ini sangat cepat pada 2–3 passes.</li><li>Pastikan payload, pengisian bucket, dan kondisi kerja tetap sesuai prosedur.</li>':'<li>Pertahankan posisi hauler, pola manuver, dan komunikasi yang berjalan baik.</li><li>Pantau siklus berikutnya untuk memastikan hasil tetap konsisten.</li>';}}
+ renderTables(cycles,phases,key);
+}
+function renderTables(cycles,phases,key){const c=cfg(key);if(!cycles.length){$('cycleTableMount').innerHTML='<div class="empty-results">Belum ada siklus tersimpan untuk pasangan unit ini.</div>'}else{$('cycleTableMount').innerHTML=`<table class="result-table"><thead><tr><th>SIKLUS</th><th>SPOTTING</th><th>LOADING</th><th>HASIL</th></tr></thead><tbody>${cycles.map(x=>{const issues=cycleEval(x,key);const label=issues.length?'Perlu cek':c.note==='Tidak disarankan'?'Fleet tidak disarankan':c.note==='Kurang ideal'?'Kurang ideal':'Sesuai';const date=new Date(x.at).toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});return `<tr><td>${String(x.cycleNo).padStart(2,'0')}<br><small>${date}</small></td><td>${fmt(x.spot)}<br><small>target ${c.spot?fmt(c.spot):'—'}</small></td><td>${fmt(x.load)}<br><small>target ${c.load?fmt(c.load):'—'}</small></td><td>${label}</td></tr>`}).join('')}</tbody></table>`}
+ const reverse=[...phases].reverse();if(!reverse.length){$('phaseTableMount').innerHTML='<div class="empty-results">Catatan phase muncul setelah tombol Ukur ditekan pada perpindahan fase.</div>'}else{$('phaseTableMount').innerHTML=`<table class="result-table"><thead><tr><th>SIKLUS</th><th>PHASE</th><th>DURASI</th><th>STATUS</th></tr></thead><tbody>${reverse.map(x=>{const st=phaseStatus(x.phase,x.seconds,key);return `<tr><td>${String(x.cycleNo).padStart(2,'0')}</td><td>${x.phase==='spotting'?'Spotting':'Loading'}</td><td>${fmt(x.seconds)}</td><td>${st.text==='LEBIH'?'Lebih target':st.text==='SESUAI'?'Sesuai':'Target belum diatur'}</td></tr>`}).join('')}</tbody></table>`}}
+function openStandards(){
+ const rows=PAIRS.map((p,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(p.loader)} + ${escapeHtml(p.hauler)}</b></td><td>${escapeHtml(p.capacity)}</td><td>${fmt(p.spot)} <small>(${p.spot} detik)</small></td><td>${fmt(p.load)} <small>(${p.load} detik)</small></td><td>${escapeHtml(p.passes)} pass</td><td>${p.note?`<span class="standard-note">${escapeHtml(p.note)}</span>`:'—'}</td></tr>`).join('');
+ $('standardsTable').innerHTML=`<table class="result-table standards-table"><thead><tr><th>No</th><th>Kombinasi fleet</th><th>Kapasitas / kelas</th><th>Spotting</th><th>Loading total</th><th>Estimasi passes</th><th>Catatan</th></tr></thead><tbody>${rows}</tbody></table>`;
+ openModal('standardsModal');
+}
+function resetSession(){if(data.active&&data.active.phase){clearInterval(ticker);ticker=null}data.phases=[];data.cycles=[];data.active=null;save();closeModal('resetModal');renderHome();toast('Riwayat sesi dihapus')}
+function exportCsv(){const p=currentPair(),cycles=getPairCycles(),phases=getPairPhases(),c=cfg();const rows=[['Jenis','Siklus','Loader','Hauler','Phase','Durasi detik','Target detik','Status','Waktu']];for(const x of phases){const st=phaseStatus(x.phase,x.seconds,pairKey(p));rows.push(['Phase',x.cycleNo,x.loader,x.hauler,x.phase,x.seconds.toFixed(1),x.phase==='spotting'?c.spot||'':c.load||'',st.text,new Date(x.at).toLocaleString('id-ID')])}for(const x of cycles)rows.push(['Siklus',x.cycleNo,x.loader,x.hauler,'Spotting + Loading',`${x.spot.toFixed(1)} + ${x.load.toFixed(1)}`,`${c.spot||''} + ${c.load||''}`,cycleEval(x,pairKey(p)).join(' & ')||'Sesuai',new Date(x.at).toLocaleString('id-ID')]);const csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`GPE_Loader_${p.loader}_${p.hauler}_hasil.csv`.replaceAll(' ','_');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+// Events
+fillSelectors(data.active?.loader||'PC1250',data.active?.hauler||'HD465');
+$('loaderSelect').addEventListener('change',()=>{const loader=$('loaderSelect').value;const hauler=PAIRS.find(p=>p.loader===loader)?.hauler;fillSelectors(loader,hauler);renderHome()});
+$('haulerSelect').addEventListener('change',renderHome);
+$('guideToggle').addEventListener('click',()=>{const isOpen=!$('guideCard').classList.contains('open');$('guideCard').classList.toggle('open',isOpen);$('guidePopover').hidden=!isOpen});
+document.addEventListener('click',e=>{if(!$('guideCard').contains(e.target)){$('guideCard').classList.remove('open');$('guidePopover').hidden=true}});
+$('openStandards').addEventListener('click',openStandards);$('headerStandards').addEventListener('click',openStandards);
+$('measureBtn').addEventListener('click',measureClick);$('resultsBtn').addEventListener('click',switchResults);$('viewAllBtn').addEventListener('click',switchResults);$('backBtn').addEventListener('click',backHome);$('exportBtn').addEventListener('click',exportCsv);
+$('resetBtn').addEventListener('click',()=>openModal('resetModal'));$('confirmReset').addEventListener('click',resetSession);
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+document.querySelectorAll('.modal-backdrop').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('show')}));
+if(migrated)save();renderHome();if(data.active)ticker=setInterval(renderMeasurement,100);
+const menus=[
+ ['measure','Ukur Fleet','Stopwatch spotting dan loading','time','#174e9c'],
+ ['calc','Hitung Cepat','Produktivitas dan kebutuhan unit','calc','#185a40'],
+ ['param','Parameter','Data unit dan parameter tambang','data','#394e65'],
+ ['formula','Rumus','Rumus dan satuan perhitungan','calc','#805016'],
+ ['terms','Terminologi Tambang','Cari arti istilah di lapangan','book','#14616b'],
+ ['safety','Pengawas & Keselamatan','Tugas, kecelakaan, dan pelaporan','shield','#823d32']
+];
+const parameters={
+ 'Hauler': [
+ ['HD465','Lebar 5,4 m · turning radius 8,5 m · muatan awal 25,5 BCM/trip'],
+ ['HD785','Lebar 6,8 m · turning radius 10,1 m · vessel acuan 42 BCM'],
+ ['OHT773','Lebar 5,5 m · turning radius 10,9 m'],
+ ['OHT777D','Lebar 6,1 m · turning radius OHT777 14,2 m'],
+ ['Volvo FMX440','Turning radius 11,85 m · muatan awal 11 BCM/trip'],
+ ['Scania P410','Turning radius 10,46 m · muatan DT Scania acuan 30 ton']],
+ 'Excavator': [
+ ['Kapasitas bucket','PC400 2,6 m³ / 2,3 ton  · PC1250 6,7 m³ · Cat 6015 8,1 m³ · PC2000 12 m³'],
+ ['Siklus bucket (detik)','Urutan digging / swing isi / dump / swing kosong. PC400 atau DX500 + DT: 8 / 6 / 2 / 6 = 22. PC1250 atau 6015 + HD465/OHT773 atau HD785/OHT777: 11 / 8 / 2 / 7 = 28. PC2000 + HD785/OHT777: 12 / 8 / 3 / 7 = 30.']],
+ 'Dozer': [['Kapasitas blade','D85ESS 3,4 m³ · D155 9,4 m³ · D375 18,5 m³'],['Ripping','Lebar track D155 2,14 m dan D375 2,5 m. Penetrasi acuan 1,37 m dan 1,43 m. EK 0,85.']],
+ 'Grader': [['Blade dan kerja','Blade 4,9 m · overlap 0,2–0,3 m · faktor proyeksi kartu 0,7 (45°) atau 0,8 (30°) · EK 0,85.']],
+ 'PC200': [['Pembuatan tanggul','CT ±15 detik · bucket 0,8 m³ · BFF 0,90–1,10 · EK 0,85 · contoh tanggul dasar 3 m, puncak 2 m, tinggi 2 m.']],
+ 'Parameter Tambang': [
+ ['Jalan Hauling','Lebar 3,5 × lebar unit terbesar. Grade parameter kerja maksimum 8–10%. Cross fall maksimum 2%.'],
+ ['Front Loading','Lebar 2 × lebar hauler + turning radius.'],
+ ['Disposal','Lebar 2 × (lebar hauler + turning radius) × jumlah fleet.'],
+ ['Tanggul','Acuan kartu: hauling ¾ tinggi ban, disposal ⅓ tinggi ban. Tinggi ban acuan HD465 2,1 m dan HD785 2,6 m.'],
+ ['Indikator produktivitas','Kecepatan rata-rata di bawah 22 km/jam, digging 4 detik di atas acuan, manuver lebih dari 30 detik atau berulang, serta front lembek yang menambah secondary work adalah indikasi untuk diperiksa.']]
+};
+const n=(key,label,value='',min=0,max)=>({key,label,value,min,max});
+const calcs=[
+ ['loader','PTY Loader','60 ÷ (spotting + loading dalam menit) × muatan per trip × EWH',[n('t','Spotting + loading (menit)'),n('v','Muatan per trip'),n('s','Secondary work (menit/jam)',0,0,59.99)],({t,v,s})=>60/t*v*(60-s)/60,'payload'],
+ ['hauler','PTY Hauler','3600 ÷ cycle time hauler (detik) × muatan per trip',[n('t','Cycle time hauler (detik)'),n('v','Muatan per trip')],({t,v})=>3600/t*v,'payload'],
+ ['match','Matching Fleet','Cycle time hauler ÷ (spotting + loading), keduanya dalam menit. Bulatkan ke atas untuk estimasi jumlah hauler.',[n('h','Cycle time hauler (menit)'),n('t','Spotting + loading (menit)')],({h,t})=>Math.ceil(h/t),'hauler'],
+ ['matchpty','Kebutuhan Hauler dari PTY','PTY loader ÷ PTY satu hauler, dengan satuan produksi sama. Bulatkan ke atas.',[n('l','PTY loader'),n('h','PTY satu hauler')],({l,h})=>Math.ceil(l/h),'hauler'],
+ ['dozer','Kebutuhan Dozer Disposal','Kapasitas blade efektif = volume per dumping ÷ jumlah pass. PTY dozer = 3600 ÷ CT × blade efektif × EK. Kebutuhan = debit masuk ÷ PTY dozer, dibulatkan ke atas.',[n('q','Material masuk (m³ lepas/jam)'),n('v','Volume per dumping (m³ lepas)'),n('p','Jumlah pass dozing per dumping'),n('t','Cycle time satu pass (detik)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({q,v,p,t,e})=>({value:Math.ceil(q/(3600/t*v/p*e)),note:'PTY per dozer '+number(3600/t*v/p*e)+' m³ lepas/jam'}),'dozer'],
+ ['dozerpty','PTY Dozer','3600 ÷ CT (detik) × kapasitas blade efektif × EK',[n('t','Cycle time dozer (detik)'),n('v','Kapasitas blade efektif (m³ lepas)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({t,v,e})=>3600/t*v*e,'m³ lepas/jam'],
+ ['speed','Kecepatan Hauler','Jarak tempuh (km) ÷ waktu tempuh (menit) × 60. Isi waktu perjalanan bersih dari dumping.',[n('d','Jarak tempuh (km)'),n('t','Waktu tempuh (menit)')],({d,t})=>d/t*60,'km/jam'],
+ ['travel','Waktu Tempuh','Jarak tempuh (km) ÷ kecepatan (km/jam) × 60',[n('d','Jarak tempuh (km)'),n('v','Kecepatan (km/jam)')],({d,v})=>d/v*60,'menit'],
+ ['ewh','Effective Working Hour','(60 − secondary work dalam menit per jam) ÷ 60',[n('s','Secondary work (menit/jam)',0,0,60)],({s})=>(60-s)/60,''],
+ ['rip','Produktivitas Ripping','60 ÷ CT (menit) × (½ lebar) × penetrasi × jarak ripping × EK. CT estimasi = jarak × 0,05.',[n('w','Lebar acuan dozer (m)'),n('p','Penetrasi (m)'),n('d','Jarak ripping (m)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({w,p,d,e})=>60/(d*.05)*w/2*p*d*e,'m³/jam'],
+ ['riptime','Durasi Ripping','CT × jumlah lintasan ÷ (EK × 60). Jumlah lintasan = panjang area melintang ÷ ½ lebar acuan, dibulatkan ke atas.',[n('w','Lebar acuan dozer (m)'),n('p','Panjang area melintang lintasan (m)'),n('d','Jarak satu lintasan ripping (m)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({w,p,d,e})=>d*.05*Math.ceil(p/(w/2))/(60*e),'jam'],
+ ['grader','Produktivitas dan Durasi Grader','PTY = kecepatan × (lebar blade × faktor proyeksi − overlap) × 1000 × EK. Durasi = luas jalan ÷ PTY.',[n('v','Kecepatan (km/jam)'),n('w','Lebar blade (m)',4.9),n('a','Faktor proyeksi blade (0–1)',0.7,0,1),n('o','Overlap (m)',0.25),n('e','Efektivitas kerja (0–1)',0.85,0,1),n('l','Panjang jalan (m)'),n('j','Lebar jalan (m)')],({v,w,a,o,e,l,j})=>{const p=v*(w*a-o)*1000*e;if(p<=0)throw Error('Overlap harus lebih kecil dari lebar blade efektif.');return {value:p,note:'Estimasi durasi '+number(l*j/p)+' jam'}},'m²/jam'],
+ ['berm','Produktivitas Tanggul PC200','Volume per meter = ½ × (lebar dasar + lebar puncak) × tinggi. Pass per meter = volume ÷ (bucket × BFF). PTY = 3600 × EK ÷ (CT × pass per meter).',[n('a','Lebar dasar (m)',3),n('b','Lebar puncak (m)',2),n('h','Tinggi (m)',2),n('v','Kapasitas bucket (m³)',0.8),n('f','Bucket fill factor',1),n('t','Cycle time (detik)',15),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({a,b,h,v,f,t,e})=>3600*e/(t*((a+b)*h/2/(v*f))),'m/jam'],
+ ['road','Lebar Jalan Hauling','3,5 × lebar unit terbesar  acuan',[n('w','Lebar unit terbesar (m)')],({w})=>3.5*w,'m'],
+ ['front','Lebar Front Loading','2 × lebar hauler + turning radius',[n('w','Lebar hauler (m)'),n('r','Turning radius (m)')],({w,r})=>2*w+r,'m'],
+ ['disposal','Lebar Disposal','2 × (lebar hauler + turning radius) × jumlah fleet',[n('w','Lebar hauler (m)'),n('r','Turning radius (m)'),n('f','Jumlah fleet')],({w,r,f})=>2*(w+r)*f,'m'],
+ ['bermheight','Tinggi Tanggul Acuan','Hauling = ¾ tinggi ban. Disposal = ⅓ tinggi ban.',[n('t','Tinggi ban (m)')],({t})=>({value:.75*t,note:'Disposal '+number(t/3)+' m'}),'m hauling']
+];
+const referenceOnly=new Set(['rip','riptime','grader','berm','road','bermheight']);
+const fleetSpecs={HD465:[5.4,8.5,25.5],HD785:[6.8,10.1,42],OHT773:[5.5,10.9],OHT777D:[6.1,14.2],'DT Volvo':[null,null,11]};
+const glossary=[
+["Geometri & Material", "Highwall", "Dinding pit pada sisi batuan penutup di atas lapisan batubara.", ""],
+["Geometri & Material", "Lowwall", "Dinding pit pada sisi batuan dasar di bawah lapisan batubara, sering mengikuti kemiringan lapisan.", ""],
+["Geometri & Material", "Slope", "Bidang lereng pada dinding tambang.", ""],
+["Geometri & Material", "Crest", "Garis pertemuan puncak lereng dengan permukaan di atasnya.", ""],
+["Geometri & Material", "Toe", "Garis pertemuan kaki lereng dengan permukaan di bawahnya.", ""],
+["Geometri & Material", "Bench", "Jenjang yang membagi dinding tambang menjadi beberapa tingkat.", ""],
+["Geometri & Material", "Bench Height", "Selisih elevasi vertikal antara crest dan toe satu jenjang.", ""],
+["Geometri & Material", "Overall Slope", "Kemiringan keseluruhan dinding tambang dari kaki terbawah ke puncak teratas.", ""],
+["Geometri & Material", "Ultimate Pit Slope", "Kemiringan keseluruhan dinding pada desain pit akhir.", ""],
+["Geometri & Material", "Overburden (OB)", "Material penutup di atas lapisan batubara.", ""],
+["Geometri & Material", "Interburden (IB)", "Material yang berada di antara dua lapisan batubara.", ""],
+["Geometri & Material", "Stripping Ratio (SR)", "Perbandingan volume material penutup yang dikupas terhadap batubara yang diperoleh, lazim dinyatakan BCM/ton.", ""],
+["Geometri & Material", "Pit", "Area bukaan untuk mengambil material tambang.", ""],
+["Geometri & Material", "Pit Floor", "Permukaan dasar area bukaan tambang.", ""],
+["Geometri & Material", "Ramp", "Jalur miring untuk menghubungkan dua elevasi tambang.", ""],
+["Geometri & Material", "Seam", "Lapisan batubara yang dapat dibedakan pada penampang geologi.", ""],
+["Geometri & Material", "Dip", "Sudut kemiringan lapisan terhadap bidang horizontal.", ""],
+["Geometri & Material", "Strike", "Arah garis perpotongan bidang lapisan dengan bidang horizontal.", ""],
+["Geometri & Material", "Outcrop", "Bagian lapisan batuan atau batubara yang tersingkap di permukaan.", ""],
+["Geometri & Material", "Subcrop", "Bagian lapisan yang berakhir dekat permukaan dan masih tertutup material lain.", ""],
+["Geometri & Material", "Topsoil", "Lapisan tanah paling atas yang biasanya dikupas dan disimpan untuk reklamasi.", ""],
+["Geometri & Material", "Stockpile", "Area penumpukan sementara material sebelum penanganan berikutnya.", ""],
+ ['Produksi','Spotting Time','Waktu dari hauler penuh berangkat atau klakson penuh hingga bucket pertama ditumpahkan ke hauler berikutnya, sesuai metode ukur aplikasi.','Tekan Ukur pada klakson penuh, lalu tekan lagi saat bucket pertama masuk.'],
+ ['Produksi','Loading Time','Waktu dari bucket pertama ditumpahkan hingga klakson penuh atau hauler berangkat, sesuai metode ukur aplikasi.','Catat loading terpisah dari spotting.'],
+ ['Produksi','Cycle Time','Waktu satu putaran pekerjaan. Sebut unit dan titik awal serta akhir pengukuran.','CT hauler meliputi spotting, loading, perjalanan, dan dumping.'],
+ ['Produksi','PTY','Produktivitas, yaitu jumlah material per satuan waktu.','Laporkan produksi dalam ton/jam atau BCM/jam sesuai basis muatan.'],
+ ['Produksi','EWH','Bagian dari satu jam yang efektif untuk bekerja.','Secondary work 6 menit per jam memberi EWH 0,90.'],
+ ['Produksi','Matching Factor','Ukuran keseimbangan kemampuan loader dan armada angkut.','Periksa antrean dan waktu tunggu loader bersama hasil matching.'],
+ ['Produksi','Fleet','Kelompok unit yang bekerja dalam satu rangkaian.','Satu excavator dan beberapa HD membentuk satu fleet.'],
+ ['Produksi','Payload','Berat material yang dibawa unit.','Baca payload dalam ton dari sistem penimbangan.'],
+ ['Produksi','BCM','Bank cubic metre, volume material pada kondisi asli sebelum digali.','Gunakan BCM saat melaporkan volume bank.'],
+ ['Produksi','LCM','Loose cubic metre, volume material setelah digali dan mengembang.','Samakan basis volume sebelum menghitung kebutuhan dozer.'],
+ ['Produksi','Swell Factor','Perbandingan volume material lepas dengan volume bank jika dinyatakan sebagai faktor pengali.','Faktor 1,25 berarti 1 BCM menjadi 1,25 LCM.'],
+ ['Produksi','Secondary Work','Aktivitas pendukung yang mengurangi waktu kerja efektif pada perhitungan kartu.','Catat waktu perbaikan front sebagai secondary work.'],
+ ['Produksi','Waiting Time','Waktu unit menunggu sebelum dapat melanjutkan pekerjaan.','Loader menunggu ketika hauler belum tiba.'],
+ ['Unit','Bucket Pass','Satu kali pengisian material dari bucket ke vessel.','Hitung jumlah pass sampai hauler penuh.'],
+ ['Unit','Bucket Fill Factor','Perbandingan isi aktual bucket terhadap kapasitas nominalnya.','BFF 0,9 berarti rata-rata bucket terisi 90% dari kapasitas acuan.'],
+ ['Unit','Digging','Fase bucket menggali dan mengambil material.','Catat digging lama saat material sulit ditembus.'],
+ ['Unit','Swing Load','Gerakan putar excavator saat bucket berisi.','Catat swing load dari posisi gali menuju vessel.'],
+ ['Unit','Dump Bucket','Fase menumpahkan isi bucket.','Dump pertama menjadi batas spotting dan loading pada aplikasi.'],
+ ['Unit','Swing Empty','Gerakan putar kembali setelah bucket dikosongkan.','Catat swing kosong menuju posisi gali berikutnya.'],
+ ['Unit','Vessel','Bak muatan pada hauler.','Gunakan kapasitas vessel sesuai basis ton atau volume.'],
+ ['Unit','Turning Radius','Jari-jari putar unit dengan titik ukur yang ditentukan pabrikan.','Pastikan acuan radius ban luar atau radius badan sebelum menilai ruang manuver.'],
+ ['Unit','Ripping','Penggaruan material menggunakan ripper.','Catat jarak lintasan dan penetrasi sebagai input estimasi ripping.'],
+ ['Unit','Dozing','Mendorong atau meratakan material dengan blade dozer.','Catat jumlah pass dozing per dumping pada disposal.'],
+ ['Jalan & Area','Haul Road','Jalan yang dipakai untuk pengangkutan material.','Periksa lebar, grade, dan kondisi permukaan jalan hauling.'],
+ ['Jalan & Area','Grade','Kemiringan memanjang jalan, biasanya dalam persen.','Kenaikan 8 m dalam jarak horizontal 100 m berarti grade 8%.'],
+ ['Jalan & Area','Cross Fall','Kemiringan melintang permukaan jalan.','Periksa arah aliran air menuju saluran.'],
+ ['Jalan & Area','Rolling Resistance','Hambatan gelinding yang melawan gerak unit.','Permukaan lembek atau bergelombang dapat menambah hambatan.'],
+ ['Jalan & Area','Front Loading','Area kerja tempat loader memuat hauler.','Periksa ruang manuver dan kondisi lantai front.'],
+ ['Jalan & Area','Disposal','Area penempatan material buangan.','Catat debit masuk material untuk estimasi kebutuhan dozer.'],
+ ['Jalan & Area','Dumping','Kegiatan menurunkan muatan hauler.','Catat dumping terpisah saat menghitung kecepatan perjalanan.'],
+ ['Jalan & Area','Berm / Tanggul','Gundukan pembatas atau pengaman di tepi area tertentu.','Bandingkan kondisi tanggul aktual dengan ketentuan site.'],
+ ['Jalan & Area','Re-spot','Pengulangan manuver untuk memperbaiki posisi hauler.','Catat re-spot saat posisi pertama belum sesuai.'],
+ ['Keselamatan','KTT','Kepala Teknik Tambang.','Pengawas operasional bertanggung jawab kepada KTT atau PTL sesuai lingkupnya.'],
+ ['Keselamatan','PTL','Penanggung Jawab Teknik dan Lingkungan.','Rujuk struktur penunjukan yang berlaku di tempat kerja.'],
+ ['Keselamatan','KPO','Kartu Pengawas Operasional.','Cek persyaratan penunjukan dan KPO pada menu Pengawas.'],
+ ['Keselamatan','Kejadian Berbahaya','Kejadian yang dapat membahayakan jiwa atau menghambat produksi menurut pedoman keselamatan pertambangan.','Segera ikuti jalur pelaporan yang berlaku di site.'],
+ ['Keselamatan','Inspeksi','Pemeriksaan terencana terhadap kondisi atau kegiatan kerja.','Catat temuan, tindak lanjut, dan penanggung jawab.'],
+ ['Keselamatan','Bahaya','Sumber atau kondisi yang berpotensi menimbulkan cedera atau kerugian.','Permukaan licin adalah salah satu bahaya yang perlu dicatat.'],
+ ['Keselamatan','Risiko','Gabungan kemungkinan dan konsekuensi dari suatu bahaya.','Nilai risiko sesuai metode yang ditetapkan perusahaan.']
+];
+
+const safety=[
+ ['Tugas dan Tanggung Jawab Pengawas Operasional',["Bertanggung jawab kepada KTT/PTL atas keselamatan dan kesehatan seluruh pekerja tambang yang menjadi bawahannya.", "Melaksanakan inspeksi, pemeriksaan, dan pengujian.", "Bertanggung jawab kepada KTT/PTL atas keselamatan, kesehatan, dan kesejahteraan semua orang yang ditugaskan kepadanya.", "Membuat dan menandatangani laporan inspeksi, pemeriksaan, dan pengujian."],'Lampiran I, bagian pengangkatan Pengawas Operasional'],
+ ['Kriteria dan Penunjukan','Pengawas memiliki sertifikat kompetensi atau kualifikasi yang diakui sesuai jenjang, menduduki jabatan di bagian operasional, dan memiliki bawahan atau tugas pengawasan. KTT/PTL menunjuk, mengevaluasi, dan menerbitkan surat penunjukan jika dinyatakan laik. Pengawas yang memenuhi ketentuan mendapatkan KPO yang disahkan oleh KaIT atau sesuai kewenangannya.','Lampiran I'],
+ ['Lima Unsur Kecelakaan Tambang','(1) Benar terjadi, tidak diinginkan, tidak direncanakan dan tanpa kesengajaan. (2) Mencederai pekerja tambang atau orang yang diberi izin KTT/PTL. (3) Merupakan akibat kegiatan pertambangan, pengolahan, pemurnian, atau kegiatan penunjang. (4) Terjadi pada jam kerja pekerja yang cedera, atau kapan saja bagi orang yang diberi izin. (5) Terjadi di wilayah kegiatan usaha pertambangan atau wilayah proyek.','Lampiran III, hlm. 146'],
+ ['Klasifikasi Cedera','Ringan: pekerja tidak mampu menjalankan tugas semula lebih dari satu hari dan kurang dari tiga minggu, termasuk hari libur. Berat: tiga minggu atau lebih, cacat tetap, atau jenis cedera khusus yang disebut dalam ketentuan (antara lain retak pada tulang tertentu, perdarahan dalam, pingsan karena kekurangan oksigen, luka yang berpotensi menyebabkan ketidakmampuan tetap, atau sendi lepas pertama kali). Mati: pekerja meninggal akibat kecelakaan tambang. Lihat naskah resmi untuk daftar lengkap cedera berat.','Lampiran III, hlm. 146–147'],
+ ['Kejadian Berbahaya dan Pelaporan','Kejadian berbahaya dapat membahayakan jiwa atau menghambat produksi. Laporkan sesaat setelah kejadian melalui jalur resmi. KTT/PTL segera melakukan penyelidikan dalam waktu tidak lebih dari 2 × 24 jam. Gunakan prosedur site untuk kontak dan penanganan awal.','Lampiran III, hlm. 145 dan 149'],
+ ['Checklist Pengawasan','Sebelum kerja: periksa kondisi area dan bahaya pekerjaan. Selama kerja: periksa perubahan kondisi dan tindak lanjuti temuan. Setelah kerja: catat hasil inspeksi, penanggung jawab tindak lanjut, dan serahkan informasi kepada shift berikutnya.','Panduan lapangan. Sesuaikan dengan SOP site.']
+];
+const law='https://jdih.esdm.go.id/dokumen/view?id=1805';
+const source='<p class="hint">Parameter kerja GPE. Sesuaikan angka dengan spesifikasi unit dan ketentuan site.</p>';
+const icon=name=>'<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-'+name+'"/></svg>';
+const details=(title,copy)=>'<details class="glass hub-card"><summary>'+escapeHtml(title)+'</summary>'+copy+'</details>';
+const paragraph=str=>'<p>'+escapeHtml(str)+'</p>';
+const number=v=>new Intl.NumberFormat('id-ID',{maximumFractionDigits:2}).format(v);
+const dock=[['measure','Ukur','time'],['calc','Hitung','calc'],['dashboard','Beranda','home'],['reference','Referensi','book'],['safety','Pengawas','shield']];
+$('dock').innerHTML=dock.map(([page,label,i])=>'<button data-page="'+page+'" class="'+(page==='dashboard'?'dock-home':'')+'">'+icon(i)+label+'</button>').join('');
+let calcKey='loader';
+function show(page){
+ const isMeasure=page==='measure';
+ $('homeScreen').style.display=isMeasure?'flex':'none';
+ $('resultsScreen').style.display='none';
+ $('hubScreen').style.display=isMeasure?'none':'block';
+ for(const el of $('dock').querySelectorAll('button')){
+  const current=el.dataset.page===page||(el.dataset.page==='reference'&&['param','formula','terms'].includes(page));
+  if(current)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');
+ }
+ if(isMeasure){renderHome();return}
+ const hub=$('hubContent');
+ $('hubScreen').scrollTop=0;
+ if(page==='dashboard'){
+  hub.innerHTML='<header class="hero"><h1>Panduan Pengawas Tambang</h1><p>Pengukuran fleet, kalkulator, dan referensi lapangan.</p><div id="heroFigure"></div></header><div class="tiles">'+tiles(menus)+'</div>';
+  const worker=document.querySelector('.watermark').cloneNode(true);
+  worker.removeAttribute('class');
+  worker.querySelector('g').setAttribute('stroke','#c8eeff');
+  $('heroFigure').append(worker);
+ }else if(page==='reference'){
+  hub.innerHTML='<h1>Referensi</h1><div class="tiles">'+tiles(menus.filter(m=>['param','formula','terms'].includes(m[0])))+'</div>';
+ }else if(page==='param'){
+  hub.innerHTML='<h1>Parameter</h1>'+source+Object.entries(parameters).map(([title,rows])=>details(title,rows.map(([label,copy])=>'<div class="param-row"><strong>'+escapeHtml(label)+'</strong><ul>'+copy.split(/ · |(?<=\.) (?=[A-Z])/).map(part=>'<li>'+escapeHtml(part)+'</li>').join('')+'</ul></div>').join(''))).join('')+'<div class="glass hub-card"><h2>Standar waktu fleet</h2><p>Setiap baris memasangkan satu excavator dengan satu jenis hauler serta menampilkan target spotting, loading, dan estimasi pass.</p><button class="action-btn" id="hubStandards">Lihat standar spotting dan loading</button></div>';
+  $('hubStandards').onclick=openStandards;
+ }else if(page==='formula'){
+  hub.innerHTML='<h1>Rumus</h1>'+source+calcs.map(([key,label,formula])=>details(label,paragraph(formula)+(referenceOnly.has(key)?'':'<button class="action-btn secondary" data-calc="'+key+'">Buka Hitung Cepat</button>'))).join('');
+ }else if(page==='terms'){
+  hub.innerHTML='<h1>Terminologi Tambang</h1><label for="termSearch">Cari istilah</label><input type="search" id="termSearch" placeholder="Contoh: spotting, BCM, disposal"><div id="termRows" style="margin-top:12px"></div>';
+  function filterTerms(){
+   const query=$('termSearch').value.trim().toLowerCase();
+
+   $('termRows').innerHTML=glossary.filter(g=>g.slice(1).join(' ').toLowerCase().includes(query)).map(([cat,term,meaning,example])=>'<article class="glass hub-card"><h2>'+escapeHtml(term)+'</h2>'+paragraph(meaning)+(example?'<p class="hint">'+escapeHtml(example)+'</p>':'')+'</article>').join('')||'<p>Tidak ada istilah yang cocok.</p>';
+  }
+  $('termSearch').oninput=filterTerms;filterTerms();
+ }else if(page==='safety'){
+  hub.innerHTML='<h1>Pengawas &amp; Keselamatan</h1><p><a href="'+law+'" target="_blank" rel="noopener">Kepmen ESDM 1827 K/30/MEM/2018 · JDIH ESDM</a></p><p><a class="action-btn" style="color:white;display:inline-block" href="https://hse.gpe.web.id/" target="_blank" rel="noopener">Buka G SAP ↗</a></p>'+safety.map(([title,content,ref])=>details(title,renderSafety(content)+'<p class="hint">'+escapeHtml(ref)+'</p>')).join('');
+ }else if(page==='calc'){
+  hub.innerHTML='<h1>Hitung Cepat</h1><label for="calcSelect">Pilih perhitungan</label><select id="calcSelect">'+calcs.filter(([key])=>!referenceOnly.has(key)).map(([key,label])=>'<option value="'+key+'">'+escapeHtml(label)+'</option>').join('')+'</select><div class="glass hub-card" id="calcDetail" style="margin-top:12px"></div>';
+  $('calcSelect').value=calcKey;
+  $('calcSelect').onchange=()=>{calcKey=$('calcSelect').value;renderCalculator()};
+  renderCalculator();
+ }
+}
+function tiles(items){
+ return items.map(([key,label,desc,i,color])=>'<button class="tile" style="--tile:'+color+'" data-page="'+key+'">'+icon(i)+'<b>'+escapeHtml(label)+'</b><small>'+escapeHtml(desc)+'</small></button>').join('');
+}
+function renderSafety(content){
+ const parts=Array.isArray(content)?content:content.startsWith('(1)')?content.split(/\(\d\)\s*/).filter(Boolean):content.split(/(?<=\.) (?=(?:Berat:|Mati:|Selama kerja:|Setelah kerja:|KTT|Laporkan|Gunakan|Lihat))/);
+ return parts.length>1?'<ol>'+parts.map(p=>'<li>'+escapeHtml(p)+'</li>').join('')+'</ol>':paragraph(parts[0]);
+}
+function renderCalculator(){
+ const [,title,formula,fields,calculate,unit]=calcs.find(c=>c[0]===calcKey);
+ const payload=unit==='payload';
+ const geometry=['front','disposal'].includes(calcKey);
+ const compare=payload||geometry;
+ const autoTarget=calcKey==='loader';
+ const choices=Object.entries(fleetSpecs).filter(([,v])=>payload?v[2]:v[0]&&v[1]);
+ const visible=fields.filter(f=>!geometry||!['w','r'].includes(f.key));
+ const input=(key,label,value='',optional=false)=>'<div><label for="field-'+key+'">'+escapeHtml(label)+'</label><input type="text" inputmode="decimal" id="field-'+key+'" value="'+value+'" '+(optional?'placeholder="Opsional"':'')+'></div>';
+ $('calcDetail').innerHTML='<h2>'+escapeHtml(title)+'</h2><form id="calcForm" novalidate><div class="calc-grid">'+
+  ((payload||geometry)?'<div><label for="calcHauler">Jenis hauler</label><select id="calcHauler">'+choices.map(([k])=>'<option>'+k+'</option>').join('')+(payload?'<option>Muatan manual</option>':'')+'</select></div>':'')+
+  (autoTarget?'<div><label for="calcLoader">Excavator</label><select id="calcLoader">'+[...new Set(PAIRS.map(p=>p.loader))].map(x=>'<option>'+x+'</option>').join('')+'</select></div>':'')+
+  visible.map(f=>input(f.key,payload&&f.key==='v'?'Muatan (BCM/trip)':f.label,f.value)).join('')+
+  (autoTarget?'<div><label for="targetMode">Mode target</label><select id="targetMode"><option value="auto">Otomatis</option><option value="custom">Custom</option></select></div>':'')+
+  (compare?input('benchmark',geometry?'Lebar aktual (m)':'Target (BCM/jam)','',true):'')+
+  '</div><p id="calcPreset" class="hint"></p><button class="action-btn" id="calcRun" type="button">Hitung</button></form><div id="calcOutput" role="status" aria-live="polite"></div><p class="hint">'+escapeHtml(formula)+'</p>';
+ const output=$('calcOutput');
+ const setPreset=()=>{
+  const spec=fleetSpecs[$('calcHauler').value];
+  if(payload)$('field-v').value=spec?.[2]??'';
+  if(geometry)$('calcPreset').textContent='Lebar '+number(spec[0])+' m · turning radius '+number(spec[1])+' m';
+  output.innerHTML='';
+  refreshTarget();
+ };
+ function refreshTarget(){
+  if(!autoTarget)return;
+  output.innerHTML='';
+  const manual=$('targetMode').value==='custom';
+  $('field-benchmark').closest('div').hidden=!manual;
+  const pair=targetPair();
+  $('calcPreset').textContent=manual?'Isi target produksi Anda dalam BCM/jam.':pair?'Standar '+pair.loader+' + '+pair.hauler+' · spotting '+fmt(pair.spot)+' · loading '+fmt(pair.load)+'.':'Target otomatis belum tersedia untuk tipe ini. Pilih Custom untuk mengisi target.';
+ }
+ function targetPair(){
+  const hauler=$('calcHauler').value;
+  return PAIRS.find(p=>p.loader===$('calcLoader').value&&p.hauler===(hauler==='DT Volvo'?'Volvo DT / Umum':hauler));
+ }
+ if(autoTarget){$('targetMode').onchange=refreshTarget;$('calcLoader').onchange=refreshTarget}
+ if(payload||geometry){$('calcHauler').onchange=setPreset;setPreset()}
+ $('calcForm').oninput=()=>{output.innerHTML=''};
+ function read(key,label,optional=false){
+  const raw=$('field-'+key).value.trim();
+  if(optional&&!raw)return null;
+  if(!/^\d+(?:[.,]\d+)?$/.test(raw))throw Error('Isi '+label+' dengan angka. Desimal boleh memakai koma atau titik.');
+  return Number(raw.replace(',','.'));
+ }
+ function runCalculation(){
+  if(document.activeElement?.matches('input'))document.activeElement.blur();
+  try{
+   const values={};
+   for(const f of visible){
+    const v=f.key==='s'&&f.value===0&&!$('field-s').value.trim()?0:read(f.key,f.label);
+    if(!Number.isFinite(v)||v<f.min||(v===0&&f.key!=='s')||(f.max!==undefined&&v>f.max))throw Error('Periksa nilai '+f.label+'.');
+    values[f.key]=v;
+   }
+   if(geometry)[values.w,values.r]=fleetSpecs[$('calcHauler').value];
+   if(['dozer','disposal'].includes(calcKey)&&!Number.isInteger(values[calcKey==='dozer'?'p':'f']))throw Error('Masukkan jumlah dalam bilangan bulat.');
+   const result=calculate(values);
+   const {value,note}=typeof result==='number'?{value:result}:result;
+   if(!Number.isFinite(value)||value<0)throw Error('Periksa kembali angka yang dimasukkan.');
+   const automatic=autoTarget&&$('targetMode').value==='auto';
+   const pair=automatic?targetPair():null;
+   const target=automatic?(pair?calculate({...values,t:(pair.spot+pair.load)/60}):null):compare?read('benchmark',geometry?'lebar aktual':'target',true):null;
+   const resultUnit=payload?'BCM/jam':unit;
+   let advice='';
+   if(target!==null){
+    const good=geometry?target>=value:value>=target;
+    advice=good?'No issue':geometry?'Lebar kurang '+number(value-target)+' m. Cek ruang manuver dan evaluasi tata letak area.':'Di bawah target '+number(target-value)+' BCM/jam. Cek cycle time, muatan aktual, dan waktu tidak produktif.';
+   }else if(calcKey==='speed'){
+    advice=value>=22?'No issue':'Di bawah indikator 22 km/jam. Cek hambatan rute, kondisi jalan, dan waktu berhenti yang masuk catatan.';
+   }else if(compare){
+    advice=geometry?'Isi lebar aktual untuk melihat analisa.':automatic?'Pilih Custom untuk memasukkan target produksi.':'Isi target produksi untuk melihat analisa.';
+   }
+   output.innerHTML='<section class="calc-result"><h3>Hasil Perhitungan</h3><strong>'+number(value)+'</strong><span>'+escapeHtml(resultUnit)+'</span>'+
+    (target!==null?paragraph((geometry?'Lebar aktual':automatic?'Target otomatis':'Target custom')+' '+number(target)+' '+(geometry?'m':'BCM/jam')):'')+
+    (note?paragraph(note):'')+(advice?'<div class="calc-advice"><h3>Rekomendasi</h3>'+paragraph(advice)+'</div>':'')+'</section>';
+  }catch(err){output.textContent=err.message}
+  requestAnimationFrame(()=>output.scrollIntoView({block:'nearest'}));
+ }
+ $('calcRun').addEventListener('click',runCalculation);
+ $('calcForm').addEventListener('submit',e=>{e.preventDefault();runCalculation()});
+}
+document.addEventListener('click',e=>{
+ const target=e.target.closest('[data-page],[data-calc]');
+ if(!target)return;
+ if(target.dataset.calc){calcKey=target.dataset.calc;show('calc')}else show(target.dataset.page);
+});
+$('continueMeasure').onclick=()=>{closeModal('endModal');$('resultsBtn').focus()};
+$('finishMeasure').onclick=()=>{
+ clearInterval(ticker);ticker=null;
+ data.active=null;save();renderHome();closeModal('endModal');displayResults();$('backBtn').focus();
+};
+show('dashboard');
+
+})();
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Nama file harus sama persis, termasuk huruf kecil dan ekstensi.
+Tambahkan foto asli di folder assets ini:
+logo-gpe.png   — logo di header
+tambang.jpg    — latar Beranda
+excavator.jpg  — kartu Ukur Fleet dan Parameter Excavator
+hd465.jpg      — kartu Hitung Cepat dan Parameter Hauler
+dt-volvo.jpg   — kartu Parameter dan Parameter Hauler
+hd785.jpg, oht773.jpg, oht777d.jpg, dt-scania.jpg — Parameter Hauler
+dozer.jpg, grader.jpg, pc200.jpg — Parameter Unit
+
+Aplikasi tetap bisa dipakai sebelum foto ditambahkan.

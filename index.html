@@ -32,6 +32,8 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 .brand-icon{position:relative;overflow:hidden}.brand-icon .brand-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:transparent;padding:3px}
 .hero.has-photo{background:linear-gradient(90deg,#0d243be8,#0d243b55),url("assets/tambang.jpg") center/cover}.hero.has-photo #heroFigure{display:none}
 .unit-photo{width:100%;height:118px;object-fit:contain;background:transparent;border-radius:9px;margin:4px 0}.param-photo{width:100%;max-height:180px;object-fit:contain;margin-top:9px}
+</style><style>
+.param-with-photo{display:flex;align-items:center;gap:10px}.param-copy{flex:1;min-width:0}.param-with-photo .param-photo{flex:0 0 auto;width:clamp(64px,22vw,110px);height:clamp(64px,22vw,110px);margin:0;object-fit:contain}.tile-square{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:9px;background:#ffffff26;overflow:hidden}.tile-square .unit-photo{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:contain;padding:3px;box-sizing:border-box}.tile-square:has(img) svg{visibility:hidden}
 </style></head>
 <body>
 <div class="app" id="app">
@@ -398,7 +400,7 @@ function show(page, fromHistory=false){
  }else if(page==='reference'){
   hub.innerHTML='<h1>Referensi</h1><div class="tiles">'+tiles(menus.filter(m=>['param','formula','terms'].includes(m[0])))+'</div>';
  }else if(page==='param'){
-  hub.innerHTML='<h1>Parameter</h1>'+source+Object.entries(parameters).map(([title,rows])=>details(title,parameterPhotos(title)+rows.map(([label,copy])=>'<div class="param-row"><strong>'+escapeHtml(label)+'</strong><ul>'+copy.split(/ · |(?<=\.) (?=[A-Z])/).map(part=>'<li>'+escapeHtml(part)+'</li>').join('')+'</ul></div>').join(''))).join('')+'<div class="glass hub-card"><h2>Standar waktu fleet</h2><p>Setiap baris memasangkan satu excavator dengan satu jenis hauler serta menampilkan target spotting, loading, dan estimasi pass.</p><button class="action-btn" id="hubStandards">Lihat standar spotting dan loading</button></div>';
+  hub.innerHTML='<h1>Parameter</h1>'+source+Object.entries(parameters).map(([title,rows])=>details(title,parameterRows(title,rows))).join('')+'<div class="glass hub-card"><h2>Standar waktu fleet</h2><p>Setiap baris memasangkan satu excavator dengan satu jenis hauler serta menampilkan target spotting, loading, dan estimasi pass.</p><button class="action-btn" id="hubStandards">Lihat standar spotting dan loading</button></div>';
   $('hubStandards').onclick=openStandards;
  }else if(page==='formula'){
   hub.innerHTML='<h1>Rumus</h1>'+source+calcs.map(([key,label,formula])=>details(label,paragraph(formula)+(referenceOnly.has(key)?'':'<button class="action-btn secondary" data-calc="'+key+'">Buka Hitung Cepat</button>'))).join('');
@@ -419,15 +421,27 @@ function show(page, fromHistory=false){
   renderCalculator();
  }
 }
-function unitPhoto(name,label,style='unit-photo'){
- return '<img class="'+style+'" src="assets/'+name+'.png" loading="lazy" alt="'+label+'" onerror="this.remove()">';
+function unitPhoto(name,style){
+ return '<img class="'+style+'" src="assets/'+name+'.png" alt="" loading="lazy" onerror="this.remove()">';
 }
-function parameterPhotos(title){
- const images={Hauler:[['hd465','HD465'],['hd785','HD785'],['oht773','OHT773'],['oht777d','OHT777D'],['dt-volvo','DT Volvo'],['dt-scania','DT Scania']],Excavator:[['excavator','Excavator']],Dozer:[['dozer','Dozer']],Grader:[['grader','Grader']],PC200:[['pc200','PC200']]};
- return (images[title]||[]).map(([name,label])=>unitPhoto(name,label,'param-photo')).join('');
+function parameterRows(title,rows){
+ const haulers={HD465:'hd465',HD785:'hd785',OHT773:'oht773',OHT777D:'oht777d','Volvo FMX440':'dt-volvo','Scania P410':'dt-scania'};
+ const groups={Excavator:'excavator',Dozer:'dozer',Grader:'grader',PC200:'pc200'};
+ const list=rows.map(([label,copy])=>{
+  const name=title==='Hauler'?haulers[label]:null;
+  const description='<div class="param-copy"><strong>'+escapeHtml(label)+'</strong><ul>'+
+   copy.split(/ · |(?<=\.) (?=[A-Z])/).map(part=>'<li>'+escapeHtml(part)+'</li>').join('')+'</ul></div>';
+  return '<div class="param-row param-with-photo">'+description+(name?unitPhoto(name,'param-photo'):'')+'</div>';
+ }).join('');
+ const group=groups[title];
+ return group?'<div class="param-with-photo"><div class="param-copy">'+list+'</div>'+unitPhoto(group,'param-photo')+'</div>':list;
 }
 function tiles(items){
- return items.map(([key,label,desc,i,color])=>'<button class="tile" style="--tile:'+color+'" data-page="'+key+'">'+icon(i)+(key==='measure'?unitPhoto('excavator','Excavator'):key==='calc'?unitPhoto('hd465','HD465'):key==='param'?unitPhoto('dt-volvo','DT Volvo'):'')+'<b>'+escapeHtml(label)+'</b><small>'+escapeHtml(desc)+'</small></button>').join('');
+ const photos={measure:'excavator',calc:'hd465',param:'dt-volvo'};
+ return items.map(([key,label,desc,i,color])=>{
+  const photo=photos[key];
+  return '<button class="tile" style="--tile:'+color+'" data-page="'+key+'"><span class="tile-square">'+icon(i)+(photo?unitPhoto(photo,'unit-photo'):'')+'</span><b>'+escapeHtml(label)+'</b><small>'+escapeHtml(desc)+'</small></button>';
+ }).join('');
 }
 function renderSafety(content){
  const parts=Array.isArray(content)?content:content.startsWith('(1)')?content.split(/\(\d\)\s*/).filter(Boolean):content.split(/(?<=\.) (?=(?:Berat:|Mati:|Selama kerja:|Setelah kerja:|KTT|Laporkan|Gunakan|Lihat))/);

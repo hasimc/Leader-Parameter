@@ -607,6 +607,9 @@ html[data-theme=dark] .dock .dock-home,html[data-theme=dark] .dock .dock-home[ar
 html[data-theme=dark] .dock .dock-home:active,html[data-theme=dark] .dock .dock-home[aria-current=page]:active{box-shadow:inset 3px 3px 6px rgba(43,67,100,.20),inset -2px -2px 5px rgba(255,255,255,.83),0 1px 3px rgba(0,5,15,.16)}
 @media(prefers-reduced-motion:reduce){.controls .activity-button,.icon-btn,.info-button,.back-btn,.modal-close,.tiny-action,#guideToggle{transition:none}}
 </style>
+<style id="ewh-estimate-note">
+.estimate-ewh{font-size:11px;line-height:1.5;margin:8px 0 0;color:#b9cde3;font-weight:650}.detail-pty .estimate-ewh{font-size:11px;color:#c7d9eb}.detail-pty .pty-formula-details summary{color:#d7e8f9}.detail-pty .pty-formula-details p{color:#bac9dc}
+</style>
 </head>
 <body>
 <div class="app" id="app">
@@ -864,27 +867,47 @@ function sessionRange(s){
  const cross=new Date(s.startedAt).toDateString()!==new Date(s.endedAt).toDateString();
  return shortTime(s.startedAt)+' – '+(cross?sessionDate(s.endedAt)+' ':'')+shortTime(s.endedAt);
 }
-function sessionStats(session){const config=session.config||cfg(pairKey(session)),cycles=session.cycles||[],phases=session.phases||[];
- const valid=cycles.filter(x=>Number.isFinite(x.spot)&&Number.isFinite(x.load)&&x.spot+x.load>0&&(!config.lastDump||x.lastDump));
- const spot=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot));
- const load=avg(cycles.filter(x=>!config.lastDump||x.lastDump).map(x=>x.load));
- const wait=phases.filter(x=>x.phase==='waiting').reduce((sum,x)=>sum+x.seconds,0);
+// Delay is treated once as the recorded total for a one-hour estimate.
+function observationEstimate(cycles,phases,config,vessel){
+ const valid=cycles.filter(x=>Number.isFinite(x.spot)&&Number.isFinite(x.load)&&x.spot>=0&&x.load>=0&&x.spot+x.load>0&&(!config.lastDump||x.lastDump));
+ const spot=valid.length?avg(valid.map(x=>x.spot)):null;
+ const load=valid.length?avg(valid.map(x=>x.load)):null;
+ const wait=phases.filter(x=>x.phase==='waiting'&&Number.isFinite(x.seconds)&&x.seconds>=0).reduce((sum,x)=>sum+x.seconds,0);
+ const delayMinutes=wait/60;
+ const effectiveMinutes=Math.max(0,60-delayMinutes);
+ const ewh=effectiveMinutes/60;
+ const interval=valid.length?(spot+load)/60:null;
+ const v=typeof vessel==='number'?vessel:Number(String(vessel??'').replace(',','.'));
+ const pty=interval>0&&Number.isFinite(v)&&v>0?(effectiveMinutes/interval)*v:null;
+ return {spot,load,wait,delayMinutes,effectiveMinutes,ewh,interval,count:valid.length,vessel:Number.isFinite(v)&&v>0?v:null,pty};
+}
+function estimateEwhText(stats){return 'Waktu efektif: '+number(stats.effectiveMinutes)+' menit/jam · EWH: '+number(stats.ewh*100)+'%'}
+function estimateDetailsHtml(stats,vessel){
+ const effectiveTerm=stats.delayMinutes>60?'maks(0, 60 − '+minuteText(stats.delayMinutes)+')':'(60 − '+minuteText(stats.delayMinutes)+')';
+ const ewhFormula=stats.delayMinutes>60?'EWH = maks(0, (60 − Total Delay) ÷ 60)':'EWH = (60 − Total Delay) ÷ 60';
+ const capped=stats.delayMinutes>=60?'<p>Total delay mencapai 60 menit atau lebih; waktu efektif estimasi dibatasi 0 menit.</p>':'';
+ return '<p>PTY = [(60 − Total Delay) ÷ (Rata-rata Loading + Rata-rata Spotting)] × Muatan per Trip</p>'+
+  (stats.interval>0?'<p>['+effectiveTerm+' ÷ ('+minuteText(stats.load/60)+' + '+minuteText(stats.spot/60)+')] × '+(vessel>0?inputNumber(vessel):'Muatan')+'</p>':'')+
+  '<p>'+ewhFormula+' = '+minuteText(stats.ewh)+' ('+number(stats.ewh*100)+'%).</p>'+
+  '<p>Semua waktu pada rumus dalam menit. Loading dan Spotting memakai rata-rata dari siklus lengkap yang sama.</p>'+
+  '<p>EWH adalah proporsi waktu efektif untuk estimasi satu jam. Total delay tercatat dianggap sebagai delay satu jam, tanpa tambahan delay di luar yang tercatat. Delay sudah diperhitungkan sekali.</p>'+capped;
+}
+function sessionStats(session){
+ const config=session.config||cfg(pairKey(session));
  const key=session.hauler==='Volvo DT / Umum'?'DT Volvo':session.hauler;
- const vessel=session.vessel??fleetSpecs[key]?.[2];
- const interval=valid.length?avg(valid.map(x=>(x.spot+x.load)/60)):null;
- return {spot,load,wait,vessel,pty:interval&&vessel>0?60*vessel/interval:null};
+ return observationEstimate(session.cycles||[],session.phases||[],config,session.vessel??fleetSpecs[key]?.[2]);
 }
 function renderSessionHistory(){
  $('sessionCount').textContent=data.sessions.length+' SESI';
  const ordered=[...data.sessions].sort((a,b)=>(b.endedAt||0)-(a.endedAt||0));
- $('sessionHistory').innerHTML=ordered.length?ordered.map(s=>{const stats=sessionStats(s),id=escapeHtml(s.id);return `<div class="session-swipe" data-session-row="${id}"><button class="swipe-delete" data-delete-session="${id}" tabindex="-1" aria-hidden="true">Hapus</button><div class="session-face"><button class="session-open" data-open-session="${id}"><span class="session-calendar" aria-hidden="true">◷</span><span class="session-copy"><b>${escapeHtml(sessionRange(s))}</b><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))} · ${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</span><small>${s.cycles.length} siklus • ${s.phases.length} catatan${s.legacy?' • data sebelumnya':''}</small></span><span class="session-pty"><b>${stats.pty==null?'—':number(stats.pty)}</b><small>BCM/jam</small></span><span class="session-chevron" aria-hidden="true">›</span></button><button class="session-delete-icon" data-delete-session="${id}" aria-label="Hapus riwayat ${escapeHtml(sessionRange(s))}" title="Hapus riwayat"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6m4-6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>`}).join(''):'<div class="empty-results">Belum ada sesi tersimpan. Selesaikan pengukuran melalui Hasil &amp; Rekomendasi untuk menyimpannya di sini.</div>';
+ $('sessionHistory').innerHTML=ordered.length?ordered.map(s=>{const stats=sessionStats(s),id=escapeHtml(s.id);return `<div class="session-swipe" data-session-row="${id}"><button class="swipe-delete" data-delete-session="${id}" tabindex="-1" aria-hidden="true">Hapus</button><div class="session-face"><button class="session-open" data-open-session="${id}"><span class="session-calendar" aria-hidden="true">◷</span><span class="session-copy"><b>${escapeHtml(sessionRange(s))}</b><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))} · ${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</span><small>${stats.count} siklus • ${s.phases.length} catatan${s.legacy?' • data sebelumnya':''}</small></span><span class="session-pty"><b>${stats.pty==null?'—':number(stats.pty)}</b><small>BCM/jam</small></span><span class="session-chevron" aria-hidden="true">›</span></button><button class="session-delete-icon" data-delete-session="${id}" aria-label="Hapus riwayat ${escapeHtml(sessionRange(s))}" title="Hapus riwayat"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6m4-6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>`}).join(''):'<div class="empty-results">Belum ada sesi tersimpan. Selesaikan pengukuran melalui Hasil &amp; Rekomendasi untuk menyimpannya di sini.</div>';
 }
 function openSessionDetail(id){
  const s=data.sessions.find(x=>x.id===id);if(!s)return;
  const stats=sessionStats(s),config=s.config||cfg(pairKey(s));
  const metric=(label,value,cls)=>`<div class="summary-card ${cls}"><small>${label}</small><strong>${value}</strong></div>`;
  const rows=[...s.phases].reverse().map(r=>{const status=phaseStatusWithConfig(config,r);return `<tr><td>${r.phase==='waiting'?'—':escapeHtml(r.cycleNo)}</td><td>${phaseName(r.phase)}</td><td><b>${fmt(r.seconds,true)}</b></td><td>${status.text}</td></tr>`}).join('');
- $('sessionDetailBody').innerHTML=`<div class="detail-session-heading"><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))}</span><h3>${escapeHtml(sessionRange(s))}</h3><p>${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</p></div><div class="summary-grid">${metric('SIKLUS',s.cycles.length,'metric-cycles')}${metric('SPOTTING',fmt(stats.spot),'metric-spot')}${metric('LOADING',fmt(stats.load),'metric-load')}${metric('TOTAL DELAY',fmt(stats.wait),'metric-wait')}</div><div class="detail-pty"><small>PTY HASIL PENGUKURAN</small><strong>${stats.pty==null?'—':number(stats.pty)} <span>BCM/jam</span></strong><p>Kapasitas vessel: ${stats.vessel??'—'} BCM. Waktu delay dicatat terpisah dan belum masuk rumus PTY.</p></div><h3 class="detail-table-title">Catatan Waktu</h3><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>AKTIVITAS</th><th>DURASI</th><th>STATUS</th></tr></thead><tbody>${rows||'<tr><td colspan="4">Tidak ada catatan fase.</td></tr>'}</tbody></table></div><details class="detail-cycles"><summary>Detail ${s.cycles.length} Siklus</summary><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>SPOTTING</th><th>LOADING</th></tr></thead><tbody>${s.cycles.map(r=>`<tr><td>${escapeHtml(r.cycleNo)}</td><td>${fmt(r.spot,true)}</td><td>${fmt(r.load,true)}</td></tr>`).join('')}</tbody></table></div></details>`;
+ $('sessionDetailBody').innerHTML=`<div class="detail-session-heading"><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))}</span><h3>${escapeHtml(sessionRange(s))}</h3><p>${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</p></div><div class="summary-grid">${metric('SIKLUS',stats.count,'metric-cycles')}${metric('SPOTTING',fmt(stats.spot),'metric-spot')}${metric('LOADING',fmt(stats.load),'metric-load')}${metric('TOTAL DELAY',fmt(stats.wait),'metric-wait')}</div><div class="detail-pty"><small>PTY HASIL PENGUKURAN</small><strong>${stats.pty==null?'—':number(stats.pty)} <span>BCM/jam</span></strong><p>Kapasitas vessel: ${stats.vessel??'—'} BCM.</p><p class="estimate-ewh">${estimateEwhText(stats)}</p><details class="pty-formula-details"><summary>Lihat perhitungan</summary>${estimateDetailsHtml(stats,stats.vessel)}</details></div><h3 class="detail-table-title">Catatan Waktu</h3><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>AKTIVITAS</th><th>DURASI</th><th>STATUS</th></tr></thead><tbody>${rows||'<tr><td colspan="4">Tidak ada catatan fase.</td></tr>'}</tbody></table></div><details class="detail-cycles"><summary>Detail ${s.cycles.length} Siklus</summary><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>SPOTTING</th><th>LOADING</th></tr></thead><tbody>${s.cycles.map(r=>`<tr><td>${escapeHtml(r.cycleNo)}</td><td>${fmt(r.spot,true)}</td><td>${fmt(r.load,true)}</td></tr>`).join('')}</tbody></table></div></details>`;
  $('sessionDetailBody').scrollTop=0;openModal('sessionDetailModal');$('sessionDetailModal').querySelector('.modal-close').focus();
 }
 function phaseStatusWithConfig(c,r){if(r.phase==='waiting')return {text:'Delay'};if(c.pending)return {text:'Pending'};if(c.lastDump&&r.phase==='loading'&&!r.lastDump)return {text:'Metode lama'};if(c.bands)return bandStatus(r.phase,r.seconds,c.bands,c.lastDump);const target=r.phase==='spotting'?c.spot:c.load;return {text:target?(r.seconds<=target?'Sesuai':'Lebih'):'—'}}
@@ -934,21 +957,25 @@ function ptyEquation(title,denominator,v,value,extra=''){
   escapeHtml(denominator)+'</span></span><span>× '+inputNumber(v)+' BCM'+extra+' = '+number(value)+' BCM/jam</span></div>';
 }
 function renderObservedPty(cycles,pair){
- const body=$('observedPtyBody');
- const valid=cycles.filter(x=>Number.isFinite(x.spot)&&Number.isFinite(x.load)&&x.spot+x.load>0&&(!pair.lastDump||x.lastDump));
- if(!valid.length){body.innerHTML='<div class="pty-empty">Selesaikan satu siklus Spotting dan Loading untuk melihat PTY.</div>';return}
+ const body=$('observedPtyBody'),phases=getPairPhases();
  const vesselKey=pair.hauler==='Volvo DT / Umum'?'DT Volvo':pair.hauler;
  const preset=data.vesselByPair[pairKey(pair)]??fleetSpecs[vesselKey]?.[2]??'';
- const interval=avg(valid.map(x=>(x.spot+x.load)/60));
- body.innerHTML='<div class="pty-compact"><div class="pty-primary"><span class="pty-label">PRODUKTIVITAS LOADER</span><div id="observedPtyValue"></div><span class="pty-meta">'+valid.length+' siklus • interval '+fmt(interval*60)+'</span></div><label class="vessel-mini" for="observedVessel">Vessel <span>BCM</span><input id="observedVessel" type="text" inputmode="decimal" value="'+escapeHtml(preset)+'"></label></div><details class="pty-formula-details"><summary>Lihat perhitungan</summary><p>(60 ÷ '+minuteText(interval)+' menit) × Kapasitas Vessel Hauler</p><p>Waktu delay dicatat terpisah dan belum termasuk dalam PTY ini.</p></details>';
+ const initial=observationEstimate(cycles,phases,pair,preset);
+ if(!initial.count){body.innerHTML='<div class="pty-empty">Selesaikan satu siklus Spotting dan Loading untuk melihat PTY.</div><p class="estimate-ewh">'+estimateEwhText(initial)+'</p><details class="pty-formula-details"><summary>Lihat perhitungan</summary>'+estimateDetailsHtml(initial,initial.vessel)+'</details>';return}
+ body.innerHTML='<div class="pty-compact"><div class="pty-primary"><span class="pty-label">PRODUKTIVITAS LOADER</span><div id="observedPtyValue"></div><span class="pty-meta">'+initial.count+' siklus • interval '+fmt(initial.interval*60)+'</span></div><label class="vessel-mini" for="observedVessel">Vessel <span>BCM</span><input id="observedVessel" type="text" inputmode="decimal" value="'+escapeHtml(preset)+'"></label></div><p class="estimate-ewh" id="observedEwh"></p><details class="pty-formula-details"><summary>Lihat perhitungan</summary><div id="observedFormula"></div></details>';
  const vessel=$('observedVessel');
- function update(persist=false){const raw=vessel.value.trim(),v=Number(raw.replace(',','.'));const valid=/^\d+(?:[.,]\d+)?$/.test(raw)&&Number.isFinite(v)&&v>0;
- $('observedPtyValue').innerHTML=valid?'<div class="pty-number">'+number(60*v/interval)+'<span>BCM/jam</span></div>':'<span class="pty-invalid">Isi kapasitas vessel</span>';
- if(persist){if(valid){data.vesselByPair[pairKey(pair)]=v;if(data.currentSessionArchived){const saved=data.sessions.find(x=>x.id===data.workingId);if(saved)saved.vessel=v;}save();renderSessionHistory()}}
+ function update(persist=false){
+  const raw=vessel.value.trim(),v=Number(raw.replace(',','.'));
+  const valid=/^\d+(?:[.,]\d+)?$/.test(raw)&&Number.isFinite(v)&&v>0;
+  const stats=observationEstimate(cycles,phases,pair,valid?v:null);
+  $('observedPtyValue').innerHTML=stats.pty!=null?'<div class="pty-number">'+number(stats.pty)+'<span>BCM/jam</span></div>':'<span class="pty-invalid">Isi kapasitas vessel</span>';
+  $('observedEwh').textContent=estimateEwhText(stats);
+  $('observedFormula').innerHTML=estimateDetailsHtml(stats,stats.vessel);
+  if(persist&&valid){data.vesselByPair[pairKey(pair)]=v;if(data.currentSessionArchived){const saved=data.sessions.find(x=>x.id===data.workingId);if(saved)saved.vessel=v}save();renderSessionHistory()}
  }
  vessel.addEventListener('input',()=>update(true));update();
 }
-function renderResults(){const p=currentPair(),key=pairKey(p),cycles=getPairCycles(),phases=getPairPhases(),c=cfg(key);$('resultPair').textContent=`${p.loader} → ${p.hauler}`;$('sumCycles').textContent=String(cycles.length);const as=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot)),al=avg(cycles.filter(x=>!c.lastDump||x.lastDump).map(x=>x.load));$('sumSpot').textContent=as==null?'—':fmt(as);$('sumLoad').textContent=al==null?'—':fmt(al);$('sumSpotTarget').textContent=`Standar ${fmt(c.spot)}`;$('sumLoadTarget').textContent=`Standar ${fmt(c.load)}`;
+function renderResults(){const p=currentPair(),key=pairKey(p),cycles=getPairCycles(),phases=getPairPhases(),c=cfg(key);$('resultPair').textContent=`${p.loader} → ${p.hauler}`;const estimate=observationEstimate(cycles,phases,c,null);$('sumCycles').textContent=String(estimate.count);const as=estimate.spot,al=estimate.load;$('sumSpot').textContent=as==null?'—':fmt(as);$('sumLoad').textContent=al==null?'—':fmt(al);$('sumSpotTarget').textContent=`Standar ${fmt(c.spot)}`;$('sumLoadTarget').textContent=`Standar ${fmt(c.load)}`;
  const title=$('overallTitle'),desc=$('overallText'),box=$('overallBox'),list=$('recommendations');list.innerHTML='';box.style.borderColor='';box.style.background='';
  if(!cycles.length){title.textContent='Belum ada siklus lengkap';desc.textContent='Selesaikan satu siklus spotting dan loading untuk melihat evaluasi.';list.innerHTML='<li>Standar waktu dan estimasi passes mengikuti tabel fleet untuk pasangan unit terpilih.</li>';}
  else if(c.pending){title.textContent='Acuan waktu pending';desc.textContent='Durasi tercatat. Kategori penilaian menunggu penetapan acuan PC1250 + HD785.';}
@@ -976,7 +1003,9 @@ function openStandards(){
  openModal('standardsModal');
 }
 function resetSession(){if(data.active&&data.active.phase){clearInterval(ticker);ticker=null}data.phases=[];data.cycles=[];data.active=null;data.workingId=null;data.sessionStartedAt=null;data.currentSessionArchived=false;save();closeModal('resetModal');renderHome();toast('Riwayat sesi dihapus')}
-function exportCsv(){const p=currentPair(),cycles=getPairCycles(),phases=getPairPhases(),c=cfg();const rows=[['Jenis','Siklus','Loader','Hauler','Phase','Durasi detik','Target detik','Status','Waktu']];for(const x of phases){const st=phaseStatus(x.phase,x.seconds,pairKey(p),x.lastDump);rows.push(['Phase',x.cycleNo,x.loader,x.hauler,phaseName(x.phase),x.seconds.toFixed(1),x.phase==='waiting'?'':x.phase==='spotting'?c.spot||'':c.load||'',st.text,new Date(x.at).toLocaleString('id-ID')])}for(const x of cycles)rows.push(['Siklus',x.cycleNo,x.loader,x.hauler,'Spotting + Loading',`${x.spot==null?'':x.spot.toFixed(1)} + ${x.load.toFixed(1)}`,`${c.spot||''} + ${c.load||''}`,(c.pending?'Pending':c.bands?(c.lastDump&&!x.lastDump?'Metode lama':cycleBandStatus(x.spot,x.load,c.bands,c.lastDump).text):cycleEval(x,pairKey(p)).join(' & ')||'Sesuai'),new Date(x.at).toLocaleString('id-ID')]);const csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`GPE_Loader_${p.loader}_${p.hauler}_hasil.csv`.replaceAll(' ','_');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportCsv(){const p=currentPair(),cycles=getPairCycles(),phases=getPairPhases(),c=cfg();const rows=[['Jenis','Siklus','Loader','Hauler','Phase','Durasi detik','Target detik','Status','Waktu']];for(const x of phases){const st=phaseStatus(x.phase,x.seconds,pairKey(p),x.lastDump);rows.push(['Phase',x.cycleNo,x.loader,x.hauler,phaseName(x.phase),x.seconds.toFixed(1),x.phase==='waiting'?'':x.phase==='spotting'?c.spot||'':c.load||'',st.text,new Date(x.at).toLocaleString('id-ID')])}for(const x of cycles)rows.push(['Siklus',x.cycleNo,x.loader,x.hauler,'Spotting + Loading',`${x.spot==null?'':x.spot.toFixed(1)} + ${x.load.toFixed(1)}`,`${c.spot||''} + ${c.load||''}`,(c.pending?'Pending':c.bands?(c.lastDump&&!x.lastDump?'Metode lama':cycleBandStatus(x.spot,x.load,c.bands,c.lastDump).text):cycleEval(x,pairKey(p)).join(' & ')||'Sesuai'),new Date(x.at).toLocaleString('id-ID')]);const stats=sessionStats({loader:p.loader,hauler:p.hauler,config:c,cycles,phases,vessel:data.vesselByPair[pairKey(p)]});
+ rows.push([],['RINGKASAN ESTIMASI SATU JAM'],['Parameter','Nilai','Satuan'],['PTY Loader',stats.pty??'','BCM/jam'],['Siklus lengkap untuk perhitungan',stats.count,'siklus'],['Rata-rata Loading',stats.load==null?'':stats.load/60,'menit'],['Rata-rata Spotting',stats.spot==null?'':stats.spot/60,'menit'],['Total Delay',stats.delayMinutes,'menit'],['Waktu efektif',stats.effectiveMinutes,'menit/jam'],['EWH',stats.ewh,'rasio'],['EWH',stats.ewh*100,'%'],['Muatan per Trip',stats.vessel??'','BCM'],['Rumus','[(60 - Total Delay) / (Rata-rata Loading + Rata-rata Spotting)] x Muatan per Trip'],['Asumsi','Delay tercatat dianggap sebagai total delay satu jam; tidak ada tambahan delay di luar yang tercatat.']);
+ const csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`GPE_Loader_${p.loader}_${p.hauler}_hasil.csv`.replaceAll(' ','_');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 // Saved session interactions never replace the current working data.
 $('sessionHistory').addEventListener('click',e=>{
  const del=e.target.closest('[data-delete-session]');if(del){askDeleteSession(del.dataset.deleteSession);return}

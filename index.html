@@ -3,55 +3,582 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#163c72">
+<meta name="theme-color" content="#e9edf8">
 <title>LEADER PARAMETER</title>
-<style>
-:root{--navy:#153766;--blue:#2468d3;--blue2:#3984f5;--sky:#eaf2ff;--sky2:#dceaff;--green:#48bd78;--ink:#183350;--muted:#6d829c;--line:#d7e2f1;--danger:#c65c3f;--amber:#dda02c;--surface:rgba(236,244,255,.82);--shadow:0 9px 26px rgba(36,83,148,.12)}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#edf3fb}button,select,input{font:inherit}button{cursor:pointer}.app{height:100dvh;min-height:0;position:relative;overflow:hidden;background:radial-gradient(ellipse at 93% 35%,rgba(120,174,249,.16),transparent 30%),radial-gradient(ellipse at 4% 78%,rgba(108,188,218,.12),transparent 34%),linear-gradient(150deg,#f5f8fd,#eaf1fa);isolation:isolate}.watermark{position:absolute;z-index:0;width:min(52vw,360px);height:auto;right:-4%;top:20%;opacity:.10;pointer-events:none}.topbar{height:calc(64px + env(safe-area-inset-top));padding:7px 16px 7px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(110deg,#193d72,#12315f);color:#fff;position:relative;z-index:2}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#4c91f8,#2870de);display:grid;place-items:center;box-shadow:inset 0 1px 0 #ffffff88,0 4px 12px #071e4428;flex:none}.brand-text small{display:block;color:#b9cee9;font-size:9px;letter-spacing:.12em;font-weight:800}.brand-text strong{font-size:15px;letter-spacing:.035em;white-space:nowrap}.top-actions{display:flex;gap:7px}.icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid #ffffff25;background:#ffffff12;color:#fff;display:grid;place-items:center}.icon-btn:hover{background:#ffffff24}.livebar{position:absolute;z-index:3;left:0;right:0;top:calc(64px + env(safe-area-inset-top));height:3px;background:linear-gradient(90deg,var(--green) 0 19%,#4a8ff3 19% 100%)}.screen{position:absolute;z-index:1;inset:calc(67px + env(safe-area-inset-top)) 0 0;display:flex;flex-direction:column;min-height:0}.home-content{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;padding:11px 14px calc(env(safe-area-inset-bottom) + 8px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;max-width:660px;width:100%;margin:0 auto}.home-content::-webkit-scrollbar{display:none}.glass{background:linear-gradient(135deg,rgba(237,245,255,.87),rgba(222,236,253,.78));border:1px solid rgba(255,255,255,.92);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:17px;position:relative}.glass:after{content:"";position:absolute;left:18px;right:18px;top:1px;height:1px;background:#fff9;border-radius:2px;pointer-events:none}.guide{min-height:54px;padding:9px 13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex:none}.guide-main{min-width:0}.eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#788ca5;font-weight:800}.guide-title{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;margin-top:2px}.guide-summary{font-size:10px;color:var(--muted);margin-top:1px}.guide-side{display:flex;align-items:center;gap:7px;flex:none}.step-tag{font-size:9px;color:#2868c8;font-weight:800;background:#e5efff;border-radius:99px;padding:5px 8px}.chevron{color:#2468d3;transition:transform .2s}.guide.open .chevron{transform:rotate(180deg)}.guide-popover{position:static;z-index:auto;flex:1 0 100%;width:100%;margin-top:2px;padding:10px 12px;background:rgba(250,252,255,.84);border:1px solid #d5e3f6;border-radius:12px;box-shadow:inset 0 1px 0 #ffffffb0;backdrop-filter:blur(12px)}.guide-popover[hidden]{display:none}.guide-step{display:flex;gap:9px;align-items:flex-start;font-size:11px;line-height:1.35;color:#435b76;padding:5px 0}.guide-step b{color:#1d416f}.step-no{width:19px;height:19px;border-radius:50%;background:#e4efff;color:#2168d2;display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}.panel{padding:11px 13px;flex:none}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}.panel h2{font-size:14px;line-height:1.15;margin:0;color:#1b3b62;letter-spacing:-.01em}.panel-sub{font-size:10px;color:var(--muted);margin-top:3px}.tiny-action{border:0;background:#e5efff;color:#2868c8;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:800;white-space:nowrap}.pair-selects{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:7px}.select-wrap label{display:block;font-size:8px;letter-spacing:.11em;color:#7389a2;font-weight:800;margin:0 0 3px 2px}.select-wrap select{appearance:none;width:100%;height:32px;border-radius:9px;border:1px solid #cbdcf2;background:rgba(255,255,255,.83);color:#234565;font-weight:750;font-size:12px;padding:0 27px 0 10px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%235f7690' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}.target-note{font-size:8px;letter-spacing:.025em;color:#37659e;background:rgba(224,237,255,.75);padding:5px 8px;border-radius:8px;margin-bottom:5px}.targets{display:grid;grid-template-columns:1fr 1fr;gap:6px}.target{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:3px 1px}.target+.target{border-left:1px solid #d1deef;padding-left:11px}.target-label{font-size:10px;color:#45607d;font-weight:700}.target-value{font-size:15px;font-weight:850;color:#236bd7;font-variant-numeric:tabular-nums}.target-value.unset{font-size:9px;color:#7a8da4;font-weight:700}.history-card{padding:9px 13px 8px;flex:1;min-height:112px;display:flex;flex-direction:column;overflow:hidden}.history-card .panel-head{margin-bottom:4px;align-items:center}.history-count{font-size:9px;color:#3468a7;background:#e3edfb;padding:5px 8px;border-radius:99px;font-weight:800;white-space:nowrap}.history-columns,.phase-row{display:grid;grid-template-columns:minmax(0,1fr) 68px 72px;align-items:center;gap:5px}.history-columns{font-size:8px;letter-spacing:.09em;color:#7c90a8;font-weight:800;padding:3px 0 5px;border-bottom:1px solid #d5e0ed}.history-columns span:nth-child(2),.phase-time{text-align:left}.history-columns span:last-child,.phase-status{text-align:right}.phase-list{min-height:0;overflow:hidden}.phase-row{min-height:27px;border-bottom:1px solid rgba(199,215,235,.55);font-size:10px}.phase-name{display:flex;align-items:center;gap:7px;min-width:0;color:#35516f;font-weight:750}.phase-dot{width:8px;height:8px;border-radius:50%;background:#317bea;box-shadow:0 0 0 3px #dceaff;flex:none}.phase-dot.loading{background:#51b979;box-shadow:0 0 0 3px #e0f4e8}.phase-meta{font-size:8px;color:#8798ab;font-weight:600;margin-left:2px;white-space:nowrap}.phase-time{font-variant-numeric:tabular-nums;font-weight:800;color:#294967;font-size:11px}.status-pill{display:inline-flex;justify-content:center;min-width:54px;border-radius:99px;padding:4px 6px;font-size:8px;font-weight:850}.status-good{background:#e4f5eb;color:#258252}.status-warn{background:#fff0e9;color:#b65d3f}.status-neutral{background:#e9eff6;color:#657b93}.empty-log{min-height:42px;display:grid;place-items:center;text-align:center;color:#8495a8;font-size:10px}.log-foot{font-size:8px;color:#8193a8;margin-top:4px}.measure-area{flex:none;padding:9px 10px 10px}.measure-head{display:flex;align-items:center;justify-content:space-between;padding:0 3px 7px}.measure-head h2{font-size:14px;margin:0;color:#1b3b62}.measure-head span{font-size:9px;color:#6b819a}.controls{display:grid;grid-template-columns:minmax(0,1fr) 82px;gap:7px}.measure-button{height:78px;border:0;border-radius:14px;background:linear-gradient(130deg,#3987f8 0%,#276bd5 58%,#1b55bb 100%);color:#fff;text-align:left;padding:9px 12px;display:grid;grid-template-columns:minmax(0,1fr) 1px 122px;align-items:center;gap:10px;box-shadow:0 8px 18px #1d59b928,inset 0 1px 0 #ffffff60;position:relative;overflow:hidden}.measure-button:before{content:"";position:absolute;left:-20%;top:-65%;width:58%;height:210%;background:linear-gradient(90deg,transparent,#ffffff15,transparent);transform:rotate(22deg);pointer-events:none}.timer-info,.measure-action{position:relative;z-index:1}.phase-label{font-size:8px;font-weight:850;letter-spacing:.08em;color:#d9e8ff;display:flex;align-items:center;gap:6px}.live-dot{width:6px;height:6px;border-radius:50%;background:#53d783;box-shadow:0 0 0 3px #53d78332}.timer-value{font-size:26px;line-height:1.15;font-weight:800;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-top:3px}.measure-separator{height:46px;background:#ffffff50;position:relative;z-index:1}.measure-action{text-align:center}.measure-action strong{display:block;font-size:14px;letter-spacing:.08em}.measure-action small{display:block;font-size:8px;color:#d6e6ff;margin-top:3px;line-height:1.2}.results-button{height:78px;border-radius:14px;border:1.5px solid #3b7de1;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(226,238,255,.84));color:#2868c8;box-shadow:0 7px 16px #265a9e18,inset 0 1px 0 white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:4px}.results-button svg{width:20px;height:20px}.results-button span{font-size:8px;line-height:1.15;font-weight:850;text-align:center}.session-tools{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:0 2px}.session-hint{font-size:8px;color:#8092a7}.small-link{border:0;background:transparent;color:#3e6fab;font-size:9px;font-weight:750;padding:3px 4px}.screen-results{display:none;position:absolute;z-index:4;top:calc(64px + env(safe-area-inset-top));right:0;bottom:0;left:0;overflow:auto;padding:14px 15px calc(env(safe-area-inset-bottom) + 18px)}.results-wrap{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:11px}.results-top{display:flex;align-items:center;gap:10px}.back-btn{width:38px;height:38px;border:1px solid #d6e2f2;border-radius:12px;background:#ffffffbb;color:#215da9;display:grid;place-items:center;box-shadow:0 4px 12px #244d8010}.results-title h1{margin:0;font-size:19px;color:#183b67}.results-title p{margin:3px 0 0;color:#71859d;font-size:11px}.result-pair{margin-left:auto;background:#e4efff;color:#2d66af;padding:7px 9px;border-radius:10px;font-size:10px;font-weight:800}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.summary-card{padding:12px 10px;border-radius:15px;background:linear-gradient(145deg,rgba(239,246,255,.95),rgba(222,235,252,.86));border:1px solid #ffffff;box-shadow:var(--shadow);backdrop-filter:blur(14px)}.summary-card small{display:block;color:#778ca6;font-size:8px;line-height:1.2;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.summary-card strong{display:block;font-size:17px;color:#1d5fb9;margin-top:5px;font-variant-numeric:tabular-nums}.summary-card em{display:block;font-style:normal;color:#7d90a6;font-size:8px;margin-top:2px}.result-panel{padding:14px;border-radius:17px;background:linear-gradient(135deg,rgba(239,246,255,.94),rgba(220,235,253,.84));border:1px solid #ffffff;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.result-panel h2{font-size:14px;margin:0 0 8px;color:#1b3b62}.overall{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:12px;background:#ffffffaa;border:1px solid #ffffff}.overall-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#e4f2ff;color:#2468d3;flex:none}.overall strong{display:block;font-size:12px;color:#264868}.overall p{font-size:10px;line-height:1.45;color:#687f98;margin:3px 0 0}.recommendation-list{margin:8px 0 0;padding-left:16px;color:#4d6682;font-size:10px;line-height:1.5}.recommendation-list li+li{margin-top:3px}.result-table-wrap{overflow:auto;border-radius:11px;border:1px solid #d7e3f2;background:#ffffffb8}.result-table{border-collapse:collapse;width:100%;min-width:470px;font-size:10px}.result-table th{text-align:left;color:#758aa2;background:#edf4ff;font-size:8px;letter-spacing:.07em;padding:8px}.result-table td{padding:8px;border-top:1px solid #e3ebf5;color:#35516e;font-variant-numeric:tabular-nums}.result-actions{display:flex;gap:8px}.action-btn{border:0;border-radius:10px;padding:10px 12px;background:#2468d3;color:#fff;font-size:10px;font-weight:800;box-shadow:0 5px 13px #1d59b923}.action-btn.secondary{background:#ffffffc9;color:#2c64a7;border:1px solid #cbdcf2;box-shadow:none}.empty-results{padding:18px;border:1px dashed #bfd1e7;border-radius:12px;text-align:center;color:#71859b;font-size:11px;background:#ffffff80}.modal-backdrop{position:fixed;inset:0;z-index:20;background:#0c234b70;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}.modal-backdrop.show{display:flex}.modal{width:min(440px,100%);border:1px solid #ffffff;border-radius:20px;padding:17px;background:linear-gradient(145deg,#f7faff,#e7f0fc);box-shadow:0 22px 60px #0d2c523b}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.modal h2{font-size:16px;margin:0;color:#193e6e}.modal-desc{font-size:10px;line-height:1.45;color:#6d829a;margin:4px 0 14px}.modal-close{border:0;width:30px;height:30px;border-radius:9px;background:#e2ecf9;color:#345d8b;font-size:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:9px;font-weight:800;color:#58718e;margin:0 0 5px}.field input{width:100%;height:40px;border:1px solid #c9d9ec;border-radius:10px;padding:0 10px;background:#ffffffd9;color:#244664;font-size:14px;font-weight:750}.modal-note{margin-top:11px;padding:9px 10px;border-radius:10px;background:#e4efff;color:#49698d;font-size:9px;line-height:1.45}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:13px}.modal-actions button{border:0;border-radius:10px;padding:9px 13px;font-size:10px;font-weight:800}.cancel{background:#e5edf7;color:#516b86}.save{background:#2468d3;color:#fff}.toast{position:fixed;z-index:30;left:50%;bottom:calc(env(safe-area-inset-bottom) + 18px);transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#183c6d;color:#fff;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:750;box-shadow:0 10px 28px #153a6633;transition:.2s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
-.pair-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.pair-chip{display:inline-flex;align-items:center;min-height:22px;padding:4px 8px;border-radius:999px;background:rgba(215,231,251,.72);border:1px solid rgba(255,255,255,.8);color:#416384;font-size:9px;font-weight:750}.pair-chip.caution{background:rgba(255,239,214,.76);color:#966a26}.standards-modal{width:min(760px,100%);max-height:calc(100dvh - 28px);display:flex;flex-direction:column;overflow:hidden}.standards-table-wrap{max-height:56dvh;overflow:auto;border:1px solid #d7e3f2;border-radius:11px;background:#ffffffb8}.standards-table{min-width:790px}.standards-table th,.standards-table td{white-space:normal;line-height:1.35}.standards-table td:first-child,.standards-table th:first-child{text-align:center;width:40px}.standards-table td:nth-child(4),.standards-table td:nth-child(5){font-variant-numeric:tabular-nums;white-space:nowrap}.standard-note{display:inline-flex;padding:4px 7px;border-radius:99px;background:#fff1db;color:#946822;font-size:8px;font-weight:800;white-space:nowrap}.standards-modal .modal-note{flex:none}.standards-modal .modal-actions{flex:none}
-@media(max-height:760px){.home-content{gap:6px;padding-top:7px}.guide{min-height:48px;padding:7px 11px}.panel{padding:8px 11px}.history-card{min-height:95px}.phase-row{min-height:23px}.measure-area{padding:7px 8px}.measure-button,.results-button{height:68px}.measure-button{grid-template-columns:minmax(0,1fr) 1px 108px;padding:7px 10px}.timer-value{font-size:23px}.results-button span{font-size:7px}.controls{grid-template-columns:minmax(0,1fr) 74px}.summary-card{padding:9px 8px}}
-@media(max-width:360px){.home-content{padding-left:9px;padding-right:9px}.topbar{padding-left:11px;padding-right:11px}.brand-text strong{font-size:13px}.top-actions{gap:4px}.icon-btn{width:34px;height:34px}.controls{grid-template-columns:minmax(0,1fr) 74px}.measure-button{grid-template-columns:minmax(0,1fr) 1px 91px;gap:7px}.timer-value{font-size:22px}.measure-action strong{font-size:12px}.measure-action small{font-size:7px}.panel h2{font-size:13px}}
-</style>
-<style>
-.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;align-items:end}.calc-grid label{font-size:13px}.calc-grid input,.calc-grid select{min-width:0}.hub #calcOutput:not(:empty){margin-top:12px;font-size:16px;font-weight:700;scroll-margin-bottom:16px}.calc-result{padding:12px;background:#e8f4f3;border-radius:12px;color:#104e43}.calc-result strong{display:block;font-size:clamp(28px,8vw,46px);line-height:1.1}.calc-result p{margin:8px 0 0}.param-row{padding:8px 0;border-bottom:1px solid #cbd9e7}.param-row:last-child{border:0}.param-row ul,.hub-card ol{padding-left:22px;margin:5px 0}.hub-card li+li{margin-top:4px}
-</style><style>
-.calc-result{padding:16px;border:1px solid #a9d7ce;background:linear-gradient(145deg,#f5fffc,#dcefeb);box-shadow:0 8px 20px #173f5220}.calc-result h3{margin:0 0 7px;font-size:16px}.calc-result strong{font-size:clamp(34px,10vw,52px)}.calc-result p,.calc-result span{font-size:15px;line-height:1.5}.calc-advice{margin-top:13px;padding:11px;background:#ffffffb3;border-radius:9px}.calc-advice p{margin:0}.screen-results .overall p,.screen-results .recommendation-list{font-size:14px;line-height:1.55}.screen-results .overall strong{font-size:15px}
-</style><style>
-#themeToggle{font-size:18px} .time-params{padding:7px 10px}.time-params .panel-head{align-items:center;margin-bottom:3px}.time-params .pair-selects{margin-bottom:1px}.time-params select{height:29px}.time-params .target{padding-top:1px;padding-bottom:1px}.time-params .target-value{font-size:14px}
-#historyTitle{font-size:13px;margin:0}.history-columns,.phase-row{grid-template-columns:minmax(0,1fr) minmax(68px,.55fr) 72px}.history-columns{font-size:10px;color:#415c78}.phase-time{font-size:16px;color:#123f76}.phase-name{font-size:13px;color:#183b60}.phase-meta,.history-count,.status-pill{font-size:10px}.phase-meta,.log-foot,.empty-log{color:#4b627c}.phase-list{overflow:visible}
-.screen-results .result-pair,.screen-results .result-table td,.screen-results .result-table th,.screen-results .highlight span,.screen-results .result-caption{font-size:13px;color:#264665}.screen-results .result-table small{font-size:12px;color:#345779}.screen-results .overall p,.screen-results .recommendation-list{color:#294865}.screen-results .result-table th{font-size:11px}.screen-results .result-panel h2{font-size:14px}
-html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-theme=dark] .app{background:#101c2c;color:#e5effd}
-[data-theme=dark] .glass,[data-theme=dark] .result-panel,[data-theme=dark] .modal,[data-theme=dark] .dock{background:#1a2d43;border-color:#38516d;color:#e5effd;box-shadow:none}
-[data-theme=dark] .glass::before{opacity:.15}
-[data-theme=dark] .app :is(h1,h2,h3,summary,.phase-time,.phase-name,.target-value,.overall strong,.overall p,.recommendation-list,.result-table td,.result-table small,.dock button,.target-label){color:#edf5ff}
-[data-theme=dark] .app :is(.panel-sub,.eyebrow,.guide-summary,.history-columns,.phase-meta,.log-foot,.empty-log,.hint,.modal-desc,.session-hint,.measure-head span){color:#bdcde0}
-[data-theme=dark] .app :is(select,input,.guide-popover,.result-table,.result-table th,.summary-card,.empty-results,.action-btn.secondary,.results-button,.back-btn,.tiny-action,.history-count,.step-tag){background:#233b55;color:#e0efff;border-color:#45617f}
-[data-theme=dark] .app :is(.result-pair,.overall,.overview-item,.result-caption,.calc-result,.calc-advice){background:#203b50!important;color:#e9f7ff;border-color:#487288!important}
-[data-theme=dark] .app a{color:#9ed2ff}[data-theme=dark] .dock button[aria-current=page]{color:#abffd5}
-[hidden]{display:none!important}.screen-results .summary-card small,.screen-results .summary-card em{font-size:11px;color:#395776}[data-theme=dark] .screen-results .summary-card :is(small,em,strong){color:#e1efff}</style>
-<style>
-.brand-icon{position:relative;overflow:hidden}.brand-icon .brand-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:transparent;padding:3px}
-.hero.has-photo{background:linear-gradient(90deg,#0d243be8,#0d243b55),url("assets/tambang.jpg") center/cover}.hero.has-photo #heroFigure{display:none}
-.unit-photo{width:100%;height:118px;object-fit:contain;background:transparent;border-radius:9px;margin:4px 0}.param-photo{width:100%;max-height:180px;object-fit:contain;margin-top:9px}
-</style><style>
-.param-with-photo{display:flex;align-items:center;gap:10px}.param-copy{flex:1;min-width:0}.param-with-photo .param-photo{flex:0 0 auto;width:clamp(64px,22vw,110px);height:clamp(64px,22vw,110px);margin:0;object-fit:contain}.tile-square{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:9px;background:#ffffff26;overflow:hidden}.tile-square .unit-photo{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:contain;padding:3px;box-sizing:border-box}.tile-square:has(img) svg{visibility:hidden}
-</style><style>
-.hub details.glass>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0}
-.hub details.glass>summary::-webkit-details-marker{display:none}
-.hub details.glass>summary::after{content:"";box-sizing:border-box;width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#174875 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/19px no-repeat}
-.hub details[open]>summary::after{transform:rotate(180deg)}
-#guideToggle{display:grid;place-items:center;background:#174875;color:#fff;border-radius:8px;width:32px;height:32px}#guideToggle .chevron{color:#fff}
-[data-theme=dark] .hub details.glass>summary::after,[data-theme=dark] #guideToggle{background-color:#346da5}
-.tile,.param-with-photo{position:relative;isolation:isolate;overflow:hidden}
-.tile>.card-watermark,.param-with-photo>.card-watermark{position:absolute;z-index:-1;pointer-events:none;right:0;bottom:0;width:74%;height:100%;object-fit:contain;object-position:right bottom;opacity:.13}
-.param-with-photo>.card-watermark{width:68%;opacity:.09}
-</style><style>
-.brand-icon{width:88px;height:49px;border-radius:9px;background:#fff;box-shadow:none}
-.brand-icon .brand-photo{padding:1px;object-fit:contain}
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style id="reference-v6-appearance">
+
+/* ===== LEADER PARAMETER v5 — Aurora Glass, ukuran kartu sama dengan aplikasi awal ===== */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{color-scheme:light;
+--bg:#e9edf8;--card:#ffffff;--card2:rgba(20,30,70,.055);--ink:#0e1424;--ink2:#40496a;--muted:#7a84a3;--line:rgba(20,30,70,.09);--line2:rgba(20,30,70,.16);
+--acc:#1976d2;--accsoft:rgba(25,118,210,.13);--green:#10b981;--gsoft:rgba(16,185,129,.16);--gtxt:#0a7f5b;--amber:#f59e0b;--asoft:rgba(245,158,11,.18);--atxt:#945200;--red:#ef4444;--rsoft:rgba(239,68,68,.15);--rtxt:#b42318;--cyan:#11a3d2;
+--glass:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.62));--edge:linear-gradient(150deg,rgba(255,255,255,1),rgba(90,165,230,.35) 45%,rgba(255,255,255,.7));
+--sh:0 10px 30px rgba(40,50,110,.12);--aur:.55;--dots:rgba(20,30,70,.11);
+--num:"Space Grotesk",Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+--top:calc(64px + env(safe-area-inset-top));--nav-safe:calc(70px + env(safe-area-inset-bottom))}
+html[data-theme=dark]{color-scheme:dark;
+--bg:#04060c;--card:#0d111c;--card2:rgba(255,255,255,.06);--ink:#f3f6fd;--ink2:#b9c3da;--muted:#7b86a0;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16);
+--acc:#85c6ff;--accsoft:rgba(133,198,255,.16);--gsoft:rgba(52,211,153,.16);--gtxt:#5eead4;--asoft:rgba(251,191,36,.16);--atxt:#fcd34d;--rsoft:rgba(248,113,113,.17);--rtxt:#fca5a5;
+--glass:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.03));--edge:linear-gradient(150deg,rgba(255,255,255,.42),rgba(133,198,255,.08) 40%,rgba(34,211,238,.30));
+--sh:0 14px 40px rgba(0,0,0,.45);--aur:.95;--dots:rgba(255,255,255,.14)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none;padding:0}
+[hidden]{display:none!important}
+.app{height:100dvh;position:relative;overflow:hidden;background:var(--bg);isolation:isolate}
+.app::before{content:"";position:absolute;inset:-25%;z-index:-2;opacity:var(--aur);will-change:transform;background:radial-gradient(34% 26% at 22% 18%,rgba(25,118,210,.55),transparent 70%),radial-gradient(30% 24% at 82% 22%,rgba(34,211,238,.38),transparent 70%),radial-gradient(34% 26% at 72% 86%,rgba(18,117,202,.42),transparent 70%),radial-gradient(30% 22% at 8% 82%,rgba(16,185,129,.34),transparent 70%);animation:drift 24s ease-in-out infinite alternate}
+html[data-theme=dark] .app::before{background:radial-gradient(34% 26% at 22% 18%,rgba(12,79,160,.50),transparent 70%),radial-gradient(30% 24% at 82% 22%,rgba(6,182,212,.30),transparent 70%),radial-gradient(34% 26% at 72% 86%,rgba(15,103,176,.38),transparent 70%),radial-gradient(30% 22% at 8% 82%,rgba(5,150,105,.30),transparent 70%)}
+.app::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(var(--dots) 1px,transparent 1.2px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
+@keyframes drift{from{transform:translate3d(-4%,-3%,0) scale(1)}to{transform:translate3d(4%,4%,0) scale(1.14)}}
+.app-background-photo,.app>.watermark{display:none}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--acc) 55%,transparent);outline-offset:2px}
+
+/* Header */
+.topbar{height:var(--top);padding:7px 16px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(8,12,28,.92),rgba(14,20,44,.82));color:#fff;position:relative;z-index:2;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+html:not([data-theme=dark]) .topbar{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.6));color:var(--ink)}
+.livebar{position:absolute;z-index:3;left:0;right:0;top:var(--top);height:3px;background:linear-gradient(90deg,#10d9a0,#2d8cf0,#064b98,#22d3ee,#10d9a0);background-size:300% 100%;animation:flow 6s linear infinite;box-shadow:0 0 14px rgba(25,118,210,.7)}
+@keyframes flow{to{background-position:300% 0}}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-icon{width:88px;height:49px;border-radius:9px;background:#fff;overflow:hidden;flex:none;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.3),0 0 22px rgba(25,118,210,.45)}
+.brand-icon .brand-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:1px}
+.brand-text small{display:block;font-size:9px;letter-spacing:.12em;font-weight:800;color:#77baff}
+.brand-text strong{display:block;font:700 15px var(--num);letter-spacing:.035em;white-space:nowrap;background:linear-gradient(90deg,currentColor 40%,#77baff);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=dark] .brand-text strong{background-image:linear-gradient(90deg,#fff 30%,#9dd2ff 70%,#5eead4)}
+html:not([data-theme=dark]) .brand-text strong{background-image:linear-gradient(90deg,#0e1424 40%,#1976d2)}
+.top-actions{display:flex;gap:7px}
+.icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;font-size:18px;transition:background .15s,box-shadow .15s}
+html:not([data-theme=dark]) .icon-btn{color:var(--ink);background:rgba(255,255,255,.7);border-color:var(--line2)}
+.icon-btn:hover{background:rgba(133,198,255,.28);box-shadow:0 0 16px rgba(133,198,255,.5)}
+#themeToggle{font-size:18px}
+
+/* Layout */
+.screen{position:absolute;z-index:1;inset:calc(67px + env(safe-area-inset-top)) 0 var(--nav-safe);display:flex;flex-direction:column;min-height:0}
+.home-content{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;padding:11px 14px 8px;overflow:hidden;max-width:660px;width:100%;margin:0 auto}
+.glass,.result-panel,.summary-card{background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);position:relative}
+.glass,.result-panel{border-radius:17px}
+.glass::before,.result-panel::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:var(--edge);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);pointer-events:none;z-index:1}
+.panel{padding:11px 13px;flex:none}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.panel h2,.measure-head h2{font-size:14px;line-height:1.15;margin:0;font-weight:700;letter-spacing:-.01em}
+.panel-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.parameter-actions{display:flex;align-items:center;gap:4px}
+.tiny-action{border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);background:var(--accsoft);color:var(--acc);border-radius:99px;padding:6px 9px;font-size:9px;font-weight:800;white-space:nowrap}
+.info-button{width:36px;height:32px;display:grid;place-items:center;border-radius:50%;flex:none;color:var(--acc)}
+.info-button svg{width:23px;height:23px}
+#guideToggle{background:transparent}
+
+/* Parameter Waktu */
+.time-params{padding:7px 10px}
+.time-params .panel-head{align-items:center;margin-bottom:3px}
+.pair-selects{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1px}
+.select-wrap label{display:block;font-size:8px;letter-spacing:.11em;color:var(--muted);font-weight:800;margin:0 0 3px 2px}
+.select-wrap select,.hub select{appearance:none;-webkit-appearance:none;width:100%;height:29px;border-radius:9px;border:1px solid var(--line2);background-color:var(--card2);color:var(--ink);font-weight:700;font-size:12px;padding:0 27px 0 10px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%238b95b3' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+select:disabled{opacity:.55}
+.target-note{font-size:8px;color:var(--acc);background:var(--accsoft);padding:5px 8px;border-radius:8px;margin-bottom:5px}
+.targets{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.target{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:1px}
+.target+.target{border-left:1px solid var(--line2);padding-left:11px}
+.target-label{font-size:10px;color:var(--ink2);font-weight:700}
+.target-value{font:700 14px var(--num);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--acc);text-shadow:0 0 16px color-mix(in srgb,var(--acc) 55%,transparent)}
+.pair-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.pair-chip{display:inline-flex;align-items:center;min-height:22px;padding:4px 8px;border-radius:999px;background:var(--accsoft);color:var(--acc);font-size:9px;font-weight:750}
+.pair-chip.caution{background:var(--asoft);color:var(--atxt)}
+
+/* Catatan Waktu */
+.history-card{padding:9px 13px 8px;flex:1 1 0;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.history-card .panel-head{margin-bottom:4px;align-items:center;flex:none}
+#historyTitle{font-size:13px;margin:0}
+.history-count{font-size:10px;color:var(--acc);background:var(--accsoft);padding:5px 8px;border-radius:99px;font-weight:800;white-space:nowrap}
+.history-columns,.phase-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(68px,.55fr) 72px;align-items:center;gap:5px}
+.history-columns{flex:none;font-size:10px;letter-spacing:.09em;color:var(--muted);font-weight:800;padding:3px 0 5px;border-bottom:1px solid var(--line2)}
+.history-columns span:last-child,.phase-status{text-align:right}
+.phase-list{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:3px}
+.phase-row{min-height:36px;border-bottom:1px solid var(--line);font-size:10px}
+.phase-name{display:flex;align-items:center;gap:7px;min-width:0;color:var(--ink);font-weight:750;font-size:13px}
+.phase-dot{width:8px;height:8px;border-radius:50%;background:#2687e8;box-shadow:0 0 0 3px rgba(91,123,255,.22),0 0 10px #2687e8;flex:none}
+.phase-dot.loading{background:#10d9a0;box-shadow:0 0 0 3px rgba(16,217,160,.22),0 0 10px #10d9a0}
+.phase-dot.waiting{background:#ffb629;box-shadow:0 0 0 3px rgba(255,182,41,.22),0 0 10px #ffb629}
+.phase-meta{font-size:10px;color:var(--muted);font-weight:600;margin-left:2px;white-space:nowrap}
+.phase-time{font:700 16px var(--num);letter-spacing:-.03em;text-align:left;font-variant-numeric:tabular-nums;color:var(--ink)}
+.status-pill{display:inline-flex;justify-content:center;min-width:54px;border-radius:99px;padding:4px 6px;font-size:10px;font-weight:850;font-style:normal}
+.status-good{background:var(--gsoft);color:var(--gtxt);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 40%,transparent)}
+.status-warn{background:var(--rsoft);color:var(--rtxt);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--red) 40%,transparent)}
+.status-average{background:var(--asoft);color:var(--atxt);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--amber) 40%,transparent)}
+.status-neutral{background:var(--card2);color:var(--muted)}
+.empty-log{min-height:42px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:10px}
+.log-foot{flex:none;font-size:8px;color:var(--muted);margin-top:4px}
+
+/* Area ukur */
+.measure-area{flex:none;padding:8px;position:relative}
+.measure-head{display:flex;align-items:center;justify-content:space-between;padding:0 3px 7px}
+.measure-head span{font-size:9px;color:var(--acc);font-weight:800}
+.controls{display:grid;grid-template-columns:minmax(0,65fr) minmax(0,35fr);gap:7px}
+.activity-button{height:102px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px;border:1px solid rgba(255,255,255,.3);border-radius:14px;color:#fff;text-align:center;position:relative;overflow:hidden;transition:opacity .2s,box-shadow .2s,transform .1s,filter .2s;touch-action:manipulation}
+.activity-button::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.26),transparent 55%);pointer-events:none}
+.measure-button{background:linear-gradient(135deg,#2d8cf0 0%,#1263c2 60%,#064b98 100%);box-shadow:0 10px 26px rgba(25,118,210,.5),inset 0 1px 0 rgba(255,255,255,.4)}
+.measure-button.is-loading{background:linear-gradient(135deg,#10d9a0 0%,#0aa57a 55%,#0b8f8f 100%);box-shadow:0 10px 26px rgba(16,185,129,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+.waiting-button{background:linear-gradient(135deg,#ffb629 0%,#f58a0a 55%,#ef5a12 100%);box-shadow:0 10px 26px rgba(245,138,10,.42),inset 0 1px 0 rgba(255,255,255,.4)}
+.activity-button.is-muted{opacity:.38;filter:saturate(.5) brightness(.9);box-shadow:none}
+.activity-button.is-active{opacity:1}
+.activity-button.is-active::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 55%,rgba(255,255,255,.95) 78%,transparent 92%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:spin 2.6s linear infinite}
+@keyframes spin{to{--ang:360deg}}
+.phase-label{font-size:9px;line-height:1.1;font-weight:850;letter-spacing:.04em;color:rgba(255,255,255,.92);position:relative;z-index:1}
+.activity-button.is-active .phase-label::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;margin-right:5px;vertical-align:1px;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}50%{box-shadow:0 0 0 5px rgba(255,255,255,0)}}
+.timer-value{font:700 28px/1.05 var(--num);letter-spacing:-.05em;font-variant-numeric:tabular-nums;margin:0;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.28);position:relative;z-index:1}
+.button-action{font-size:11px;line-height:1.1;font-weight:800;letter-spacing:.06em;position:relative;z-index:1}
+.activity-button small{font-size:9px;line-height:1.15;color:rgba(255,255,255,.9);max-width:100%;position:relative;z-index:1}
+.results-button{width:100%;height:38px;min-height:38px;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:7px;border-radius:14px;position:relative;overflow:hidden;font-weight:800;touch-action:manipulation;transition:transform .1s,box-shadow .2s;background:linear-gradient(135deg,#2088e8,#0754aa);color:#fff;box-shadow:0 6px 18px rgba(7,84,170,.28)}
+html[data-theme=dark] .results-button{background:linear-gradient(135deg,#258cde,#0a56a5);color:#fff;box-shadow:0 0 22px rgba(37,140,222,.25)}
+.results-button svg{width:17px;height:17px}
+.results-button span{font-size:11px;font-weight:850;letter-spacing:.04em}
+.activity-button:active,.results-button:active{transform:scale(.965)}
+.session-tools{display:flex;justify-content:space-between;align-items:center;margin-top:5px;padding:0 2px}
+.session-hint{font-size:8px;color:var(--muted)}
+.small-link{color:var(--acc);font-size:9px;font-weight:750;padding:3px 4px}
+.press-ripple{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.4);pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:press-wave .5s ease-out forwards}
+@keyframes press-wave{to{transform:translate(-50%,-50%) scale(22);opacity:0}}
+@media(max-height:760px){.home-content{gap:6px;padding-top:7px}.activity-button{height:92px}.timer-value{font-size:26px}}
+@media(max-height:570px) and (orientation:landscape){.home-content{display:grid;grid-template-columns:1fr 1.3fr;grid-template-rows:auto minmax(0,1fr)}.time-params{grid-column:1;grid-row:1}.measure-area{grid-column:1;grid-row:2;overflow:auto}.history-card{grid-column:2;grid-row:1/3}}
 @media(max-width:400px){.brand-icon{width:66px;height:43px}.brand{gap:7px}.brand-text strong{font-size:clamp(10px,3.5vw,14px);white-space:normal}}
-</style><style>
-.app-background-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.17;pointer-events:none;z-index:-1}
-[data-theme=dark] .app-background-photo{opacity:.11}
-</style></head>
+@media(max-width:360px){.home-content{padding-left:9px;padding-right:9px}.topbar{padding-left:11px;padding-right:11px}.top-actions{gap:4px}.icon-btn{width:34px;height:34px}.timer-value{font-size:22px}}
+
+/* Hasil */
+.screen-results{display:none;position:absolute;z-index:4;top:var(--top);right:0;bottom:var(--nav-safe);left:0;overflow:auto;padding:12px 15px 18px}
+.results-wrap{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.results-top{display:flex;align-items:center;gap:10px}
+.back-btn{width:38px;height:38px;border:1px solid var(--line2);border-radius:12px;background:var(--glass);color:var(--acc);display:grid;place-items:center;flex:none}
+.results-title h1{margin:0;font:700 19px var(--num);letter-spacing:-.02em}
+.results-title p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.result-pair{margin-left:auto;background:var(--accsoft);color:var(--acc);padding:7px 9px;border-radius:10px;font-size:10px;font-weight:800;border:1px solid color-mix(in srgb,var(--acc) 35%,transparent)}
+.result-session-time{font-size:11px;font-weight:650;color:var(--muted);line-height:1.4}
+.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.summary-card{overflow:hidden;min-width:0;padding:12px 5px 10px;border-radius:15px;text-align:center}
+.summary-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--mc,var(--acc));box-shadow:0 0 14px var(--mc,var(--acc))}
+.metric-cycles{--mc:#2687e8}.metric-spot{--mc:#22d3ee}.metric-load{--mc:#10d9a0}.metric-wait{--mc:#ffb629}
+.summary-card small{display:flex;align-items:center;justify-content:center;min-height:20px;font-size:8px;letter-spacing:.02em;line-height:1.3;color:var(--ink2);font-weight:800}
+.summary-card strong{display:block;margin-top:8px;font:700 clamp(16px,4.7vw,27px)/1.15 var(--num);letter-spacing:-.05em;color:var(--mc);font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 18px color-mix(in srgb,var(--mc) 45%,transparent)}
+.summary-card em{display:block;font-style:normal;color:var(--muted);font-size:8px;margin-top:5px;line-height:1.3}
+.result-panel{padding:14px}
+.result-panel h2{font-size:14px;margin:0 0 8px;font-weight:700}
+#observedPty{overflow:hidden;background:linear-gradient(135deg,rgba(25,118,210,.95),rgba(15,102,191,.9) 55%,rgba(11,130,195,.82));color:#fff;border-color:rgba(255,255,255,.3);box-shadow:0 18px 44px rgba(25,118,210,.45),inset 0 1px 0 rgba(255,255,255,.4)}
+html[data-theme=dark] #observedPty{background:linear-gradient(135deg,rgba(25,118,210,.72),rgba(15,103,190,.58) 55%,rgba(12,112,175,.48))}
+#observedPty::after{content:"";position:absolute;right:-50px;top:-50px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.13);pointer-events:none}
+#observedPty h2{font-size:13px;margin-bottom:10px;color:rgba(255,255,255,.92)}
+.pty-compact{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:2}
+.pty-primary{min-width:0}
+.pty-label{font-size:9px;letter-spacing:.08em;font-weight:800;color:rgba(255,255,255,.8)}
+.pty-number{font:700 clamp(36px,11vw,60px)/1.06 var(--num);letter-spacing:-.07em;color:#fff;font-variant-numeric:tabular-nums;margin:3px 0 4px;overflow-wrap:anywhere;text-shadow:0 0 36px rgba(255,255,255,.4)}
+.pty-number span{display:inline-block;font:700 12px var(--font);letter-spacing:0;margin-left:7px;color:rgba(255,255,255,.85);text-shadow:none}
+.pty-meta{font-size:11px;color:rgba(255,255,255,.85)}
+.pty-invalid{font-size:14px;display:block;margin:8px 0}
+.vessel-mini{flex:none;display:block;width:80px;padding:8px;border-radius:12px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:10px;font-weight:750;line-height:1.3}
+.vessel-mini span{font-size:8px;opacity:.85}
+.vessel-mini input{display:block;min-width:0;width:100%;padding:5px 2px;margin-top:3px;border:0;border-bottom:2px solid rgba(255,255,255,.7);border-radius:0;background:transparent;color:#fff;font:700 19px var(--num);text-align:center;outline:0}
+.pty-formula-details{margin-top:9px;border-top:1px solid rgba(255,255,255,.22);padding-top:7px;position:relative;z-index:2}
+.pty-formula-details summary{font-size:10px;color:#fff;cursor:pointer}
+.pty-formula-details p{font-size:11px;color:rgba(255,255,255,.88);line-height:1.5;margin:4px 0 12px}
+.overall{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:13px;background:var(--card2);border:1px solid var(--line)}
+.overall-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:var(--accsoft);color:var(--acc);flex:none;box-shadow:0 0 16px var(--accsoft)}
+.overall strong{display:block;font-size:15px;line-height:1.35}
+.overall p{font-size:12px;line-height:1.6;color:var(--ink2);margin:3px 0 0}
+.recommendation-list{margin:8px 0 0;padding-left:18px;color:var(--ink2);font-size:12px;line-height:1.65}
+.recommendation-list li+li{margin-top:6px}
+html[data-theme=dark] .overall{background:var(--card2)!important;border-color:var(--line)!important}
+.result-session-actions{display:flex;gap:8px}
+.result-session-actions button{flex:1;min-height:40px;font-size:11px;border-radius:12px}
+.action-btn{border-radius:10px;padding:10px 12px;background:linear-gradient(135deg,#2687e8,#0754aa);color:#fff;font-size:10px;font-weight:800;box-shadow:0 8px 20px rgba(25,118,210,.4),inset 0 1px 0 rgba(255,255,255,.3)}
+.action-btn.secondary{background:var(--glass);color:var(--ink);border:1px solid var(--line2);box-shadow:none}
+.empty-results{padding:18px;border:1px dashed var(--line2);border-radius:12px;text-align:center;color:var(--muted);font-size:11px;background:var(--card2)}
+.saved-sessions-panel .panel-head{align-items:center}
+.session-swipe{position:relative;overflow:hidden;border-radius:13px;margin-top:9px;background:var(--red);touch-action:pan-y}
+.session-face{position:relative;display:flex;align-items:center;background:var(--card2);border:1px solid var(--line);border-radius:13px;transition:transform .18s ease;z-index:1}
+.session-swipe.swiped .session-face{transform:translateX(-80px)}
+.session-open{flex:1;min-width:0;display:flex;align-items:center;gap:9px;padding:13px 7px 13px 10px;text-align:left;color:var(--ink)}
+.session-calendar{flex:none;display:grid;place-items:center;width:31px;height:35px;border-radius:10px;background:var(--accsoft);color:var(--acc);font-size:25px}
+.session-copy{flex:1;min-width:0}
+.session-copy b{font-size:13px;line-height:1.4;display:block}
+.session-copy>span{font-size:10px;display:block;color:var(--ink2);margin-top:3px;line-height:1.5}
+.session-copy small{font-size:9px;color:var(--muted);display:block;margin-top:4px}
+.session-pty{text-align:right;flex:none}
+.session-pty b{font:700 19px/1.2 var(--num);display:block;letter-spacing:-.05em;color:var(--acc)}
+.session-pty small{font-size:8px;display:block;color:var(--muted);margin-top:3px}
+.session-chevron{font-size:24px;color:var(--muted)}
+.session-delete-icon{width:30px;height:40px;flex:none;border-radius:9px;color:var(--muted);margin-right:4px;display:grid;place-items:center}
+.session-delete-icon svg{width:16px;height:16px}
+.swipe-delete{position:absolute;inset:0 0 0 auto;width:80px;background:var(--red);color:#fff;font-size:12px;font-weight:800;z-index:0}
+.result-table{border-collapse:collapse;width:100%;font-size:10px}
+.result-table th{text-align:left;color:var(--muted);background:var(--card2);font-size:8px;letter-spacing:.07em;padding:8px}
+.result-table td{padding:8px;border-top:1px solid var(--line);color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.screen-results .result-table{min-width:0}.screen-results .result-table th{font-size:11px}.screen-results .result-table td{font-size:13px}.screen-results .result-table small{font-size:12px;color:var(--muted)}
+@media(max-width:360px){.results-wrap .summary-grid{gap:4px}.summary-card{padding:10px 3px}.summary-card strong{font-size:17px}.session-calendar{display:none}.session-pty b{font-size:17px}.session-copy b{font-size:12px}.session-delete-icon{width:25px}.pty-number{font-size:38px}}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;z-index:20;background:rgba(3,6,16,.62);display:none;align-items:center;justify-content:center;padding:18px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.modal-backdrop.show{display:flex;animation:fadein .2s}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.modal{width:min(440px,100%);position:relative;border:1px solid var(--line2);border-radius:20px;padding:17px;background:var(--card);box-shadow:0 26px 70px rgba(0,0,0,.45),0 0 0 1px rgba(133,198,255,.08);animation:pop .22s cubic-bezier(.2,.9,.3,1.2)}
+html[data-theme=dark] .modal{background:linear-gradient(180deg,#151b2d,#0b0f19)}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.modal h2{font:700 16px var(--num);margin:0}
+.modal-desc{font-size:10px;line-height:1.45;color:var(--ink2);margin:4px 0 14px}
+.modal-close{border:0;width:30px;height:30px;border-radius:9px;background:var(--card2);color:var(--ink2);font-size:18px;display:grid;place-items:center}
+.modal-note{margin-top:11px;padding:9px 10px;border-radius:10px;background:var(--accsoft);color:var(--ink2);font-size:9px;line-height:1.45}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:13px}
+.end-actions{display:flex;gap:8px;justify-content:flex-end}
+.modal-actions button{border-radius:10px;padding:9px 13px;font-size:10px;font-weight:800}
+.cancel{background:var(--card2);color:var(--ink2)}
+.save{background:linear-gradient(135deg,#2687e8,#0754aa);color:#fff;box-shadow:0 6px 16px rgba(25,118,210,.4)}
+.danger-action{background:var(--red);color:#fff}
+.standards-modal{width:min(760px,100%);max-height:calc(100dvh - 28px);display:flex;flex-direction:column;overflow:hidden}
+.standards-table-wrap{max-height:56dvh;overflow:auto;border:1px solid var(--line);border-radius:11px;background:var(--card2)}
+.standards-table{min-width:790px}
+.standards-table th,.standards-table td{white-space:normal;line-height:1.35}
+.standards-table td:first-child,.standards-table th:first-child{text-align:center;width:40px}
+.standards-table td:nth-child(4),.standards-table td:nth-child(5){white-space:nowrap}
+.standard-note{display:inline-flex;padding:4px 7px;border-radius:99px;background:var(--asoft);color:var(--atxt);font-size:8px;font-weight:800;white-space:nowrap}
+.standards-modal .modal-note,.standards-modal .modal-actions{flex:none}
+.guide-modal{display:flex;flex-direction:column;max-height:85dvh}
+.guide-body{overflow:auto;min-height:0;font-size:13px;line-height:1.5;color:var(--ink2)}
+.guide-body ol{padding-left:22px;margin:8px 0}.guide-body li+li{margin-top:9px}.guide-body b{color:var(--ink)}
+.session-detail-modal{width:min(680px,100%);max-height:88dvh;display:flex;flex-direction:column;padding:16px}
+.session-detail-body{overflow:auto;min-height:0;padding:3px 1px 0}
+.session-detail-modal .modal-head,.session-detail-modal .modal-actions{flex:none}
+.detail-session-heading{margin-bottom:13px}
+.detail-session-heading>span{font-size:11px;color:var(--muted)}
+.detail-session-heading h3{font:700 22px var(--num);margin:5px 0;letter-spacing:-.03em}
+.detail-session-heading p{margin:0;font-size:12px;color:var(--ink2)}
+.detail-pty{margin:13px 0;padding:13px;background:linear-gradient(135deg,#1976d2,#0754aa 60%,#1583cd);border-radius:13px;color:#fff}
+.detail-pty>small{font-size:9px;letter-spacing:.07em;display:block;color:rgba(255,255,255,.8)}
+.detail-pty strong{font:700 32px var(--num);display:block;letter-spacing:-.06em;margin-top:4px}
+.detail-pty strong span{font:700 11px var(--font);letter-spacing:0}
+.detail-pty p{font-size:10px;line-height:1.5;color:rgba(255,255,255,.88);margin:6px 0 0}
+.detail-table-title{font-size:14px;color:var(--ink);margin:16px 0 9px}
+.detail-table-scroll{overflow:auto;border:1px solid var(--line);border-radius:11px}
+.detail-table-scroll .result-table{min-width:0;font-size:11px;table-layout:fixed}
+.detail-table-scroll td,.detail-table-scroll th{padding:9px 5px;overflow-wrap:anywhere}
+.detail-cycles{margin-top:15px}
+.detail-cycles summary{font-size:12px;font-weight:700;cursor:pointer;margin-bottom:9px;color:var(--acc)}
+.toast{position:fixed;z-index:30;left:50%;top:calc(76px + env(safe-area-inset-top));transform:translate(-50%,-12px);opacity:0;pointer-events:none;background:rgba(8,12,28,.92);border:1px solid rgba(133,198,255,.4);color:#fff;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:750;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 22px rgba(133,198,255,.3);transition:.2s;max-width:calc(100vw - 28px);text-align:center;line-height:1.4}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Hub / referensi */
+.hub{display:block;overflow:auto;padding:16px 14px 22px}
+.hub-inner{width:min(100%,680px);margin:0 auto}
+.hub h1{font:700 25px var(--num);letter-spacing:-.03em;margin:0 0 12px}
+.hub h2{font-size:18px;margin:0 0 9px;font-weight:700}
+.hub p,.hub li,.hub td,.hub th{font-size:14px;line-height:1.5}
+.hub p{margin:6px 0 12px}
+.hub .hint{color:var(--muted);font-size:13px}
+.hub a{color:var(--acc);font-weight:700}.hub a.action-btn{color:#fff}
+.hero{position:relative;overflow:hidden;padding:24px 18px;margin-bottom:14px;background:linear-gradient(120deg,#0954a8,#1678cf,#168ecb,#11a3d2);background-size:220% 220%;animation:shift 14s ease-in-out infinite alternate;color:#fff;border-radius:19px;box-shadow:0 18px 44px rgba(25,118,210,.4),inset 0 1px 0 rgba(255,255,255,.35)}
+@keyframes shift{to{background-position:100% 100%}}
+.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.12)}
+.hero h1{color:#fff;max-width:75%;margin:0 0 4px;position:relative;z-index:1}
+.hero p{max-width:70%;margin:0;color:#e8f0ff;position:relative;z-index:1}
+.hero svg{position:absolute;right:12px;bottom:-32px;width:30%;height:155px;opacity:.4;z-index:1}
+.hero.has-photo{animation:none;background:linear-gradient(100deg,rgba(30,20,110,.93),rgba(30,20,110,.3)),url("assets/tambang.jpg") center/cover}
+.hero.has-photo #heroFigure{display:none}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{position:relative;isolation:isolate;overflow:hidden;min-height:100px;text-align:left;color:var(--ink);padding:13px;border-radius:15px;background:linear-gradient(150deg,color-mix(in srgb,var(--tile) 28%,transparent),transparent 72%),var(--glass);border:1px solid var(--line2);box-shadow:var(--sh);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);transition:transform .12s}
+.tile:active{transform:scale(.97)}
+.tile b,.tile small{display:block}
+.tile b{font:700 15px var(--num);margin-top:5px}
+.tile small{font-size:12px;margin-top:4px;color:var(--ink2)}
+.tile svg{width:23px;height:23px}
+.tile-square{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:9px;background:var(--tile);color:#fff;overflow:hidden;box-shadow:0 8px 20px color-mix(in srgb,var(--tile) 55%,transparent),inset 0 0 0 1px rgba(255,255,255,.25)}
+.tile-square .unit-photo{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:contain;padding:3px;background:#fff}
+.tile-square:has(img) svg{visibility:hidden}
+.card-watermark{position:absolute;z-index:-1;pointer-events:none;right:0;bottom:0;width:74%;height:100%;object-fit:contain;object-position:right bottom;opacity:.13}
+.param-with-photo>.card-watermark{width:68%;opacity:.09}
+.hub-card{padding:13px;margin:0 0 9px}
+.hub details.glass>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;cursor:pointer;font-weight:700;font-size:15px}
+.hub details.glass>summary::-webkit-details-marker{display:none}
+.hub details.glass>summary::after{content:"";box-sizing:border-box;width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:var(--accsoft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%238aa4ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/19px no-repeat;border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);transition:transform .2s}
+.hub details[open]>summary::after{transform:rotate(180deg)}
+.hub label{display:block;font-size:14px;font-weight:700;margin:9px 0 4px}
+.hub input{width:100%;min-height:42px;border:1px solid var(--line2);border-radius:9px;background:var(--card2);color:var(--ink);padding:8px;font-size:14px}
+.hub input:focus,.hub select:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 3px var(--accsoft)}
+.hub select{height:auto;min-height:42px;padding:8px 30px 8px 8px;font-size:14px}
+.hub .action-btn{font-size:13px;min-height:42px}
+.param-row{padding:8px 0;border-bottom:1px solid var(--line2)}
+.param-row:last-child{border:0}
+.param-row ul,.hub-card ol{padding-left:22px;margin:5px 0}
+.hub-card li+li{margin-top:4px}
+.param-with-photo{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:10px}
+.param-copy{flex:1;min-width:0}
+.param-with-photo .param-photo{flex:0 0 auto;width:clamp(64px,22vw,110px);height:clamp(64px,22vw,110px);margin:0;object-fit:contain}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;align-items:end}
+.calc-grid label{font-size:13px}
+.calc-time-field{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch}
+.calc-time-field label{grid-column:1/-1}
+.calc-time-field input{min-width:0;border-start-end-radius:0;border-end-end-radius:0}
+.calc-time-field select{width:auto;min-width:0;padding-inline:4px 24px;border-start-start-radius:0;border-end-start-radius:0;border-inline-start:0;font-size:12px}
+#calcOutput:not(:empty){margin-top:12px;font-size:16px;font-weight:700;scroll-margin-bottom:16px}
+.calc-result{padding:16px;border:1px solid color-mix(in srgb,var(--green) 45%,transparent);background:linear-gradient(145deg,var(--gsoft),transparent);color:var(--ink);border-radius:12px;box-shadow:0 0 36px color-mix(in srgb,var(--green) 18%,transparent)}
+.calc-result h3{margin:0 0 7px;font-size:16px}
+.calc-result strong{display:block;font:700 clamp(34px,10vw,52px)/1.1 var(--num);letter-spacing:-.06em}
+.calc-result p,.calc-result span{font-size:15px;line-height:1.5}.calc-result p{margin:8px 0 0}
+.calc-advice{margin-top:13px;padding:11px;background:var(--card2);border-radius:9px}.calc-advice p{margin:0}
+.reference-equation{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px;margin:8px 0;border-radius:8px;background:var(--accsoft);color:var(--ink);font-size:15px}
+.formula-frac{display:inline-grid;text-align:center;max-width:100%;overflow-wrap:anywhere}
+.formula-frac>span{padding:3px 6px}.formula-frac>span:first-child{border-bottom:1.5px solid currentColor}
+
+/* Navigasi */
+.dock{position:absolute;bottom:0;left:0;right:0;height:var(--nav-safe);padding:5px 4px env(safe-area-inset-bottom);z-index:9;background:var(--glass);background-color:color-mix(in srgb,var(--bg) 70%,transparent);border-top:1px solid var(--line2);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);box-shadow:0 -10px 30px rgba(0,0,0,.18)}
+.dock button{position:relative;border:0;background:none;color:var(--muted);font-weight:750;font-size:10px;min-width:0;padding:3px 0;display:grid;place-items:center;gap:3px;line-height:1.1;text-align:center;transition:color .15s}
+.dock button[data-page=measure]{font-size:clamp(8px,2.1vw,11px)}
+.dock svg{width:22px;height:22px}
+.dock button[aria-current=page]{color:var(--acc)}
+.dock button[aria-current=page]:not(.dock-home)::after{content:"";position:absolute;top:-6px;width:28px;height:3px;border-radius:0 0 4px 4px;background:var(--acc);box-shadow:0 4px 14px var(--acc)}
+.dock .dock-home{background:linear-gradient(135deg,#2687e8,#064b98);color:#fff;border-radius:50%;width:62px;height:62px;margin:-16px auto 0;border:3px solid var(--bg);align-content:center;animation:orb 2.8s ease-in-out infinite}
+@keyframes orb{0%,100%{box-shadow:0 6px 20px rgba(15,103,190,.55),0 0 0 0 rgba(15,103,190,.35)}50%{box-shadow:0 6px 26px rgba(15,103,190,.7),0 0 0 9px rgba(15,103,190,0)}}
+.dock .dock-home[aria-current=page]{color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.app::before,.livebar,.hero,.dock .dock-home,.activity-button.is-active::after,.activity-button.is-active .phase-label::before,.press-ripple{animation:none!important}}
+
+/* =============== LAPISAN V6 — "COCKPIT HOLOGRAPHIC" (hanya visual, ukuran tidak berubah) =============== */
+:root{--rim1:#22d3ee;--rim2:#064b98;--rimo:.55;--hud:rgba(25,118,210,.55)}
+html[data-theme=dark]{--rimo:1;--hud:rgba(133,198,255,.7)}
+
+/* Tekstur grain + vignette */
+body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html[data-theme=dark] body::after{opacity:.09}
+body::before{content:"";position:fixed;inset:0;z-index:998;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 58%,rgba(0,0,0,.18))}
+html[data-theme=dark] body::before{background:radial-gradient(120% 90% at 50% 40%,transparent 50%,rgba(0,0,0,.55))}
+
+/* Border holografik: rim bercahaya yang berputar di kartu utama */
+.home-content .glass::before{background:conic-gradient(from var(--ang),rgba(255,255,255,.10) 0%,transparent 26%,var(--rim1) 46%,var(--rim2) 58%,transparent 74%,rgba(255,255,255,.10) 100%);opacity:var(--rimo);animation:spin 9s linear infinite}
+.home-content .history-card::before{animation-duration:12s;animation-direction:reverse}
+.home-content .measure-area::before{animation-duration:7s}
+.home-content .glass{box-shadow:var(--sh),0 0 34px -10px color-mix(in srgb,var(--rim1) 50%,transparent)}
+/* Braket sudut ala HUD */
+.home-content .glass::after{content:"";position:absolute;inset:4px;border-radius:13px;pointer-events:none;z-index:1;--c:var(--hud);background:linear-gradient(var(--c),var(--c)) 0 0/9px 1.5px,linear-gradient(var(--c),var(--c)) 0 0/1.5px 9px,linear-gradient(var(--c),var(--c)) 100% 0/9px 1.5px,linear-gradient(var(--c),var(--c)) 100% 0/1.5px 9px,linear-gradient(var(--c),var(--c)) 0 100%/9px 1.5px,linear-gradient(var(--c),var(--c)) 0 100%/1.5px 9px,linear-gradient(var(--c),var(--c)) 100% 100%/9px 1.5px,linear-gradient(var(--c),var(--c)) 100% 100%/1.5px 9px;background-repeat:no-repeat;opacity:.8}
+
+/* Judul gradien */
+#parametersTitle,#historyTitle,#measureTitle,.results-title h1,.hub h1:not(.hero h1){background:linear-gradient(90deg,var(--ink) 40%,var(--acc) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme=dark] #parametersTitle,html[data-theme=dark] #historyTitle,html[data-theme=dark] #measureTitle,html[data-theme=dark] .results-title h1,html[data-theme=dark] .hub h1:not(.hero h1){background-image:linear-gradient(90deg,#fff 35%,#8fe9ff 100%)}
+.hero h1{-webkit-background-clip:border-box;background-clip:border-box;background:none;color:#fff}
+
+/* Target & catatan terbaru */
+.target-value{text-shadow:0 0 18px color-mix(in srgb,var(--acc) 70%,transparent)}
+.target:first-child .target-value{color:#5b9bff}.target+.target .target-value{color:#10d9a0;text-shadow:0 0 18px rgba(16,217,160,.6)}
+.phase-list .phase-row:first-child{background:linear-gradient(90deg,var(--accsoft),transparent 75%);box-shadow:inset 3px 0 0 var(--acc);border-radius:6px 0 0 6px}
+.phase-list .phase-row:first-child .phase-time{text-shadow:0 0 16px color-mix(in srgb,var(--acc) 60%,transparent)}
+.status-good{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 45%,transparent),0 0 14px color-mix(in srgb,var(--green) 30%,transparent)}
+.status-warn{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--red) 45%,transparent),0 0 14px color-mix(in srgb,var(--red) 30%,transparent)}
+.status-average{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--amber) 45%,transparent),0 0 14px color-mix(in srgb,var(--amber) 28%,transparent)}
+.phase-list::-webkit-scrollbar,.screen-results::-webkit-scrollbar,.hub::-webkit-scrollbar{width:4px}
+.phase-list::-webkit-scrollbar-thumb,.screen-results::-webkit-scrollbar-thumb,.hub::-webkit-scrollbar-thumb{background:var(--accsoft);border-radius:4px}
+
+/* Tombol ukur: kilau menyapu + aura bernapas */
+.measure-button{--glow:rgba(15,103,190,.75)}.measure-button.is-loading{--glow:rgba(16,217,160,.7)}.waiting-button{--glow:rgba(255,138,10,.7)}
+.activity-button.is-active::before{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%),linear-gradient(180deg,rgba(255,255,255,.26),transparent 55%);background-size:260% 100%,100% 100%;background-repeat:no-repeat;animation:sweep 3.2s ease-in-out infinite}
+@keyframes sweep{0%{background-position:190% 0,0 0}55%,100%{background-position:-90% 0,0 0}}
+.activity-button.is-active{animation:aura 2.4s ease-in-out infinite}
+@keyframes aura{0%,100%{box-shadow:0 10px 26px var(--glow),inset 0 1px 0 rgba(255,255,255,.4)}50%{box-shadow:0 12px 44px var(--glow),0 0 0 3px color-mix(in srgb,var(--glow) 35%,transparent),inset 0 1px 0 rgba(255,255,255,.5)}}
+.activity-button.is-active .timer-value{text-shadow:0 0 24px rgba(255,255,255,.7),0 2px 14px rgba(0,0,0,.25)}
+.results-button::before{content:none;animation:none}
+
+/* Header & nav */
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(133,198,255,.6),transparent)}
+.brand-icon{animation:glowpulse 3.2s ease-in-out infinite}
+@keyframes glowpulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.3),0 0 16px rgba(25,118,210,.4)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.45),0 0 30px rgba(34,211,238,.6)}}
+.dock button[aria-current=page] svg{filter:drop-shadow(0 0 7px var(--acc))}
+.dock{border-top:1px solid transparent;background-clip:padding-box;box-shadow:0 -1px 0 rgba(133,198,255,.35),0 -12px 34px rgba(0,0,0,.22)}
+
+/* Hasil */
+.summary-card strong{filter:saturate(1.2)}
+#observedPty::before{animation:spin 8s linear infinite;background:conic-gradient(from var(--ang),rgba(255,255,255,.2),transparent 30%,#fff 50%,transparent 70%,rgba(255,255,255,.2))}
+.session-face{transition:transform .18s ease,box-shadow .2s}
+.session-face:hover{box-shadow:0 0 20px var(--accsoft)}
+.overall{border-left:3px solid var(--acc)}
+
+/* Animasi kemunculan berurutan (tidak mengubah ukuran) */
+@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.985)}}
+.home-content>.glass{animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards}
+.home-content>.glass:nth-child(2){animation-delay:.07s}.home-content>.glass:nth-child(3){animation-delay:.14s}
+.results-wrap>*{animation:rise .5s cubic-bezier(.2,.8,.2,1) backwards}
+.results-wrap>*:nth-child(2){animation-delay:.05s}.results-wrap>*:nth-child(3){animation-delay:.1s}.results-wrap>*:nth-child(4){animation-delay:.15s}.results-wrap>*:nth-child(5){animation-delay:.2s}.results-wrap>*:nth-child(6){animation-delay:.25s}.results-wrap>*:nth-child(7){animation-delay:.3s}
+.hub-inner>*{animation:rise .5s cubic-bezier(.2,.8,.2,1) backwards}
+.hub-inner>*:nth-child(2){animation-delay:.05s}.hub-inner>*:nth-child(3){animation-delay:.1s}.hub-inner>*:nth-child(4){animation-delay:.15s}.hub-inner>*:nth-child(5){animation-delay:.2s}.hub-inner>*:nth-child(n+6){animation-delay:.25s}
+.tiles>.tile{animation:rise .55s cubic-bezier(.2,.8,.2,1) backwards}
+.tiles>.tile:nth-child(2){animation-delay:.06s}.tiles>.tile:nth-child(3){animation-delay:.12s}.tiles>.tile:nth-child(4){animation-delay:.18s}.tiles>.tile:nth-child(5){animation-delay:.24s}.tiles>.tile:nth-child(6){animation-delay:.3s}
+.hero{animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards,shift 14s ease-in-out infinite alternate}
+.hero.has-photo{animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);background-size:250% 100%;background-repeat:no-repeat;animation:sweep 6s ease-in-out infinite;pointer-events:none}
+.tile{border:1px solid var(--line2)}
+.tile-square{animation:glowpulse2 3.5s ease-in-out infinite}
+@keyframes glowpulse2{50%{filter:brightness(1.15)}}
+@media(prefers-reduced-motion:reduce){.home-content .glass::before,#observedPty::before,.activity-button.is-active,.activity-button.is-active::before,.results-button::before,.brand-icon,.tile-square,.hero::after,.home-content>.glass,.results-wrap>*,.hub-inner>*,.tiles>.tile{animation:none!important}}
+
+/* Compatibility with the original application markup; presentation only. */
+.glass::after{pointer-events:none}
+.unit-photo{width:100%;height:118px;object-fit:contain;border-radius:9px;margin:4px 0}
+.target-value.unset{font:700 9px var(--font);white-space:normal}
+.target-note{font-size:8px;color:var(--acc);background:var(--accsoft);padding:5px 8px;border-radius:8px}
+.result-table-wrap{overflow:auto;border-radius:11px;border:1px solid var(--line);background:var(--card2)}
+.overview-item{padding:10px;background:var(--card2);border:1px solid var(--line);border-radius:10px}
+.field label{display:block;font-size:10px;margin-bottom:5px;color:var(--ink2)}
+.field input{width:100%;height:40px;border:1px solid var(--line2);border-radius:10px;padding:0 10px;background:var(--card2);color:var(--ink)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.session-face{background:var(--card)}
+.pty-empty{font-size:12px;line-height:1.5;color:rgba(255,255,255,.9)}
+@media(max-width:360px){.history-count{font-size:9px}.phase-name{font-size:12px}.phase-meta{font-size:9px}}
+
+</style>
+
+<style id="reference-neutral-balance">
+/* Preserve the reference glass/holographic design; keep broad surfaces neutral. */
+:root{--bg:#edf0f5;--card:#ffffff;--card2:rgba(30,43,65,.045);--glass:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.62));--line:rgba(30,43,65,.09);--line2:rgba(30,43,65,.16)}
+html[data-theme=dark]{--bg:#070a10;--card:#11151d;--card2:rgba(255,255,255,.055);--glass:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.03));--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16)}
+html:not([data-theme=dark]) .topbar{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.6))}
+html[data-theme=dark] .topbar{background:linear-gradient(180deg,rgba(12,16,25,.92),rgba(18,23,34,.82))}
+html[data-theme=dark] .modal{background:linear-gradient(180deg,#191e29,#0d1119)}
+.session-face{background:var(--card)}
+/* Only the primary action is blue; activity colors remain distinct. */
+.results-button::before{content:none;animation:none}
+</style>
+<style id="soft-light-refinement">
+/* Keep the reference character, with softer light and finer finishes. */
+.activity-button.is-active::before{background:linear-gradient(105deg,transparent 39%,rgba(255,255,255,.10) 50%,transparent 61%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 55%);background-size:260% 100%,100% 100%;background-repeat:no-repeat;animation:sweep 5.6s ease-in-out infinite}
+.hero::after{background:linear-gradient(115deg,transparent 43%,rgba(255,255,255,.055) 50%,transparent 57%);background-size:250% 100%;animation-duration:9s}
+.activity-button{border-radius:15px;border-color:rgba(255,255,255,.32);box-shadow:0 7px 18px rgba(12,59,110,.20),inset 0 1px 0 rgba(255,255,255,.36),inset 0 -1px 0 rgba(0,0,0,.10)}
+.measure-button{background:linear-gradient(135deg,#409cec,#1a78d1 57%,#0959ad);--glow:rgba(27,119,209,.30)}
+.measure-button.is-loading{background:linear-gradient(135deg,#2cc49b,#119d79 57%,#087b64);--glow:rgba(20,168,124,.28)}
+.waiting-button{background:linear-gradient(135deg,#f5bd58,#e49b30 57%,#be741c);--glow:rgba(228,155,48,.26)}
+.activity-button.is-active{animation:soft-aura 4s ease-in-out infinite}
+@keyframes soft-aura{0%,100%{box-shadow:0 7px 18px var(--glow),inset 0 1px 0 rgba(255,255,255,.4)}50%{box-shadow:0 8px 25px var(--glow),0 0 0 1px rgba(255,255,255,.13),inset 0 1px 0 rgba(255,255,255,.45)}}
+.activity-button.is-active::after{padding:1.5px;background:conic-gradient(from var(--ang),transparent 0 62%,rgba(235,249,255,.48) 82%,transparent 96%);animation-duration:5s}
+.activity-button.is-active .timer-value{color:#fff;text-shadow:0 2px 5px rgba(0,35,65,.20),0 0 12px rgba(255,255,255,.13)}
+.activity-button.is-active .phase-label::before{animation:none;box-shadow:0 0 5px rgba(255,255,255,.28)}
+.activity-button.is-muted{opacity:.46;filter:saturate(.65);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+.activity-button:active{transform:scale(.97);box-shadow:inset 0 2px 7px rgba(0,20,40,.22)}
+.home-content .glass::before{animation-duration:15s;opacity:.38}
+.home-content .history-card::before{animation-duration:18s}
+.home-content .measure-area::before{animation-duration:12s}
+.home-content .glass::after{opacity:.35}
+.home-content .glass{box-shadow:var(--sh),0 0 22px -15px rgba(30,160,220,.28),inset 0 1px 0 rgba(255,255,255,.20)}
+.summary-card{box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.24)}
+.summary-card strong{font-weight:700;text-shadow:none}
+.summary-card::before{height:2px;box-shadow:0 0 8px color-mix(in srgb,var(--mc) 18%,transparent)}
+.phase-list .phase-row:first-child{background:linear-gradient(90deg,var(--accsoft),transparent 85%);border-radius:7px;box-shadow:inset 2px 0 0 var(--acc)}
+.phase-list .phase-row:first-child .phase-time{text-shadow:none}
+#observedPty{box-shadow:0 10px 26px rgba(15,91,158,.23),inset 0 1px 0 rgba(255,255,255,.25)}
+#observedPty::before{opacity:.42;animation-duration:14s}
+.pty-number{text-shadow:0 2px 5px rgba(0,35,65,.16)}
+/* Black result button, with a static satin finish and no sweeping light. */
+.results-button,html[data-theme=dark] .results-button{background:linear-gradient(165deg,#272d35,#10151c 58%,#090d12);color:#f6f9ff;border:1px solid #535d6b;border-radius:12px;box-shadow:0 4px 12px rgba(0,8,20,.18),inset 0 1px 0 rgba(255,255,255,.13),inset 0 -1px 0 rgba(0,0,0,.35)}
+.results-button::before{content:none;animation:none}
+.results-button span{font-size:10px;letter-spacing:.075em;font-weight:800}
+.results-button svg{color:#d0dce9}
+.results-button:hover{border-color:#778493;background:linear-gradient(165deg,#303844,#141b24 58%,#0c1219)}
+.results-button:active{transform:scale(.975);box-shadow:inset 0 2px 6px rgba(0,0,0,.36)}
+@media(prefers-reduced-motion:reduce){.activity-button.is-active,.activity-button.is-active::before,.activity-button.is-active::after,.hero::after,.home-content .glass::before,#observedPty::before{animation:none!important}}
+</style>
+<style id="clean-white-card-edges">
+/* A clean outer edge, with the existing rotating light on active buttons. */
+.glass,.result-panel,.summary-card,.tile{border:2px solid #fff}
+#observedPty{border:2px solid #fff}
+.home-content .glass::before{opacity:.28}
+.activity-button.is-active::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 62%,rgba(235,249,255,.48) 82%,transparent 96%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:spin 5s linear infinite}
+@media(prefers-reduced-motion:reduce){.activity-button.is-active::after{animation:none!important}}
+</style>
+<style id="visible-orbit-border">
+.activity-button.is-active{isolation:isolate}
+.activity-button.is-active::after{
+ content:"";position:absolute;inset:0;z-index:3;border-radius:inherit;padding:3px;pointer-events:none;opacity:1;
+ background:conic-gradient(from var(--ang),rgba(255,255,255,.10) 0deg,rgba(255,255,255,.10) 235deg,rgba(194,235,255,.60) 270deg,#fff 305deg,rgba(221,245,255,.85) 328deg,rgba(255,255,255,.10) 355deg);
+ -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+ -webkit-mask-composite:xor;
+ mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+ mask-composite:exclude;
+ animation:spin 2.6s linear infinite;
+}
+@media(prefers-reduced-motion:reduce){.activity-button.is-active::after{animation:none!important}}
+</style>
+<style id="liquid-glass-surfaces">
+/* LIQUID GLASS — surface effects only; all dimensions inherit existing values. */
+:root{--bg:#e7edf3;--card:#f5faff;--card2:rgba(255,255,255,.28);--ink:#102d49;--ink2:#385570;--muted:#617b91;--line:rgba(255,255,255,.68);--line2:rgba(255,255,255,.78);--liquid-fill:linear-gradient(135deg,rgba(255,255,255,.44),rgba(255,255,255,.13) 45%,rgba(255,255,255,.24));--liquid-top:rgba(255,255,255,.95);--liquid-cut:rgba(77,113,146,.17);--liquid-shadow:0 12px 30px rgba(34,77,111,.13),0 3px 8px rgba(34,77,111,.07);--glass:var(--liquid-fill)}
+html[data-theme=dark]{--bg:#08101c;--card:#142637;--card2:rgba(255,255,255,.07);--ink:#edf7ff;--ink2:#c2d8e9;--muted:#9fb8cb;--line:rgba(255,255,255,.45);--line2:rgba(255,255,255,.5);--liquid-fill:linear-gradient(135deg,rgba(255,255,255,.14),rgba(18,39,59,.10) 45%,rgba(255,255,255,.065));--liquid-top:rgba(255,255,255,.62);--liquid-cut:rgba(0,8,20,.22);--liquid-shadow:0 14px 34px rgba(0,8,20,.32),0 3px 9px rgba(0,8,20,.17);--glass:var(--liquid-fill)}
+/* Color sits behind the glass, rather than filling every card. */
+.app::before{inset:-15%;opacity:1;will-change:transform;background:radial-gradient(ellipse at 12% 14%,rgba(46,165,242,.72),transparent 34%),radial-gradient(ellipse at 90% 20%,rgba(255,151,122,.51),transparent 32%),radial-gradient(ellipse at 90% 76%,rgba(47,210,182,.58),transparent 37%),radial-gradient(ellipse at 12% 93%,rgba(250,194,83,.45),transparent 32%),radial-gradient(ellipse at 47% 48%,rgba(134,204,245,.38),transparent 42%),linear-gradient(155deg,#eaf3fa,#dce9f4);animation:liquid-background 28s ease-in-out infinite alternate}
+html[data-theme=dark] .app::before{background:radial-gradient(ellipse at 12% 14%,rgba(14,129,211,.52),transparent 35%),radial-gradient(ellipse at 90% 20%,rgba(230,105,78,.24),transparent 31%),radial-gradient(ellipse at 90% 76%,rgba(7,173,149,.34),transparent 38%),radial-gradient(ellipse at 12% 93%,rgba(195,136,42,.24),transparent 32%),radial-gradient(ellipse at 47% 48%,rgba(38,117,168,.15),transparent 42%),linear-gradient(155deg,#101f31,#050d16)}
+@keyframes liquid-background{to{transform:translate3d(2%,2%,0) scale(1.04)}}
+.app::after{opacity:.11;background-size:28px 28px}
+body::before{background:radial-gradient(120% 100% at 50% 35%,transparent 72%,rgba(14,40,65,.10))}
+html[data-theme=dark] body::before{background:radial-gradient(120% 100% at 50% 35%,transparent 67%,rgba(0,5,14,.32))}
+body::after,html[data-theme=dark] body::after{opacity:.018}
+/* Thick curved edges, inset refraction and off-axis specular reflection. */
+.glass,.result-panel,.summary-card,.tile{background:var(--liquid-fill);border:2px solid #fff;box-shadow:var(--liquid-shadow),inset 0 2px 1px var(--liquid-top),inset 2px 0 2px rgba(255,255,255,.36),inset -2px 0 3px rgba(255,255,255,.20),inset 0 -4px 6px var(--liquid-cut),inset 0 0 12px rgba(255,255,255,.17);backdrop-filter:blur(19px) saturate(1.7);-webkit-backdrop-filter:blur(19px) saturate(1.7)}
+.home-content .glass{background:var(--liquid-fill);box-shadow:var(--liquid-shadow),inset 0 2px 1px var(--liquid-top),inset 2px 0 3px rgba(255,255,255,.35),inset -2px 0 3px rgba(255,255,255,.18),inset 0 -4px 7px var(--liquid-cut),inset 0 0 12px rgba(255,255,255,.17)}
+.glass::before,.result-panel::before,.home-content .glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(145deg,rgba(255,255,255,1),rgba(255,255,255,.12) 32%,rgba(215,246,255,.55) 53%,rgba(255,255,255,.10) 72%,rgba(255,255,255,.86));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;opacity:.9;animation:none;pointer-events:none}
+.home-content .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;opacity:1;background:radial-gradient(ellipse at 5% -10%,rgba(255,255,255,.43),transparent 48%),linear-gradient(116deg,transparent 26%,rgba(255,255,255,.17) 35%,transparent 45%);background-repeat:no-repeat}
+html[data-theme=dark] .home-content .glass::after{background:radial-gradient(ellipse at 5% -10%,rgba(255,255,255,.20),transparent 47%),linear-gradient(116deg,transparent 26%,rgba(255,255,255,.055) 35%,transparent 45%)}
+.summary-card::before{background:var(--mc);box-shadow:0 1px 8px color-mix(in srgb,var(--mc) 20%,transparent)}
+.summary-card strong{color:var(--mc);filter:none;text-shadow:0 1px 0 rgba(255,255,255,.18)}
+/* Transparent controls inside the same unchanged layout. */
+.select-wrap select,.tiny-action,.history-count,.info-button{background-color:rgba(255,255,255,.25);border-color:rgba(255,255,255,.75);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),inset 0 -1px 2px rgba(48,84,114,.06);color:var(--ink)}
+html[data-theme=dark] .select-wrap select,html[data-theme=dark] .tiny-action,html[data-theme=dark] .history-count,html[data-theme=dark] .info-button{background-color:rgba(4,21,37,.19);color:var(--ink);border-color:rgba(255,255,255,.31)}
+.select-wrap select option{background:var(--card);color:var(--ink)}
+.phase-name,.phase-time{color:var(--ink)}.history-columns,.phase-meta,.session-hint{color:var(--muted)}
+.phase-list .phase-row:first-child{background:linear-gradient(90deg,rgba(255,255,255,.22),transparent);box-shadow:inset 2px 0 0 var(--acc)}
+.phase-row{border-bottom-color:rgba(123,157,181,.15)}
+.topbar,html:not([data-theme=dark]) .topbar{background:linear-gradient(145deg,rgba(255,255,255,.53),rgba(255,255,255,.20));color:var(--ink);backdrop-filter:blur(23px) saturate(1.6);-webkit-backdrop-filter:blur(23px) saturate(1.6);box-shadow:inset 0 -1px 0 rgba(255,255,255,.65),0 5px 20px rgba(26,72,108,.05)}
+html[data-theme=dark] .topbar{background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(12,27,43,.16));color:var(--ink)}
+.icon-btn,html:not([data-theme=dark]) .icon-btn{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.46);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.36)}
+.dock{background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(255,255,255,.22));backdrop-filter:blur(25px) saturate(1.6);-webkit-backdrop-filter:blur(25px) saturate(1.6);box-shadow:inset 0 2px 0 rgba(255,255,255,.75),0 -7px 24px rgba(25,66,100,.07)}
+html[data-theme=dark] .dock{background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(8,24,40,.35));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 -7px 24px rgba(0,7,20,.17)}
+.dock .dock-home{background:linear-gradient(145deg,rgba(81,187,255,.95),rgba(16,108,210,.92));box-shadow:0 6px 18px rgba(10,113,196,.24),inset 0 2px 1px rgba(255,255,255,.6)}
+/* Keep activity colors and the visible rotating edge. */
+.measure-button{background:linear-gradient(145deg,rgba(83,180,253,.94),rgba(14,108,206,.94))}
+.measure-button.is-loading{background:linear-gradient(145deg,rgba(71,209,172,.94),rgba(8,143,110,.94))}
+.waiting-button{background:linear-gradient(145deg,rgba(255,205,112,.96),rgba(211,139,33,.96))}
+.activity-button{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 2px 1px rgba(255,255,255,.57),inset 0 -3px 5px rgba(0,34,66,.10),0 6px 15px rgba(12,73,117,.16)}
+/* PTY: clear glass rather than an opaque painted panel. */
+#observedPty,html[data-theme=dark] #observedPty{background:var(--liquid-fill);color:var(--ink);border:2px solid #fff;box-shadow:var(--liquid-shadow),inset 0 2px 1px var(--liquid-top),inset 0 -4px 7px var(--liquid-cut);backdrop-filter:blur(19px) saturate(1.7);-webkit-backdrop-filter:blur(19px) saturate(1.7)}
+#observedPty::before{background:linear-gradient(145deg,#fff,rgba(255,255,255,.10) 35%,rgba(198,241,255,.7) 65%,#fff);animation:none;opacity:.85}
+#observedPty::after{background:radial-gradient(ellipse,rgba(255,255,255,.24),transparent 70%)}
+#observedPty h2,.pty-number,.pty-number span,.pty-label,.pty-meta,.pty-formula-details summary,.pty-formula-details p,.vessel-mini,.vessel-mini input,.pty-empty{color:var(--ink)}
+.pty-number{text-shadow:0 2px 1px rgba(255,255,255,.13)}.pty-label,.pty-meta{color:var(--ink2)}
+.vessel-mini{background:rgba(255,255,255,.19);border-color:rgba(255,255,255,.6);box-shadow:inset 0 1px 1px rgba(255,255,255,.45)}
+.vessel-mini input{background:transparent;border-bottom-color:var(--line2)}.pty-formula-details{border-top-color:var(--line2)}
+.overall{background:var(--card2);border-color:var(--line2)}
+.session-face{background:linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,255,255,.26));border-color:var(--line2)}
+html[data-theme=dark] .session-face{background:#142637}
+.session-calendar{background:var(--card2);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.tile{background:var(--liquid-fill);box-shadow:var(--liquid-shadow),inset 0 2px 1px var(--liquid-top),inset 0 -4px 7px var(--liquid-cut)}
+.hero{box-shadow:var(--liquid-shadow),inset 0 2px 1px rgba(255,255,255,.6),inset 0 -4px 7px rgba(0,42,84,.12)}
+.modal,html[data-theme=dark] .modal{background:linear-gradient(145deg,rgba(248,253,255,.94),rgba(237,247,254,.88));border:2px solid #fff;box-shadow:0 24px 60px rgba(3,26,51,.28),inset 0 2px 1px rgba(255,255,255,.9),inset 0 -4px 7px rgba(35,79,112,.10);backdrop-filter:blur(25px) saturate(1.6);-webkit-backdrop-filter:blur(25px) saturate(1.6)}
+html[data-theme=dark] .modal{background:linear-gradient(145deg,rgba(30,55,78,.95),rgba(13,29,45,.92))}
+/* Keep deletion controls concealed behind translucent history rows until swiped. */
+.session-swipe{background:transparent}
+.session-swipe:not(.swiped) .swipe-delete{visibility:hidden}
+/* Existing black result button remains unchanged and shimmer-free. */
+.results-button,html[data-theme=dark] .results-button{background:linear-gradient(165deg,#272d35,#10151c 58%,#090d12);color:#f6f9ff}
+.results-button::before{content:none;animation:none}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass,.result-panel,.summary-card,.tile,#observedPty{background:var(--card)}}
+@media(prefers-reduced-motion:reduce){.app::before{animation:none!important}}
+
+</style>
+<style id="saturated-active-colors">
+/* Opaque, saturated activity colors; preserve muted inactive buttons. */
+.activity-button.is-active{opacity:1;filter:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.measure-button.is-active{background:linear-gradient(135deg,#0789ef,#066bce 58%,#004fae)}
+.measure-button.is-loading.is-active{background:linear-gradient(135deg,#05b276,#00935d 58%,#006e49)}
+.waiting-button.is-active{background:linear-gradient(135deg,#ffcf0a,#f3b900 58%,#dfa000)}
+.activity-button.is-active::before{background:linear-gradient(105deg,transparent 39%,rgba(255,255,255,.065) 50%,transparent 61%),linear-gradient(180deg,rgba(255,255,255,.065),transparent 55%);background-size:260% 100%,100% 100%;background-repeat:no-repeat}
+.waiting-button.is-active .phase-label,.waiting-button.is-active .timer-value,.waiting-button.is-active .button-action,.waiting-button.is-active small{color:#352600;text-shadow:none}
+.waiting-button.is-active .phase-label::before{background:#594100;box-shadow:none}
+</style>
+</head>
 <body>
 <div class="app" id="app">
 <img class="app-background-photo" src="assets/latar-utama.jpg" alt="" aria-hidden="true" decoding="async" onerror="this.remove()">
@@ -70,17 +597,8 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 </header><div class="livebar"></div>
 <main class="screen" id="homeScreen">
  <div class="home-content">
-  <section class="glass guide" id="guideCard">
-   <div class="guide-main"><div class="eyebrow">PANDUAN</div><div class="guide-title">Cara Penggunaan</div><div class="guide-summary">Ketuk untuk membuka langkah pengukuran</div></div>
-   <div class="guide-side"><span class="step-tag">3 LANGKAH</span><button class="small-link" id="guideToggle" aria-label="Buka panduan"><svg class="chevron" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m4 7 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-   <div class="guide-popover" id="guidePopover" hidden>
-    <div class="guide-step"><span class="step-no">1</span><span><b>Mulai spotting</b> saat hauler penuh mulai meninggalkan front atau klakson full terdengar.</span></div>
-    <div class="guide-step"><span class="step-no">2</span><span>Tekan <b>Ukur</b> tepat saat bucket pertama ditumpahkan. Timer berpindah ke loading.</span></div>
-    <div class="guide-step"><span class="step-no">3</span><span>Tekan lagi saat hauler full/maju. Siklus tersimpan dan spotting berikutnya langsung berjalan.</span></div>
-   </div>
-  </section>
   <section class="glass panel time-params" aria-labelledby="parametersTitle">
-   <div class="panel-head"><div><h2 id="parametersTitle">Parameter Waktu</h2></div><button class="tiny-action" id="openStandards">TABEL FLEET</button></div>
+   <div class="panel-head"><div><h2 id="parametersTitle">Parameter Waktu</h2></div><div class="parameter-actions"><button class="tiny-action" id="openStandards">TABEL FLEET</button><button class="info-button" id="guideToggle" aria-label="Cara penggunaan" title="Cara penggunaan"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/></svg></button></div></div>
    <div class="pair-selects"><div class="select-wrap"><label for="loaderSelect">LOADER</label><select id="loaderSelect"></select></div><div class="select-wrap"><label for="haulerSelect">HAULER</label><select id="haulerSelect"></select></div></div>
    <div class="target-note" id="targetNote" hidden>Standar tetap sesuai tabel fleet yang dipilih.</div>
    <div class="targets"><div class="target"><span class="target-label">Spotting</span><strong class="target-value" id="spotTargetView">00:20</strong></div><div class="target"><span class="target-label">Loading total</span><strong class="target-value" id="loadTargetView">01:54</strong></div></div>
@@ -93,42 +611,44 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
    <div class="log-foot" id="logFoot">Data tersimpan otomatis di perangkat ini.</div>
   </section>
   <section class="glass measure-area" aria-labelledby="measureTitle">
-   <div class="measure-head"><h2 id="measureTitle">Pengukuran</h2><span id="cycleLabel">SIAP MEMULAI</span></div>
+   <div class="measure-head"><h2 id="measureTitle">Kalkulator PTY</h2><span id="cycleLabel">SIAP MEMULAI</span></div>
    <div class="controls">
-    <button class="measure-button" id="measureBtn" type="button" aria-label="Mulai atau lanjutkan pengukuran">
-     <span class="timer-info"><span class="phase-label"><i class="live-dot"></i><span id="activePhase">SIAP • SPOTTING</span></span><span class="timer-value" id="timerValue">00:00.0</span></span>
-     <span class="measure-separator"></span><span class="measure-action"><strong>UKUR</strong><small id="measureHint">Mulai saat hauler meninggalkan front</small></span>
+    <button class="activity-button measure-button" id="measureBtn" type="button">
+     <span class="phase-label" id="activePhase">SIAP • SPOTTING</span><span class="timer-value" id="timerValue">00:00.0</span>
+     <strong class="button-action" id="measureAction">UKUR</strong><small id="measureHint">Mulai saat hauler meninggalkan front</small>
     </button>
-    <button class="results-button" id="resultsBtn" type="button" aria-label="Buka hasil dan rekomendasi"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>HASIL &amp;<br>REKOMENDASI</span></button>
+    <button class="activity-button waiting-button" id="waitBtn" type="button" aria-label="Mulai waktu delay">
+     <span class="phase-label" id="waitPhaseLabel">DELAY</span><span class="timer-value" id="waitTimer">00:00.0</span>
+     <strong class="button-action" id="waitAction" hidden>DELAY</strong><small id="waitHint">Ketuk jika aktivitas terhenti</small>
+    </button>
    </div>
-   <div class="session-tools"><span class="session-hint" id="sessionHint">Siklus baru dimulai dari spotting.</span><button class="small-link" id="viewAllBtn">RIWAYAT LENGKAP ↗</button></div>
+   <button class="results-button" id="resultsBtn" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7" stroke="currentColor" stroke-width="1.8"/></svg><span>HASIL &amp; REKOMENDASI</span></button>
+   <div class="session-tools"><span class="session-hint" id="sessionHint">Siklus baru dimulai dari spotting.</span><button class="small-link" id="viewAllBtn" hidden>RIWAYAT LENGKAP ↗</button></div>
   </section>
  </div>
 </main>
 <section class="screen-results" id="resultsScreen" aria-label="Hasil dan rekomendasi">
  <div class="results-wrap">
   <div class="results-top"><button class="back-btn" id="backBtn" aria-label="Kembali"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m12 4-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="results-title"><h1>Hasil &amp; Rekomendasi</h1><p>Evaluasi waktu siklus loader</p></div><span class="result-pair" id="resultPair">PC1250 → HD465</span></div>
-  <div class="summary-grid"><div class="summary-card"><small>Siklus lengkap</small><strong id="sumCycles">0</strong><em>pengukuran</em></div><div class="summary-card"><small>Rata-rata spotting</small><strong id="sumSpot">—</strong><em id="sumSpotTarget">Target 00:47</em></div><div class="summary-card"><small>Rata-rata loading</small><strong id="sumLoad">—</strong><em id="sumLoadTarget">Target belum diatur</em></div></div>
+  <div class="result-session-time" id="resultSessionTime"></div>
+  <div class="summary-grid">
+   <div class="summary-card metric-cycles"><small>SIKLUS</small><strong id="sumCycles">0</strong><em>selesai</em></div>
+   <div class="summary-card metric-spot"><small>SPOTTING</small><strong id="sumSpot">—</strong><em id="sumSpotTarget">rata-rata</em></div>
+   <div class="summary-card metric-load"><small>LOADING</small><strong id="sumLoad">—</strong><em id="sumLoadTarget">rata-rata</em></div>
+   <div class="summary-card metric-wait"><small>TOTAL DELAY</small><strong id="waitTotal">00:00</strong><em>total</em></div>
+  </div>
+  <section class="result-panel" id="observedPty"><h2>PTY Loader Hasil Ukur</h2><div id="observedPtyBody" aria-live="polite"></div></section>
   <section class="result-panel"><h2>Kesimpulan</h2><div id="overallBox" class="overall"><span class="overall-icon"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M10 2.5 17 6v4.5c0 3.5-2.5 5.8-7 7-4.5-1.2-7-3.5-7-7V6z" stroke="currentColor" stroke-width="1.7"/><path d="m6.8 10 2.1 2.1 4.4-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong id="overallTitle">Belum ada hasil ukur</strong><p id="overallText">Selesaikan satu siklus untuk melihat evaluasi dan saran perbaikan.</p></div></div><ul class="recommendation-list" id="recommendations"></ul></section>
-  <section class="result-panel"><div class="panel-head"><div><h2>Riwayat Siklus</h2><div class="panel-sub">Semua siklus pada pasangan unit terpilih</div></div><div class="result-actions"><button class="action-btn secondary" id="exportBtn">Ekspor CSV</button></div></div><div id="cycleTableMount"></div></section>
-  <section class="result-panel"><div class="panel-head"><div><h2>Catatan Phase</h2><div class="panel-sub">Waktu spotting dan loading per siklus</div></div></div><div id="phaseTableMount"></div></section>
+  <div class="result-session-actions"><button class="action-btn secondary" id="exportBtn">Ekspor CSV sesi ini</button><button class="action-btn" id="newMeasureBtn">Pengukuran Baru</button></div>
+  <section class="result-panel saved-sessions-panel"><div class="panel-head"><div><h2>Riwayat Hasil Pengukuran</h2><p class="panel-sub">Ketuk untuk melihat detail • geser ke kiri untuk menghapus</p></div><span id="sessionCount" class="history-count">0 SESI</span></div><div id="sessionHistory"></div></section>
  </div>
 </section>
 <div class="modal-backdrop" id="standardsModal" role="dialog" aria-modal="true" aria-labelledby="standardsTitle">
  <div class="modal standards-modal"><div class="modal-head"><h2 id="standardsTitle">Tabel Standar Fleet</h2><button class="modal-close" data-close="standardsModal" aria-label="Tutup">×</button></div><p class="modal-desc">Standar spotting, loading total, kelas hauler, dan estimasi passes per kombinasi.</p><div class="standards-table-wrap" id="standardsTable"></div><div class="modal-note">Gunakan standar sesuai pasangan unit yang sedang dipilih. Catatan kecocokan fleet tetap ditampilkan sebagai pertimbangan operasional.</div><div class="modal-actions"><button class="save" data-close="standardsModal">Tutup</button></div></div>
 </div>
-<div class="modal-backdrop" id="resetModal" role="dialog" aria-modal="true" aria-labelledby="resetTitle"><div class="modal"><div class="modal-head"><h2 id="resetTitle">Reset sesi pengukuran?</h2><button class="modal-close" data-close="resetModal">×</button></div><p class="modal-desc">Riwayat phase dan siklus di perangkat ini akan dihapus. Standar fleet tetap tersedia.</p><div class="modal-actions"><button class="cancel" data-close="resetModal">Batal</button><button class="save" id="confirmReset">Hapus sesi</button></div></div></div>
+<div class="modal-backdrop" id="resetModal" role="dialog" aria-modal="true" aria-labelledby="resetTitle"><div class="modal"><div class="modal-head"><h2 id="resetTitle">Reset sesi pengukuran?</h2><button class="modal-close" data-close="resetModal">×</button></div><p class="modal-desc">Catatan sesi yang sedang dibuka akan dikosongkan. Riwayat hasil pengukuran yang sudah disimpan tetap tersedia.</p><div class="modal-actions"><button class="cancel" data-close="resetModal">Batal</button><button class="save" id="confirmReset">Reset sesi ini</button></div></div></div>
 <div class="toast" id="toast"></div>
-<style>
-:root{--nav-safe:calc(70px + env(safe-area-inset-bottom))}
-.app .screen,.app .screen-results{bottom:var(--nav-safe)}
-.hub{overflow:auto;padding:16px 14px 22px}.hub-inner{width:min(100%,680px);margin:0 auto}
-.hub h1{font-size:25px;margin:0 0 12px;color:#17385e}.hub h2{font-size:18px;margin:0 0 9px}.hub p,.hub li,.hub td,.hub th{font-size:14px;line-height:1.5}.hub p{margin:6px 0 12px}
-.hero{position:relative;overflow:hidden;padding:24px 18px;margin-bottom:14px;background:linear-gradient(135deg,#16395f,#2166a5);color:white;border-radius:19px}.hero h1{color:white;max-width:75%;margin-bottom:4px}.hero p{max-width:70%;margin-bottom:0;color:#e0f0ff}.hero svg{position:absolute;right:12px;bottom:-32px;width:30%;height:155px;opacity:.44}
-.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{min-height:100px;text-align:left;border:1px solid #ffffff38;color:white;border-radius:15px;padding:13px;background:linear-gradient(145deg,color-mix(in srgb,var(--tile),white 13%),var(--tile));box-shadow:0 6px 15px #19395924,inset 0 1px #ffffff40}.tile b,.tile small{display:block}.tile b{font-size:15px;margin-top:5px}.tile small{font-size:12px;margin-top:4px}.tile svg{width:23px;height:23px}
-.dock{position:absolute;bottom:0;left:0;right:0;height:var(--nav-safe);padding:5px 4px env(safe-area-inset-bottom);z-index:9;background:#f4f9fff5;border-top:1px solid #ccdaeb;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;backdrop-filter:blur(12px)}.dock button{border:0;background:none;color:#233f61;font-weight:750;font-size:10px;min-width:0;padding:3px 0;display:grid;place-items:center;gap:3px}.dock svg{width:22px;height:22px}.dock button[aria-current=page]{color:#086747}.dock .dock-home{background:linear-gradient(155deg,#337eea,#1749a2);color:white;border-radius:50%;width:62px;height:62px;margin:-16px auto 0;box-shadow:0 4px 14px #163c7266;border:3px solid white;align-content:center}.dock .dock-home[aria-current=page]{color:white;border-color:#bef5df}
-.hub-card{padding:13px;margin:0 0 9px}.hub details summary{cursor:pointer;font-weight:750;font-size:15px;padding:5px 0}.hub select,.hub input{width:100%;min-height:42px;border:1px solid #b5cbe1;border-radius:9px;background:#fff;color:#193b60;padding:8px}.hub label{display:block;font-size:14px;font-weight:700;margin:9px 0 4px}.hub .action-btn,.end-actions button{font-size:13px;min-height:42px}.hub output{display:block;margin-top:12px;font-size:18px;font-weight:800;color:#146746}.subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}.subgrid button{min-height:44px;text-align:left}.hub .hint{color:#526a84;font-size:13px}.hub a{color:#1555a6}.end-actions{display:flex;gap:8px;justify-content:flex-end}.measure-area{position:sticky;bottom:0;z-index:2}.history-card{flex:1 0 auto}.screen-results .result-table{min-width:0}.screen-results .result-table td{overflow-wrap:anywhere}
-</style>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10h-6v-6H9v6H3z"/></symbol>
 <symbol id="i-time" viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M9 2h6m-3 4V2m0 8v5l3 2"/></symbol>
@@ -139,7 +659,23 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 </defs></svg>
 <section class="screen hub" id="hubScreen"><div class="hub-inner" id="hubContent"></div></section>
 <nav class="dock" aria-label="Navigasi utama" id="dock"></nav>
-<div class="modal-backdrop" id="endModal" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="modal"><div class="modal-head"><h2 id="endTitle">Akhiri pengukuran?</h2></div><p class="modal-desc">Stopwatch akan berhenti. Hasil evaluasi memakai siklus yang sudah selesai. Catatan fase yang sudah tersimpan tetap tersedia.</p><div class="end-actions"><button class="action-btn secondary" id="continueMeasure">Lanjut Ukur</button><button class="action-btn" id="finishMeasure">Akhiri &amp; Lihat Hasil</button></div></div></div>
+<div class="modal-backdrop" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+ <div class="modal guide-modal"><div class="modal-head"><h2 id="guideTitle">Cara Penggunaan</h2><button class="modal-close" data-close="guideModal" aria-label="Tutup panduan">×</button></div>
+ <div class="guide-body"><ol>
+ <li>Pilih pasangan Loader dan Hauler sebelum mulai.</li>
+ <li>Tekan <b>Ukur</b> saat HD penuh mulai meninggalkan front atau klakson penuh terdengar. Waktu Spotting mulai.</li>
+ <li>Tekan <b>Ukur</b> saat bucket pertama ditumpahkan. Spotting selesai dan Loading mulai.</li>
+ <li id="guideLoadingEnd">Tekan Ukur saat HD penuh mulai berangkat. Loading tersimpan dan Spotting berikutnya mulai.</li>
+ <li>Jika aktivitas berikutnya belum dimulai, tekan <b>Delay sebagai pengganti Ukur</b> pada akhir fase. Fase aktif selesai dan waktu delay mulai. Jangan menekan Ukur terlebih dahulu.</li>
+ <li>Saat aktivitas berikutnya mulai, tekan <b>Ukur</b>. Waktu delay tersimpan dan fase berikutnya berjalan: setelah Loading adalah Spotting; setelah Spotting adalah Loading.</li>
+ <li id="waitBoundaryNote"></li>
+ <li>Semua catatan tersedia. Catatan terbaru selalu tampil di atas; scroll di dalam card untuk melihat catatan lama.</li>
+ <li>Tekan <b>Hasil &amp; Rekomendasi</b> untuk mengakhiri sesi melalui konfirmasi. Membuka panduan tidak menghentikan timer.</li>
+ </ol></div><div class="modal-actions"><button class="save" data-close="guideModal">Mengerti</button></div></div>
+</div>
+<div class="modal-backdrop" id="sessionDetailModal" role="dialog" aria-modal="true" aria-labelledby="sessionDetailTitle"><div class="modal session-detail-modal"><div class="modal-head"><h2 id="sessionDetailTitle">Detail Pengukuran</h2><button class="modal-close" data-close="sessionDetailModal" aria-label="Tutup detail">×</button></div><div class="session-detail-body" id="sessionDetailBody"></div><div class="modal-actions"><button class="save" data-close="sessionDetailModal">Tutup</button></div></div></div>
+<div class="modal-backdrop" id="deleteSessionModal" role="dialog" aria-modal="true" aria-labelledby="deleteSessionTitle"><div class="modal"><div class="modal-head"><h2 id="deleteSessionTitle">Hapus riwayat ini?</h2><button class="modal-close" data-close="deleteSessionModal" aria-label="Tutup konfirmasi hapus">×</button></div><p id="deleteSessionDescription" class="modal-desc"></p><div class="modal-actions"><button class="cancel" data-close="deleteSessionModal">Batal</button><button class="danger-action" id="confirmDeleteSession">Hapus Riwayat</button></div></div></div>
+<div class="modal-backdrop" id="endModal" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="modal"><div class="modal-head"><h2 id="endTitle">Akhiri pengukuran?</h2></div><p class="modal-desc">Waktu delay aktif akan disimpan. Spotting/Loading yang belum selesai tidak masuk hasil. Seluruh catatan yang sudah selesai tetap tersedia.</p><div class="end-actions"><button class="action-btn secondary" id="continueMeasure">Lanjut Ukur</button><button class="action-btn" id="finishMeasure">Akhiri &amp; Lihat Hasil</button></div></div></div>
 
 <script>
 (()=>{
@@ -147,15 +683,16 @@ html[data-theme=dark]{color-scheme:dark}html[data-theme=dark] body,html[data-the
 const $=id=>document.getElementById(id);
 const STORE='gpeLoaderAnalytic_v1';
 const PAIRS=[
- {loader:'PC400',hauler:'Volvo DT / Umum',capacity:'40 Ton & On-Off Highway',spot:20,load:114,passes:'4–5',note:''},
+ {loader:'PC400',hauler:'Volvo DT / Umum',capacity:'40 Ton & On-Off Highway',spot:30,load:100,passes:'5–6',note:'Bucket 2,80 LCM',lastDump:true,bands:{spotting:[30,45],loading:[100,125]}},
  {loader:'PC400',hauler:'HD465',capacity:'40 Ton & 45–50 Ton HD',spot:24,load:310,passes:'15–16',note:'Kurang ideal'},
  {loader:'PC400',hauler:'HD785',capacity:'40 Ton & 60–90 Ton HD',spot:28,load:420,passes:'20+',note:'Tidak disarankan'},
  {loader:'PC800',hauler:'Volvo DT / Umum',capacity:'80 Ton & On-Off Highway',spot:22,load:85,passes:'3–4',note:''},
  {loader:'PC800',hauler:'HD465',capacity:'80 Ton & 45–50 Ton HD',spot:25,load:150,passes:'5–6',note:''},
  {loader:'PC800',hauler:'HD785',capacity:'80 Ton & 60–90 Ton HD',spot:30,load:220,passes:'8–9',note:''},
+ {loader:'ZX870',hauler:'HD465',capacity:'80 Ton & HD465',spot:30,load:150,passes:'7–8',note:'Bucket 5,00 / 6,00 LCM',lastDump:true,bands:{spotting:[30,45],loading:[150,175]}},
  {loader:'PC1250',hauler:'Volvo DT / Umum',capacity:'125 Ton & On-Off Highway',spot:25,load:70,passes:'2–3',note:'Sangat cepat'},
- {loader:'PC1250',hauler:'HD465',capacity:'125 Ton & 45–50 Ton HD',spot:25,load:105,passes:'4',note:''},
- {loader:'PC1250',hauler:'HD785',capacity:'125 Ton & 60–90 Ton HD',spot:32,load:140,passes:'—',note:''}
+ {loader:'PC1250',hauler:'HD465',capacity:'125 Ton & 45–50 Ton HD',spot:30,load:105,passes:'~5',note:'',bands:{spotting:[30,45],loading:[105,136]}},
+ {loader:'PC1250',hauler:'HD785',capacity:'125 Ton & 60–90 Ton HD',spot:null,load:null,passes:'~9',note:'Acuan waktu pending',pending:true}
 ];
 const blank=()=>({settings:{},phases:[],cycles:[],active:null});
 let data, migrated=false;
@@ -178,9 +715,10 @@ if(!data){
   }
  }catch{}
 }
+if(!Array.isArray(data.sessions))data.sessions=[];if(!data.vesselByPair)data.vesselByPair={};
 if(!Array.isArray(data.phases))data.phases=[];if(!Array.isArray(data.cycles))data.cycles=[];if(!data.settings)data.settings={};
 const normalizeHauler=x=>x==='DT Volvo'||x==='DT Umum'?'Volvo DT / Umum':x;for(const row of [...data.phases,...data.cycles])row.hauler=normalizeHauler(row.hauler);if(data.active)data.active.hauler=normalizeHauler(data.active.hauler);
-let ticker=null,toastTimer=null;
+let ticker=null,toastTimer=null;let pendingDeleteSession=null;
 const currentPair=()=>({loader:$('loaderSelect').value,hauler:$('haulerSelect').value});
 const pairKey=p=>`${p.loader}|${p.hauler}`;
 const currentKey=()=>pairKey(currentPair());
@@ -191,7 +729,22 @@ function avg(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:null}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function getPairPhases(){const p=currentPair();return data.phases.filter(x=>x.loader===p.loader&&x.hauler===p.hauler)}
 function getPairCycles(){const p=currentPair();return data.cycles.filter(x=>x.loader===p.loader&&x.hauler===p.hauler)}
-function phaseStatus(phase,secs,key){const c=cfg(key),target=phase==='spotting'?Number(c.spot)||null:Number(c.load)||null;if(!target)return {text:'ATUR TARGET',kind:'neutral'};return secs<=target?{text:'SESUAI',kind:'good'}:{text:'LEBIH',kind:'warn'}}
+function bandStatus(phase,secs,bands,lastDump=false){
+ if(secs==null||!Number.isFinite(secs))return {text:'—',kind:'neutral',rank:-1};
+ const [goodLimit,averageLimit]=bands[phase];
+ if(secs<goodLimit||(lastDump&&phase==='loading'&&secs===goodLimit))return {text:'Bagus',kind:'good',rank:0};
+ if(secs<=averageLimit)return {text:'Rata-rata',kind:'average',rank:1};
+ return {text:'Jelek',kind:'warn',rank:2};
+}
+function cycleBandStatus(spot,load,bands,lastDump=false){
+ const a=bandStatus('spotting',spot,bands),b=bandStatus('loading',load,bands,lastDump);
+ if(a.rank<0||b.rank<0)return {text:'—',kind:'neutral',rank:-1};
+ return a.rank>=b.rank?a:b;
+}
+function bandRange([goodLimit,averageLimit],inclusive=false){
+ return `Bagus ${inclusive?'≤':'&lt;'} ${fmt(goodLimit)}<br>Rata-rata ${inclusive?'&gt; ':''}${fmt(goodLimit)}–${fmt(averageLimit)}<br>Jelek &gt; ${fmt(averageLimit)}`;
+}
+function phaseStatus(phase,secs,key,lastDump=false){if(phase==='waiting')return {text:'Delay',kind:'neutral',rank:-1};const c=cfg(key);if(c.pending)return {text:'Pending',kind:'neutral'};if(c.lastDump&&phase==='loading'&&!lastDump)return {text:'Metode lama',kind:'neutral'};if(c.bands)return bandStatus(phase,secs,c.bands,c.lastDump);const target=phase==='spotting'?Number(c.spot)||null:Number(c.load)||null;if(!target)return {text:'ATUR TARGET',kind:'neutral'};return secs<=target?{text:'SESUAI',kind:'good'}:{text:'LEBIH',kind:'warn'}}
 function fillSelectors(loaderValue,haulerValue){
  const loaders=[...new Set(PAIRS.map(p=>p.loader))];$('loaderSelect').innerHTML=loaders.map(x=>`<option>${x}</option>`).join('');
  $('loaderSelect').value=loaders.includes(loaderValue)?loaderValue:'PC1250';
@@ -199,16 +752,43 @@ function fillSelectors(loaderValue,haulerValue){
  $('haulerSelect').innerHTML=haulers.map(x=>`<option>${x}</option>`).join('');
  $('haulerSelect').value=haulers.includes(haulerValue)?haulerValue:haulers[0];
 }
-function updateTargetCard(){const c=cfg();$('spotTargetView').textContent=fmt(c.spot);$('loadTargetView').textContent=fmt(c.load);$('targetNote').textContent='Standar tetap • berlaku untuk kombinasi unit terpilih';$('pairInfo').innerHTML=`<span class="pair-chip">${escapeHtml(c.capacity)}</span><span class="pair-chip">${escapeHtml(c.passes)} pass</span>${c.note?`<span class="pair-chip caution">${escapeHtml(c.note)}</span>`:''}`}
+function updateTargetCard(){const c=cfg();
+ $('guideLoadingEnd').textContent=c.lastDump
+  ?'Tekan saat bucket terakhir ditumpahkan. Tekan lagi saat klakson penuh atau hauler mulai berangkat untuk memulai spotting berikutnya.'
+  :'Tekan lagi saat hauler full/maju. Siklus tersimpan dan spotting berikutnya langsung berjalan.';$('spotTargetView').textContent=fmt(c.spot);$('loadTargetView').textContent=fmt(c.load);$('targetNote').textContent='Standar tetap • berlaku untuk kombinasi unit terpilih';$('pairInfo').innerHTML=`<span class="pair-chip">${escapeHtml(c.capacity)}</span><span class="pair-chip">${escapeHtml(c.passes)} pass</span>${c.note?`<span class="pair-chip caution">${escapeHtml(c.note)}</span>`:''}`}
 function renderPhases(){
  const all=getPairPhases();const active=data.active&&data.active.loader===currentPair().loader&&data.active.hauler===currentPair().hauler?data.active:null;
- const shown=all.slice(-6).reverse();$('phaseCount').textContent=`${all.length}${active?' + AKTIF':''} PHASE`;
+ const shown=[...all].reverse();$('phaseCount').textContent=`${all.length}${active?' + AKTIF':''} PHASE`;
  if(!shown.length){$('phaseList').innerHTML=`<div class="empty-log">${active?'Phase sedang berjalan; catatan muncul saat transisi.':'Belum ada phase tercatat untuk pasangan unit ini.'}</div>`;$('logFoot').textContent='Riwayat lengkap tersimpan otomatis di perangkat ini.';return}
- $('phaseList').innerHTML=shown.map(row=>{let status=phaseStatus(row.phase,row.seconds,pairKey(row));let cycleNum=String(row.cycleNo||'—').padStart(2,'0');return `<div class="phase-row"><div class="phase-name"><i class="phase-dot ${row.phase==='loading'?'loading':''}"></i><span>${row.phase==='spotting'?'Spotting':'Loading'}</span><span class="phase-meta">S${cycleNum}</span></div><span class="phase-time">${fmt(row.seconds)}</span><span class="phase-status"><i class="status-pill status-${status.kind}">${status.text}</i></span></div>`}).join('');
- $('logFoot').textContent=all.length>6?`Menampilkan 6 phase terakhir • ${all.length} phase tercatat`:`${all.length} phase tercatat • tersimpan otomatis`;
+ $('phaseList').innerHTML=shown.map(row=>{let status=phaseStatus(row.phase,row.seconds,pairKey(row),row.lastDump);let cycleNum=String(row.cycleNo||'—').padStart(2,'0');return `<div class="phase-row"><div class="phase-name"><i class="phase-dot ${row.phase}"></i><span>${phaseName(row.phase)}</span><span class="phase-meta">S${cycleNum}</span></div><span class="phase-time">${fmt(row.seconds,!!cfg(pairKey(row)).bands)}</span><span class="phase-status"><i class="status-pill status-${status.kind}">${status.text}</i></span></div>`}).join('');
+ $('logFoot').textContent=`${all.length} catatan tersimpan • terbaru di atas`; $('phaseList').scrollTop=0;
 }
-function renderMeasurement(){const active=data.active;const btn=$('measureBtn');if(!active){$('activePhase').textContent='SIAP • SPOTTING';$('timerValue').textContent='00:00.0';$('measureHint').textContent='Mulai saat hauler meninggalkan front';$('cycleLabel').textContent='SIAP MEMULAI';$('sessionHint').textContent='Siklus pertama dimulai dari spotting.';btn.setAttribute('aria-label','Mulai pengukuran spotting');$('loaderSelect').disabled=false;$('haulerSelect').disabled=false;return}
- const elapsed=(Date.now()-active.startedAt)/1000;const phase=active.phase;$('activePhase').textContent=phase==='spotting'?'FASE AKTIF • SPOTTING':'FASE AKTIF • LOADING';$('timerValue').textContent=fmt(elapsed,true);$('measureHint').textContent=phase==='spotting'?'Ketuk saat bucket pertama ditumpahkan':'Ketuk saat klakson full / hauler mulai maju';$('cycleLabel').textContent=`SIKLUS ${String(active.cycleNo).padStart(2,'0')}`;$('sessionHint').textContent=phase==='spotting'?'Ukur sampai bucket pertama masuk ke bak.':'Ukur sampai hauler full atau bergerak maju.';btn.setAttribute('aria-label',phase==='spotting'?'Catat bucket pertama dan mulai loading':'Simpan loading dan mulai spotting berikutnya');$('loaderSelect').disabled=true;$('haulerSelect').disabled=true;
+function phaseName(phase){return phase==='spotting'?'Spotting':phase==='loading'?'Loading':phase==='waiting'?'Waktu Delay':'Menunggu keberangkatan'}
+function lastSeconds(waiting){const key=currentKey();for(let i=data.phases.length-1;i>=0;i--){const row=data.phases[i];if(pairKey(row)===key&&(row.phase==='waiting')===waiting)return row.seconds}return 0}
+function renderMeasurement(){
+ const active=data.active, phase=active?.phase, waiting=phase==='waiting';
+ const running=phase==='spotting'||phase==='loading';
+ const elapsed=active?Math.max(0,(Date.now()-active.startedAt)/1000):0;
+ $('timerValue').textContent=fmt(running?elapsed:lastSeconds(false),true);
+ $('waitTimer').textContent=fmt(waiting?elapsed:lastSeconds(true),true);
+ $('measureBtn').classList.toggle('is-loading',phase==='loading'||(waiting&&active.nextPhase==='loading'));
+ $('measureBtn').classList.toggle('is-active',!!active&&!waiting);
+ $('measureBtn').classList.toggle('is-muted',waiting);
+ $('waitBtn').classList.toggle('is-active',waiting);
+ $('waitBtn').classList.toggle('is-muted',!!active&&!waiting);
+ $('measureBtn').setAttribute('aria-pressed',String(!!active&&!waiting));
+ $('waitBtn').setAttribute('aria-pressed',String(waiting));
+ $('loaderSelect').disabled=!!active; $('haulerSelect').disabled=!!active;
+ $('cycleLabel').textContent=active?`SIKLUS ${String(active.cycleNo).padStart(2,'0')}`:'SIAP MEMULAI';
+ $('activePhase').textContent=waiting?`BERIKUTNYA • ${phaseName(active.nextPhase).toUpperCase()}`:phase==='departure'?'SIAP • SPOTTING':running?`FASE AKTIF • ${phase.toUpperCase()}`:'SIAP • SPOTTING';
+ $('measureAction').textContent=waiting?`MULAI ${phaseName(active.nextPhase).toUpperCase()}`:phase==='departure'?'MULAI SPOTTING':'UKUR';
+ $('measureHint').textContent=waiting?'Ketuk saat aktivitas dimulai':phase==='spotting'?'Ketuk saat bucket pertama ditumpahkan':phase==='loading'?(cfg(pairKey(active)).lastDump?'Ketuk saat bucket terakhir ditumpahkan':'Ketuk saat HD penuh / mulai berangkat'):'Ketuk saat HD mulai meninggalkan front';
+ $('waitPhaseLabel').textContent='DELAY';
+ $('waitAction').textContent=waiting?'SEDANG BERJALAN':'DELAY';
+ $('waitHint').textContent=waiting?'Tekan Ukur untuk fase berikutnya':'Ketuk pada akhir fase jika aktivitas terhenti';
+ $('sessionHint').textContent=waiting?'Waktu delay dicatat terpisah dari Spotting dan Loading.':'Gunakan Delay sebagai pengganti Ukur jika aktivitas berikutnya belum dimulai.';
+ $('measureBtn').setAttribute('aria-label',waiting?`Selesaikan waktu delay dan mulai ${phaseName(active.nextPhase)}`:'Ukur: '+$('measureHint').textContent);
+ $('waitBoundaryNote').textContent=cfg().lastDump?'Pasangan ini mengakhiri Loading pada tumpahan bucket terakhir. Gunakan batas yang sama ketika menekan Delay untuk mengakhiri Loading.':'Loading berakhir saat HD penuh mulai meninggalkan posisi loading.';
 }
 function renderHome(){updateTargetCard();renderPhases();renderMeasurement()}
 function toast(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2200)}
@@ -216,40 +796,179 @@ function openModal(id){$(id).classList.add('show')};function closeModal(id){$(id
 function cycleNumberForPair(p){
  return [...data.cycles,...data.phases].reduce((last,row)=>pairKey(row)===pairKey(p)?Math.max(last,Number(row.cycleNo)||0):last,0)+1;
 }
-function startSpotting(){const p=currentPair();data.active={phase:'spotting',startedAt:Date.now(),cycleId:`${Date.now()}-${Math.random().toString(16).slice(2,7)}`,cycleNo:cycleNumberForPair(p),loader:p.loader,hauler:p.hauler};save();renderHome();if(!ticker)ticker=setInterval(renderMeasurement,100)}
+function sessionId(){return 'session-'+Date.now()+'-'+Math.random().toString(36).slice(2,10)}
+function cloneRows(rows){return JSON.parse(JSON.stringify(rows))}
+function snapshotSession(p,phases,cycles,{id=sessionId(),startedAt=null,endedAt=Date.now(),legacy=false}={}){
+ return {id,loader:p.loader,hauler:p.hauler,startedAt,endedAt,legacy,phases:cloneRows(phases),cycles:cloneRows(cycles),config:cloneRows(cfg(pairKey(p))),vessel:data.vesselByPair[pairKey(p)]??null};
+}
+function ensureMeasurementSession(now){
+ if(data.currentSessionArchived){data.phases=[];data.cycles=[];data.workingId=null;data.sessionStartedAt=null;data.currentSessionArchived=false}
+ if(!data.workingId)data.workingId=sessionId();
+ if(!data.sessionStartedAt&&!data.phases.length&&!data.cycles.length)data.sessionStartedAt=now;
+}
+function archiveMeasurement(now){
+ if(data.currentSessionArchived)return;
+ const phases=getPairPhases(),cycles=getPairCycles();
+ if(!phases.length&&!cycles.length&&!data.sessionStartedAt)return;
+ const id=data.workingId||sessionId();
+ if(!data.sessions.some(x=>x.id===id))data.sessions.unshift(snapshotSession(currentPair(),phases,cycles,{id,startedAt:data.sessionStartedAt||null,endedAt:now}));
+ data.currentSessionArchived=true;
+}
+function migrateSessions(){
+ if(data.sessionHistorySchema===1)return;
+ const groups=new Map();
+ for(const r of [...data.phases,...data.cycles]){const k=pairKey(r);if(!groups.has(k))groups.set(k,{loader:r.loader,hauler:r.hauler})}
+ for(const [key,p] of groups){
+  if(data.active&&pairKey(data.active)===key)continue;
+  const phases=data.phases.filter(x=>pairKey(x)===key),cycles=data.cycles.filter(x=>pairKey(x)===key);
+  const times=[...phases,...cycles].map(x=>Date.parse(x.at)).filter(Number.isFinite);
+  data.sessions.push(snapshotSession(p,phases,cycles,{startedAt:null,endedAt:times.length?Math.max(...times):null,legacy:true}));
+ }
+ if(data.active){data.phases=data.phases.filter(x=>pairKey(x)===pairKey(data.active));data.cycles=data.cycles.filter(x=>pairKey(x)===pairKey(data.active));data.currentSessionArchived=false;data.workingId=data.workingId||sessionId()}
+ else if(groups.size)data.currentSessionArchived=true;
+ data.sessionHistorySchema=1;save();
+}
+function shortTime(ms){return ms?new Date(ms).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}):'—'}
+function sessionDate(ms){return ms?new Date(ms).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}):'Tanggal tidak tercatat'}
+function sessionRange(s){
+ if(!s.startedAt)return 'Waktu mulai tidak tercatat'+(s.endedAt?' • selesai '+shortTime(s.endedAt):'');
+ const cross=new Date(s.startedAt).toDateString()!==new Date(s.endedAt).toDateString();
+ return shortTime(s.startedAt)+' – '+(cross?sessionDate(s.endedAt)+' ':'')+shortTime(s.endedAt);
+}
+function sessionStats(session){const config=session.config||cfg(pairKey(session)),cycles=session.cycles||[],phases=session.phases||[];
+ const valid=cycles.filter(x=>Number.isFinite(x.spot)&&Number.isFinite(x.load)&&x.spot+x.load>0&&(!config.lastDump||x.lastDump));
+ const spot=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot));
+ const load=avg(cycles.filter(x=>!config.lastDump||x.lastDump).map(x=>x.load));
+ const wait=phases.filter(x=>x.phase==='waiting').reduce((sum,x)=>sum+x.seconds,0);
+ const key=session.hauler==='Volvo DT / Umum'?'DT Volvo':session.hauler;
+ const vessel=session.vessel??fleetSpecs[key]?.[2];
+ const interval=valid.length?avg(valid.map(x=>(x.spot+x.load)/60)):null;
+ return {spot,load,wait,vessel,pty:interval&&vessel>0?60*vessel/interval:null};
+}
+function renderSessionHistory(){
+ $('sessionCount').textContent=data.sessions.length+' SESI';
+ const ordered=[...data.sessions].sort((a,b)=>(b.endedAt||0)-(a.endedAt||0));
+ $('sessionHistory').innerHTML=ordered.length?ordered.map(s=>{const stats=sessionStats(s),id=escapeHtml(s.id);return `<div class="session-swipe" data-session-row="${id}"><button class="swipe-delete" data-delete-session="${id}" tabindex="-1" aria-hidden="true">Hapus</button><div class="session-face"><button class="session-open" data-open-session="${id}"><span class="session-calendar" aria-hidden="true">◷</span><span class="session-copy"><b>${escapeHtml(sessionRange(s))}</b><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))} · ${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</span><small>${s.cycles.length} siklus • ${s.phases.length} catatan${s.legacy?' • data sebelumnya':''}</small></span><span class="session-pty"><b>${stats.pty==null?'—':number(stats.pty)}</b><small>BCM/jam</small></span><span class="session-chevron" aria-hidden="true">›</span></button><button class="session-delete-icon" data-delete-session="${id}" aria-label="Hapus riwayat ${escapeHtml(sessionRange(s))}" title="Hapus riwayat"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6m4-6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>`}).join(''):'<div class="empty-results">Belum ada sesi tersimpan. Selesaikan pengukuran melalui Hasil &amp; Rekomendasi untuk menyimpannya di sini.</div>';
+}
+function openSessionDetail(id){
+ const s=data.sessions.find(x=>x.id===id);if(!s)return;
+ const stats=sessionStats(s),config=s.config||cfg(pairKey(s));
+ const metric=(label,value,cls)=>`<div class="summary-card ${cls}"><small>${label}</small><strong>${value}</strong></div>`;
+ const rows=[...s.phases].reverse().map(r=>{const status=phaseStatusWithConfig(config,r);return `<tr><td>${r.phase==='waiting'?'—':escapeHtml(r.cycleNo)}</td><td>${phaseName(r.phase)}</td><td><b>${fmt(r.seconds,true)}</b></td><td>${status.text}</td></tr>`}).join('');
+ $('sessionDetailBody').innerHTML=`<div class="detail-session-heading"><span>${escapeHtml(sessionDate(s.startedAt||s.endedAt))}</span><h3>${escapeHtml(sessionRange(s))}</h3><p>${escapeHtml(s.loader)} + ${escapeHtml(s.hauler)}</p></div><div class="summary-grid">${metric('SIKLUS',s.cycles.length,'metric-cycles')}${metric('SPOTTING',fmt(stats.spot),'metric-spot')}${metric('LOADING',fmt(stats.load),'metric-load')}${metric('TOTAL DELAY',fmt(stats.wait),'metric-wait')}</div><div class="detail-pty"><small>PTY HASIL PENGUKURAN</small><strong>${stats.pty==null?'—':number(stats.pty)} <span>BCM/jam</span></strong><p>Kapasitas vessel: ${stats.vessel??'—'} BCM. Waktu delay dicatat terpisah dan belum masuk rumus PTY.</p></div><h3 class="detail-table-title">Catatan Waktu</h3><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>AKTIVITAS</th><th>DURASI</th><th>STATUS</th></tr></thead><tbody>${rows||'<tr><td colspan="4">Tidak ada catatan fase.</td></tr>'}</tbody></table></div><details class="detail-cycles"><summary>Detail ${s.cycles.length} Siklus</summary><div class="detail-table-scroll"><table class="result-table"><thead><tr><th>SIKLUS</th><th>SPOTTING</th><th>LOADING</th></tr></thead><tbody>${s.cycles.map(r=>`<tr><td>${escapeHtml(r.cycleNo)}</td><td>${fmt(r.spot,true)}</td><td>${fmt(r.load,true)}</td></tr>`).join('')}</tbody></table></div></details>`;
+ $('sessionDetailBody').scrollTop=0;openModal('sessionDetailModal');$('sessionDetailModal').querySelector('.modal-close').focus();
+}
+function phaseStatusWithConfig(c,r){if(r.phase==='waiting')return {text:'Delay'};if(c.pending)return {text:'Pending'};if(c.lastDump&&r.phase==='loading'&&!r.lastDump)return {text:'Metode lama'};if(c.bands)return bandStatus(r.phase,r.seconds,c.bands,c.lastDump);const target=r.phase==='spotting'?c.spot:c.load;return {text:target?(r.seconds<=target?'Sesuai':'Lebih'):'—'}}
+function askDeleteSession(id){const s=data.sessions.find(x=>x.id===id);if(!s)return;pendingDeleteSession=id;$('deleteSessionDescription').textContent=sessionDate(s.startedAt||s.endedAt)+' • '+sessionRange(s)+' • '+s.loader+' + '+s.hauler+'. Seluruh catatan dalam riwayat ini akan dihapus.';openModal('deleteSessionModal');$('deleteSessionModal').querySelector('.cancel').focus()}
+function newSpotting(now){const p=currentPair();return {phase:'spotting',startedAt:now,cycleId:`${now}-${Math.random().toString(16).slice(2,7)}`,cycleNo:cycleNumberForPair(p),loader:p.loader,hauler:p.hauler}}
 function recordPhase(phase,secs,active){const row={id:`${Date.now()}-${Math.random().toString(16).slice(2,6)}`,cycleId:active.cycleId,cycleNo:active.cycleNo,loader:active.loader,hauler:active.hauler,phase,seconds:Math.max(0,secs),at:new Date().toISOString()};data.phases.push(row);return row}
-function measureClick(){const now=Date.now();if(!data.active){startSpotting();toast('Spotting dimulai');return}
- const active=data.active;const elapsed=(now-active.startedAt)/1000;
- if(active.phase==='spotting'){recordPhase('spotting',elapsed,active);data.active={...active,phase:'loading',startedAt:now};save();renderHome();toast('Spotting tersimpan • loading dimulai');return}
- recordPhase('loading',elapsed,active);const spot=data.phases.find(x=>x.cycleId===active.cycleId&&x.phase==='spotting');const load=data.phases[data.phases.length-1];data.cycles.unshift({id:active.cycleId,cycleNo:active.cycleNo,loader:active.loader,hauler:active.hauler,spot:spot?.seconds??null,load:load.seconds,at:new Date().toISOString()});data.active={phase:'spotting',startedAt:now,cycleId:`${Date.now()}-${Math.random().toString(16).slice(2,7)}`,cycleNo:cycleNumberForPair(active),loader:active.loader,hauler:active.hauler};save();renderHome();toast('Siklus tersimpan • spotting berikutnya dimulai');}
-function switchResults(){if(data.active){openModal('endModal');$('continueMeasure').focus();return}displayResults()}
-function displayResults(){renderResults();$('homeScreen').style.display='none';$('resultsScreen').style.display='block';$('resultsScreen').scrollTop=0}
-function backHome(){show('dashboard')}
+function advancePhase(now){
+ const active=data.active;
+ if(!active||active.phase==='departure'){data.active=newSpotting(now);return 'Spotting dimulai'}
+ const row=recordPhase(active.phase,(now-active.startedAt)/1000,active);
+ if(active.phase==='spotting'){data.active={...active,phase:'loading',startedAt:now};return 'Spotting tersimpan • loading dimulai'}
+ const spot=data.phases.find(x=>x.cycleId===active.cycleId&&x.phase==='spotting');
+ const lastDump=!!cfg(pairKey(active)).lastDump;row.lastDump=lastDump;
+ data.cycles.unshift({id:active.cycleId,cycleNo:active.cycleNo,loader:active.loader,hauler:active.hauler,spot:spot?.seconds??null,load:row.seconds,lastDump,at:new Date(now).toISOString()});
+ data.active=lastDump?{...active,phase:'departure',startedAt:now}:newSpotting(now);
+ return lastDump?'Loading tersimpan • tunggu HD berangkat':'Loading tersimpan • spotting berikutnya dimulai';
+}
+function refreshMeasurement(){save();renderHome();if(data.active&&!ticker)ticker=setInterval(renderMeasurement,100)}
+function measureClick(){
+ const now=Date.now();ensureMeasurementSession(now);let message;
+ if(data.active?.phase==='waiting'){
+  const active=data.active;recordPhase('waiting',(now-active.startedAt)/1000,active);
+  data.active={...active,phase:active.nextPhase||'spotting',startedAt:now};delete data.active.nextPhase;
+  message=`Waktu delay tersimpan • ${phaseName(data.active.phase)} dimulai`;
+ }else message=advancePhase(now);
+ refreshMeasurement();toast(message);
+}
+function waitClick(){
+ if(data.active?.phase==='waiting')return;
+ const now=Date.now();ensureMeasurementSession(now);advancePhase(now);
+ if(data.active.phase==='departure')data.active=newSpotting(now);
+ data.active={...data.active,nextPhase:data.active.phase,phase:'waiting',startedAt:now};
+ refreshMeasurement();toast('Fase selesai • waktu delay dimulai');
+}
+function switchResults(){if(data.active){openModal('endModal');$('continueMeasure').focus();return}archiveMeasurement(Date.now());save();displayResults()}
+function displayResults(fromHistory=false){if(!fromHistory&&history.state?.gpePage!=='results'){if(history.state?.gpePage!=='inner')history.pushState({gpePage:'inner',page:'measure'},'');else history.replaceState({gpePage:'inner',page:'measure'},'');history.pushState({gpePage:'results'},'')}renderResults();$('homeScreen').style.display='none';$('resultsScreen').style.display='block';$('resultsScreen').scrollTop=0}
+function backHome(){if(history.state?.gpePage==='results')history.back();else show('measure')}
 function cycleEval(c,key){const t=cfg(key);let issues=[];if(t.spot&&c.spot>t.spot)issues.push('Spotting');if(t.load&&c.load>t.load)issues.push('Loading');return issues}
-function renderResults(){const p=currentPair(),key=pairKey(p),cycles=getPairCycles(),phases=getPairPhases(),c=cfg(key);$('resultPair').textContent=`${p.loader} → ${p.hauler}`;$('sumCycles').textContent=String(cycles.length);const as=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot)),al=avg(cycles.map(x=>x.load));$('sumSpot').textContent=as==null?'—':fmt(as);$('sumLoad').textContent=al==null?'—':fmt(al);$('sumSpotTarget').textContent=`Standar ${fmt(c.spot)}`;$('sumLoadTarget').textContent=`Standar ${fmt(c.load)}`;
+function loaderPty({spot,load,v}){
+ return 60*v/(spot+load);
+}
+function loaderPtyWithEwh({interval,v,s}){
+ return (60/interval)*v*((60-s)/60);
+}
+function ptyEquation(title,denominator,v,value,extra=''){
+ return '<div class="reference-equation"><b>'+escapeHtml(title)+' =</b><span class="formula-frac"><span>60</span><span>'+
+  escapeHtml(denominator)+'</span></span><span>× '+inputNumber(v)+' BCM'+extra+' = '+number(value)+' BCM/jam</span></div>';
+}
+function renderObservedPty(cycles,pair){
+ const body=$('observedPtyBody');
+ const valid=cycles.filter(x=>Number.isFinite(x.spot)&&Number.isFinite(x.load)&&x.spot+x.load>0&&(!pair.lastDump||x.lastDump));
+ if(!valid.length){body.innerHTML='<div class="pty-empty">Selesaikan satu siklus Spotting dan Loading untuk melihat PTY.</div>';return}
+ const vesselKey=pair.hauler==='Volvo DT / Umum'?'DT Volvo':pair.hauler;
+ const preset=data.vesselByPair[pairKey(pair)]??fleetSpecs[vesselKey]?.[2]??'';
+ const interval=avg(valid.map(x=>(x.spot+x.load)/60));
+ body.innerHTML='<div class="pty-compact"><div class="pty-primary"><span class="pty-label">PRODUKTIVITAS LOADER</span><div id="observedPtyValue"></div><span class="pty-meta">'+valid.length+' siklus • interval '+fmt(interval*60)+'</span></div><label class="vessel-mini" for="observedVessel">Vessel <span>BCM</span><input id="observedVessel" type="text" inputmode="decimal" value="'+escapeHtml(preset)+'"></label></div><details class="pty-formula-details"><summary>Lihat perhitungan</summary><p>(60 ÷ '+minuteText(interval)+' menit) × Kapasitas Vessel Hauler</p><p>Waktu delay dicatat terpisah dan belum termasuk dalam PTY ini.</p></details>';
+ const vessel=$('observedVessel');
+ function update(persist=false){const raw=vessel.value.trim(),v=Number(raw.replace(',','.'));const valid=/^\d+(?:[.,]\d+)?$/.test(raw)&&Number.isFinite(v)&&v>0;
+ $('observedPtyValue').innerHTML=valid?'<div class="pty-number">'+number(60*v/interval)+'<span>BCM/jam</span></div>':'<span class="pty-invalid">Isi kapasitas vessel</span>';
+ if(persist){if(valid){data.vesselByPair[pairKey(pair)]=v;if(data.currentSessionArchived){const saved=data.sessions.find(x=>x.id===data.workingId);if(saved)saved.vessel=v;}save();renderSessionHistory()}}
+ }
+ vessel.addEventListener('input',()=>update(true));update();
+}
+function renderResults(){const p=currentPair(),key=pairKey(p),cycles=getPairCycles(),phases=getPairPhases(),c=cfg(key);$('resultPair').textContent=`${p.loader} → ${p.hauler}`;$('sumCycles').textContent=String(cycles.length);const as=avg(cycles.filter(x=>x.spot!=null).map(x=>x.spot)),al=avg(cycles.filter(x=>!c.lastDump||x.lastDump).map(x=>x.load));$('sumSpot').textContent=as==null?'—':fmt(as);$('sumLoad').textContent=al==null?'—':fmt(al);$('sumSpotTarget').textContent=`Standar ${fmt(c.spot)}`;$('sumLoadTarget').textContent=`Standar ${fmt(c.load)}`;
  const title=$('overallTitle'),desc=$('overallText'),box=$('overallBox'),list=$('recommendations');list.innerHTML='';box.style.borderColor='';box.style.background='';
  if(!cycles.length){title.textContent='Belum ada siklus lengkap';desc.textContent='Selesaikan satu siklus spotting dan loading untuk melihat evaluasi.';list.innerHTML='<li>Standar waktu dan estimasi passes mengikuti tabel fleet untuk pasangan unit terpilih.</li>';}
+ else if(c.pending){title.textContent='Acuan waktu pending';desc.textContent='Durasi tercatat. Kategori penilaian menunggu penetapan acuan PC1250 + HD785.';}
+ else if(c.bands){
+  const spot=bandStatus('spotting',as,c.bands),load=bandStatus('loading',al,c.bands,c.lastDump);
+  title.textContent='Penilaian rata-rata waktu';
+  desc.textContent=`Spotting ${fmt(as,true)} · ${spot.text} | Loading ${fmt(al,true)} · ${load.text}`;
+  if(spot.rank>0)list.insertAdjacentHTML('beforeend','<li>Cek waktu manuver dan posisi hauler saat spotting.</li>');
+  if(c.lastDump&&cycles.some(x=>!x.lastDump))list.insertAdjacentHTML('beforeend','<li>Loading dari metode lama tidak masuk rata-rata loading.</li>');
+  if(load.rank>0)list.insertAdjacentHTML('beforeend','<li>Cek cycle time bucket dan jumlah pass saat loading.</li>');
+ }
  else {let spotBad=as>c.spot,loadBad=al>c.load;if(spotBad||loadBad){title.textContent='Perlu evaluasi waktu';desc.textContent=`${spotBad?'Rata-rata spotting '+fmt(as)+' melebihi standar '+fmt(c.spot)+'. ':''}${loadBad?'Rata-rata loading '+fmt(al)+' melebihi standar '+fmt(c.load)+'.':''}`;box.style.background='#fff3ed';box.style.borderColor='#f3d0c2';if(spotBad)list.insertAdjacentHTML('beforeend','<li><b>Spotting lebih lama:</b> amati jalur masuk, manuver dan posisi hauler, antrean, aba-aba komunikasi, serta kejadian re-spot.</li>');if(loadBad)list.insertAdjacentHTML('beforeend','<li><b>Loading lebih lama:</b> amati waktu siklus bucket, sudut swing, kondisi material, pengisian bucket, posisi bak, dan kecocokan payload.</li>');}
  else if(c.note==='Tidak disarankan'){title.textContent='Waktu sesuai, tetapi fleet tidak disarankan';desc.textContent=`Durasi berada dalam standar waktu; kombinasi ini memiliki estimasi ${c.passes} passes.`;box.style.background='#fff3ed';box.style.borderColor='#f3d0c2';list.innerHTML='<li>Tinjau pemilihan fleet. PC400 + HD785 membutuhkan 20+ passes menurut tabel acuan.</li><li>Jika kombinasi tetap digunakan, pantau payload dan waktu siklus aktual.</li>';}
  else if(c.note==='Kurang ideal'){title.textContent='Waktu sesuai, kombinasi kurang ideal';desc.textContent=`Estimasi ${c.passes} passes membuat kombinasi ini kurang ideal menurut tabel acuan.`;box.style.background='#fff8e9';box.style.borderColor='#eddfbb';list.innerHTML='<li>Evaluasi kecocokan kapasitas loader dengan hauler dan jumlah pass aktual.</li><li>Pertimbangkan fleet yang memerlukan lebih sedikit passes bila tersedia.</li>';}
  else {title.textContent=c.note==='Sangat cepat'?'Waktu sesuai • kombinasi sangat cepat':'Rata-rata sesuai standar';desc.textContent=`Spotting ${fmt(as)} / ${fmt(c.spot)} • Loading ${fmt(al)} / ${fmt(c.load)}.`;box.style.background='#effaf3';box.style.borderColor='#c9e9d4';list.innerHTML=c.note==='Sangat cepat'?'<li>Catatan acuan menyebut kombinasi ini sangat cepat pada 2–3 passes.</li><li>Pastikan payload, pengisian bucket, dan kondisi kerja tetap sesuai prosedur.</li>':'<li>Pertahankan posisi hauler, pola manuver, dan komunikasi yang berjalan baik.</li><li>Pantau siklus berikutnya untuk memastikan hasil tetap konsisten.</li>';}}
- renderTables(cycles,phases,key);
+ const waiting=phases.filter(x=>x.phase==='waiting').reduce((sum,x)=>sum+x.seconds,0);
+ $('waitTotal').textContent=fmt(waiting);
+ const saved=data.sessions.find(x=>x.id===data.workingId);$('resultSessionTime').textContent=saved?sessionDate(saved.startedAt||saved.endedAt)+' • '+sessionRange(saved):'Hasil sesi pengukuran saat ini';
+ renderSessionHistory();
+ renderObservedPty(cycles,c);
 }
-function renderTables(cycles,phases,key){const c=cfg(key);if(!cycles.length){$('cycleTableMount').innerHTML='<div class="empty-results">Belum ada siklus tersimpan untuk pasangan unit ini.</div>'}else{$('cycleTableMount').innerHTML=`<table class="result-table"><thead><tr><th>SIKLUS</th><th>SPOTTING</th><th>LOADING</th><th>HASIL</th></tr></thead><tbody>${cycles.map(x=>{const issues=cycleEval(x,key);const label=issues.length?'Perlu cek':c.note==='Tidak disarankan'?'Fleet tidak disarankan':c.note==='Kurang ideal'?'Kurang ideal':'Sesuai';const date=new Date(x.at).toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});return `<tr><td>${String(x.cycleNo).padStart(2,'0')}<br><small>${date}</small></td><td>${fmt(x.spot)}<br><small>target ${c.spot?fmt(c.spot):'—'}</small></td><td>${fmt(x.load)}<br><small>target ${c.load?fmt(c.load):'—'}</small></td><td>${label}</td></tr>`}).join('')}</tbody></table>`}
- const reverse=[...phases].reverse();if(!reverse.length){$('phaseTableMount').innerHTML='<div class="empty-results">Catatan phase muncul setelah tombol Ukur ditekan pada perpindahan fase.</div>'}else{$('phaseTableMount').innerHTML=`<table class="result-table"><thead><tr><th>SIKLUS</th><th>PHASE</th><th>DURASI</th><th>STATUS</th></tr></thead><tbody>${reverse.map(x=>{const st=phaseStatus(x.phase,x.seconds,key);return `<tr><td>${String(x.cycleNo).padStart(2,'0')}</td><td>${x.phase==='spotting'?'Spotting':'Loading'}</td><td>${fmt(x.seconds)}</td><td>${st.text==='LEBIH'?'Lebih target':st.text==='SESUAI'?'Sesuai':'Target belum diatur'}</td></tr>`}).join('')}</tbody></table>`}}
 function openStandards(){
- const rows=PAIRS.map((p,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(p.loader)} + ${escapeHtml(p.hauler)}</b></td><td>${escapeHtml(p.capacity)}</td><td>${fmt(p.spot)} <small>(${p.spot} detik)</small></td><td>${fmt(p.load)} <small>(${p.load} detik)</small></td><td>${escapeHtml(p.passes)} pass</td><td>${p.note?`<span class="standard-note">${escapeHtml(p.note)}</span>`:'—'}</td></tr>`).join('');
+ const rows=PAIRS.map((p,i)=>`<tr><td>${i+1}</td><td><b>${escapeHtml(p.loader)} + ${escapeHtml(p.hauler)}</b></td><td>${escapeHtml(p.capacity)}</td><td>${p.pending?'Pending':p.bands?bandRange(p.bands.spotting):fmt(p.spot)+' <small>('+p.spot+' detik)</small>'}</td><td>${p.pending?'Pending':p.bands?bandRange(p.bands.loading,p.lastDump):fmt(p.load)+' <small>('+p.load+' detik)</small>'}</td><td>${escapeHtml(p.passes)} pass</td><td>${p.note?`<span class="standard-note">${escapeHtml(p.note)}</span>`:'—'}</td></tr>`).join('');
  $('standardsTable').innerHTML=`<table class="result-table standards-table"><thead><tr><th>No</th><th>Kombinasi fleet</th><th>Kapasitas / kelas</th><th>Spotting</th><th>Loading total</th><th>Estimasi passes</th><th>Catatan</th></tr></thead><tbody>${rows}</tbody></table>`;
  openModal('standardsModal');
 }
-function resetSession(){if(data.active&&data.active.phase){clearInterval(ticker);ticker=null}data.phases=[];data.cycles=[];data.active=null;save();closeModal('resetModal');renderHome();toast('Riwayat sesi dihapus')}
-function exportCsv(){const p=currentPair(),cycles=getPairCycles(),phases=getPairPhases(),c=cfg();const rows=[['Jenis','Siklus','Loader','Hauler','Phase','Durasi detik','Target detik','Status','Waktu']];for(const x of phases){const st=phaseStatus(x.phase,x.seconds,pairKey(p));rows.push(['Phase',x.cycleNo,x.loader,x.hauler,x.phase,x.seconds.toFixed(1),x.phase==='spotting'?c.spot||'':c.load||'',st.text,new Date(x.at).toLocaleString('id-ID')])}for(const x of cycles)rows.push(['Siklus',x.cycleNo,x.loader,x.hauler,'Spotting + Loading',`${x.spot.toFixed(1)} + ${x.load.toFixed(1)}`,`${c.spot||''} + ${c.load||''}`,cycleEval(x,pairKey(p)).join(' & ')||'Sesuai',new Date(x.at).toLocaleString('id-ID')]);const csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`GPE_Loader_${p.loader}_${p.hauler}_hasil.csv`.replaceAll(' ','_');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function resetSession(){if(data.active&&data.active.phase){clearInterval(ticker);ticker=null}data.phases=[];data.cycles=[];data.active=null;data.workingId=null;data.sessionStartedAt=null;data.currentSessionArchived=false;save();closeModal('resetModal');renderHome();toast('Riwayat sesi dihapus')}
+function exportCsv(){const p=currentPair(),cycles=getPairCycles(),phases=getPairPhases(),c=cfg();const rows=[['Jenis','Siklus','Loader','Hauler','Phase','Durasi detik','Target detik','Status','Waktu']];for(const x of phases){const st=phaseStatus(x.phase,x.seconds,pairKey(p),x.lastDump);rows.push(['Phase',x.cycleNo,x.loader,x.hauler,phaseName(x.phase),x.seconds.toFixed(1),x.phase==='waiting'?'':x.phase==='spotting'?c.spot||'':c.load||'',st.text,new Date(x.at).toLocaleString('id-ID')])}for(const x of cycles)rows.push(['Siklus',x.cycleNo,x.loader,x.hauler,'Spotting + Loading',`${x.spot==null?'':x.spot.toFixed(1)} + ${x.load.toFixed(1)}`,`${c.spot||''} + ${c.load||''}`,(c.pending?'Pending':c.bands?(c.lastDump&&!x.lastDump?'Metode lama':cycleBandStatus(x.spot,x.load,c.bands,c.lastDump).text):cycleEval(x,pairKey(p)).join(' & ')||'Sesuai'),new Date(x.at).toLocaleString('id-ID')]);const csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`GPE_Loader_${p.loader}_${p.hauler}_hasil.csv`.replaceAll(' ','_');a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+// Saved session interactions never replace the current working data.
+$('sessionHistory').addEventListener('click',e=>{
+ const del=e.target.closest('[data-delete-session]');if(del){askDeleteSession(del.dataset.deleteSession);return}
+ const open=e.target.closest('[data-open-session]');if(open){const row=open.closest('.session-swipe');if(performance.now()<(row.suppressUntil||0))return;openSessionDetail(open.dataset.openSession)}
+});
+$('confirmDeleteSession').onclick=()=>{const id=pendingDeleteSession;if(!id)return;data.sessions=data.sessions.filter(x=>x.id!==id);pendingDeleteSession=null;save();renderSessionHistory();closeModal('deleteSessionModal');toast('Riwayat terpilih dihapus')};
+$('newMeasureBtn').onclick=()=>{if(data.currentSessionArchived){data.phases=[];data.cycles=[];data.workingId=null;data.sessionStartedAt=null;data.currentSessionArchived=false;save()}show('measure')};
+let swipe=null;
+$('sessionHistory').addEventListener('pointerdown',e=>{if(e.target.closest('[data-delete-session]'))return;const row=e.target.closest('.session-swipe');if(!row)return;swipe={row,x:e.clientX,y:e.clientY,dx:0,horizontal:false}});
+$('sessionHistory').addEventListener('pointermove',e=>{if(!swipe)return;const dx=e.clientX-swipe.x,dy=e.clientY-swipe.y;if(!swipe.horizontal&&Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)){swipe=null;return}if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)){swipe.horizontal=true;swipe.dx=dx;swipe.row.querySelector('.session-face').style.transform=`translateX(${Math.max(-80,Math.min(0,dx))}px)`}});
+function endSessionSwipe(){if(!swipe)return;const {row,dx,horizontal}=swipe;if(horizontal){const open=dx<-42;row.classList.toggle('swiped',open);row.querySelector('.session-face').style.transform='';row.suppressUntil=performance.now()+350;const del=row.querySelector('.swipe-delete');del.tabIndex=open?0:-1;del.setAttribute('aria-hidden',String(!open))}swipe=null}
+document.addEventListener('pointerup',endSessionSwipe);
+$('sessionHistory').addEventListener('pointercancel',()=>{if(swipe)swipe.row.querySelector('.session-face').style.transform='';swipe=null});
 // Events
 fillSelectors(data.active?.loader||'PC1250',data.active?.hauler||'HD465');
 $('loaderSelect').addEventListener('change',()=>{const loader=$('loaderSelect').value;const hauler=PAIRS.find(p=>p.loader===loader)?.hauler;fillSelectors(loader,hauler);renderHome()});
 $('haulerSelect').addEventListener('change',renderHome);
-$('guideToggle').addEventListener('click',()=>{const isOpen=!$('guideCard').classList.contains('open');$('guideCard').classList.toggle('open',isOpen);$('guidePopover').hidden=!isOpen});
-document.addEventListener('click',e=>{if(!$('guideCard').contains(e.target)){$('guideCard').classList.remove('open');$('guidePopover').hidden=true}});
+$('guideToggle').addEventListener('click',()=>{openModal('guideModal');$('guideModal').querySelector('.modal-close').focus()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const modal=document.querySelector('.modal-backdrop.show');if(modal){closeModal(modal.id);if(modal.id==='guideModal')$('guideToggle').focus()}}});
+$('waitBtn').addEventListener('click',waitClick);
+for(const btn of [$('measureBtn'),$('waitBtn'),$('resultsBtn')])btn.addEventListener('click',e=>{const rect=btn.getBoundingClientRect(),r=document.createElement('span');r.className='press-ripple';r.style.left=(e.clientX?e.clientX-rect.left:rect.width/2)+'px';r.style.top=(e.clientY?e.clientY-rect.top:rect.height/2)+'px';btn.appendChild(r);setTimeout(()=>r.remove(),550)});
 $('openStandards').addEventListener('click',openStandards);$('headerStandards').addEventListener('click',openStandards);
 $('measureBtn').addEventListener('click',measureClick);$('resultsBtn').addEventListener('click',switchResults);$('viewAllBtn').addEventListener('click',switchResults);$('backBtn').addEventListener('click',backHome);$('exportBtn').addEventListener('click',exportCsv);
 $('resetBtn').addEventListener('click',()=>openModal('resetModal'));$('confirmReset').addEventListener('click',resetSession);
@@ -257,7 +976,7 @@ document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('.modal-backdrop').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('show')}));
 if(migrated)save();renderHome();if(data.active)ticker=setInterval(renderMeasurement,100);
 const menus=[
- ['measure','Ukur Fleet','Stopwatch spotting dan loading','time','#174e9c'],
+ ['measure','Kalkulator PTY','Stopwatch spotting dan loading','time','#174e9c'],
  ['calc','Hitung Cepat','Produktivitas dan kebutuhan unit','calc','#185a40'],
  ['param','Parameter','Data unit dan parameter tambang','data','#394e65'],
  ['formula','Rumus','Rumus dan satuan perhitungan','calc','#805016'],
@@ -275,9 +994,13 @@ const parameters={
  'Excavator': [
  ['Kapasitas bucket','PC400 2,6 m³ / 2,3 ton  · PC1250 6,7 m³ · Cat 6015 8,1 m³ · PC2000 12 m³'],
  ['Siklus bucket (detik)','Urutan digging / swing isi / dump / swing kosong. PC400 atau DX500 + DT: 8 / 6 / 2 / 6 = 22. PC1250 atau 6015 + HD465/OHT773 atau HD785/OHT777: 11 / 8 / 2 / 7 = 28. PC2000 + HD785/OHT777: 12 / 8 / 3 / 7 = 30.']],
- 'Dozer': [['Kapasitas blade','D85ESS 3,4 m³ · D155 9,4 m³ · D375 18,5 m³'],['Ripping','Lebar track D155 2,14 m dan D375 2,5 m. Penetrasi acuan 1,37 m dan 1,43 m. EK 0,85.']],
- 'Grader': [['Blade dan kerja','Blade 4,9 m · overlap 0,2–0,3 m · faktor proyeksi kartu 0,7 (45°) atau 0,8 (30°) · EK 0,85.']],
- 'PC200': [['Pembuatan tanggul','CT ±15 detik · bucket 0,8 m³ · BFF 0,90–1,10 · EK 0,85 · contoh tanggul dasar 3 m, puncak 2 m, tinggi 2 m.']],
+ 'Dozer': [['Kapasitas blade','D85ESS 3,4 m³ · D155 9,4 m³ · D375 18,5 m³'],['Ripping','Lebar track D155 2,14 m dan D375 2,5 m. Penetrasi acuan 1,37 m dan 1,43 m. EK 0,85.'],
+ ['Acuan perhitungan blade','Kapasitas Blade Efektif = Kapasitas Vessel Hauler ÷ Phase Dozing.'],
+ ['Acuan perhitungan ripping','PTY Ripping = (60 × ½ Lebar Unit × Penetrasi × Jarak Ripping × EK) ÷ Cycle Time · Cycle Time Ripping = Jarak Ripping × 0,05 · Durasi Ripping = (CT Ripping × N Trip) ÷ (EK × 60) · N Trip = Panjang Area Ripping ÷ (½ Lebar Unit Dozer).']],
+ 'Grader': [['Blade dan kerja','Blade 4,9 m · overlap 0,2–0,3 m · faktor proyeksi kartu 0,7 (45°) atau 0,8 (30°) · EK 0,85.'],
+ ['Acuan perhitungan grader','PTY Grader = V × (L efektif − L overlap) × 1000 × EK · L efektif = Lebar Blade × cos θ · Durasi = (Lebar Jalan × Panjang Jalan) ÷ (Kecepatan × L efektif × 1000) × EK.']],
+ 'PC200': [['Pembuatan tanggul','CT ±15 detik · bucket 0,8 m³ · BFF 0,90–1,10 · EK 0,85 · contoh tanggul dasar 3 m, puncak 2 m, tinggi 2 m.'],
+ ['Acuan perhitungan tanggul','PTY PC200 = (3600 × EK) ÷ (CT × Jumlah Phase) · Jumlah Phase = (½ × (a + b) × c) ÷ (KB × BF) · a = lebar dasar, b = lebar permukaan, c = tinggi, KB = kapasitas bucket, BF = Bucket Fill Factor.']],
  'Parameter Tambang': [
  ['Jalan Hauling','Lebar 3,5 × lebar unit terbesar. Grade parameter kerja maksimum 8–10%. Cross fall maksimum 2%.'],
  ['Front Loading','Lebar 2 × lebar hauler + turning radius.'],
@@ -287,8 +1010,8 @@ const parameters={
 };
 const n=(key,label,value='',min=0,max)=>({key,label,value,min,max});
 const calcs=[
- ['loader','PTY Loader','60 ÷ (spotting + loading dalam menit) × kapasitas vessel × EWH',[n('t','Spotting + loading (menit)'),n('v','Kapasitas vessel (BCM)'),n('s','Secondary work (menit/jam)',0,0,59.99)],({t,v,s})=>60/t*v*(60-s)/60,'payload'],
- ['hauler','PTY Hauler','3600 ÷ cycle time hauler (detik) × kapasitas vessel',[n('t','Cycle time hauler (detik)'),n('v','Kapasitas vessel (BCM)')],({t,v})=>3600/t*v,'payload'],
+ ['loader','PTY Loader','(60 ÷ Interval Loading Time) × Kapasitas Vessel Hauler × EWH.',[n('interval','Interval Loading Time'),n('v','Kapasitas Vessel (BCM)'),n('s','Secondary Work (menit/jam)',0,0,60)],loaderPtyWithEwh,'payload'],
+ ['hauler','PTY Hauler','(60 ÷ Cycle Time) × Kapasitas Vessel Hauler',[n('t','Cycle Time Hauler'),n('v','Kapasitas Vessel (BCM)')],({t,v})=>60*v/t,'payload'],
  ['match','Matching Fleet','Cycle time hauler ÷ (spotting + loading), keduanya dalam menit. Bulatkan ke atas untuk estimasi jumlah hauler.',[n('h','Cycle time hauler (menit)'),n('t','Spotting + loading (menit)')],({h,t})=>Math.ceil(h/t),'hauler'],
  ['matchpty','Kebutuhan Hauler dari PTY','PTY loader ÷ PTY satu hauler, dengan satuan produksi sama. Bulatkan ke atas.',[n('l','PTY loader'),n('h','PTY satu hauler')],({l,h})=>Math.ceil(l/h),'hauler'],
  ['dozer','Kebutuhan Dozer Disposal','Kapasitas blade efektif = volume per dumping ÷ jumlah pass. PTY dozer = 3600 ÷ CT × blade efektif × EK. Kebutuhan = debit masuk ÷ PTY dozer, dibulatkan ke atas.',[n('q','Material masuk (m³ lepas/jam)'),n('v','Volume per dumping (m³ lepas)'),n('p','Jumlah pass dozing per dumping'),n('t','Cycle time satu pass (detik)'),n('e','Efektivitas kerja (0–1)',0.85,0,1)],({q,v,p,t,e})=>({value:Math.ceil(q/(3600/t*v/p*e)),note:'PTY per dozer '+number(3600/t*v/p*e)+' m³ lepas/jam'}),'dozer'],
@@ -306,6 +1029,81 @@ const calcs=[
  ['bermheight','Tinggi Tanggul Acuan','Hauling = ¾ tinggi ban. Disposal = ⅓ tinggi ban.',[n('t','Tinggi ban (m)')],({t})=>({value:.75*t,note:'Disposal '+number(t/3)+' m'}),'m hauling']
 ];
 const referenceOnly=new Set(['rip','riptime','grader','berm','road','bermheight']);
+const referenceFormulas=[
+ ['loader','PTY Loader',[
+  ['PTY Loader',['60','Interval Loading Time'],'× Kapasitas Vessel Hauler × EWH']
+ ],'Interval Loading Time adalah durasi dalam menit dari bucket terakhir hauler pertama sampai bucket terakhir hauler berikutnya. Interval ini mencakup Spotting Time dan Loading Time.'],
+ ['ewh','Effective Working Hour',[
+  ['EWH',['60 − Secondary Work','60']]
+ ],'Secondary Work dalam menit per jam.'],
+ ['hauler','PTY Hauler',[
+  ['Taksiran PTY Hauler',['60','Cycle Time'],'× Kapasitas Vessel Hauler']
+ ],'Cycle Time dalam menit: Loading Time + Travel Muatan + Dumping Time + Travel Kosongan + Spotting Time.'],
+ ['match','Matching Fleet',[
+  ['Jumlah Hauler',['Cycle Time Hauler','Loading Time']]
+ ]],
+ ['matchpty','Matching Fleet dari PTY',[
+  ['Jumlah Hauler',['PTY Loader','PTY Hauler']]
+ ]],
+ ['speed','Kecepatan Hauler',[
+  ['Kecepatan',['Jarak','Waktu'],'× 60'],
+  ['Kecepatan Rata-rata',['2 × Jarak Front Disposal','Travel Time − Dumping Time'],'× 60']
+ ],'Jarak dalam km dan waktu dalam menit. Pada rumus kedua, Dumping Time dikurangi satu kali.'],
+ ['travel','Waktu Tempuh',[
+  ['Waktu',['Jarak','Kecepatan'],'× 60']
+ ]],
+ ['dozerpty','Produktivitas Bulldozer',[
+  ['Taksiran PTY Bulldozer',['60','Cycle Time (menit)'],'× Kapasitas Blade × EK'],
+  ['CT',['Dozing Time','Phase Dozing']]
+ ],'EK = Efektivitas Kerja (0,85).'],
+ [null,'Kapasitas Blade Efektif',[
+  ['Kapasitas Blade Efektif',['Kapasitas Vessel Hauler','Phase Dozing']]
+ ]],
+ ['rip','Produktivitas Ripping Bulldozer',[
+  ['PTY Ripping',['60 × ½ Lebar Unit × Penetrasi × Jarak Ripping × EK','Cycle Time']],
+  ['Cycle Time Ripping','Jarak Ripping × 0,05']
+ ]],
+ ['riptime','Durasi Ripping Bulldozer',[
+  ['Durasi Ripping',['CT Ripping × N Trip','EK × 60']],
+  ['Jumlah Ripping (N Trip)',['Panjang Area Ripping','½ Lebar Unit Dozer']]
+ ]],
+ ['grader','Produktivitas dan Durasi Grader',[
+  ['Taksiran PTY Grader','V × (L efektif − L overlap) × 1000 × EK'],
+  ['L efektif','Lebar Blade × cos θ'],
+  ['Durasi',['Lebar Jalan × Panjang Jalan','Kecepatan × L efektif × 1000'],'× EK']
+ ]],
+ ['berm','Produktivitas Pembuatan Tanggul PC200',[
+  ['Taksiran PTY PC200',['3600 × EK','CT × Jumlah Phase']],
+  ['Jumlah Phase',['½ × (a + b) × c','KB × BF']]
+ ],'CT dalam detik. a = lebar dasar, b = lebar permukaan, c = tinggi, KB = kapasitas bucket, BF = Bucket Fill Factor.'],
+ ['road','Lebar Jalan Hauling',[
+  ['Lebar Jalan Hauling','3,5 × Lebar Unit Terbesar']
+ ]],
+ ['front','Lebar Front Loading',[
+  ['Lebar Front Loading','(2 × Lebar Hauler) + Turning Radius']
+ ]],
+ ['disposal','Lebar Disposal',[
+  ['Lebar Disposal','2 × (Lebar Hauler + Turning Radius) × N Load']
+ ],'N Load = Jumlah Fleet.'],
+ ['bermheight','Tinggi Tanggul',[
+  ['Jalan Hauling','¾ × T'],
+  ['Disposal','⅓ × T']
+ ],'T = Tinggi Tyre.']
+];
+function renderReferenceFormulas(){
+ return referenceFormulas.filter(([key])=>key&&calcs.some(([id])=>id===key)&&!referenceOnly.has(key)).map(([key,title,equations,note])=>{
+  const content=equations.map(([label,expression,factor])=>{
+   const term=Array.isArray(expression)
+    ? '<span class="formula-frac"><span>'+escapeHtml(expression[0])+'</span><span>'+escapeHtml(expression[1])+'</span></span>'
+    : '<span>'+escapeHtml(expression)+'</span>';
+   return '<div class="reference-equation"><strong>'+escapeHtml(label)+' =</strong>'+term+
+    (factor?'<span>'+escapeHtml(factor)+'</span>':'')+'</div>';
+  }).join('');
+  const launch='<button class="action-btn secondary" data-calc="'+key+'">Buka Hitung Cepat</button>';
+  return details(title,content+(note?paragraph(note):'')+launch);
+ }).join('');
+}
+
 const fleetSpecs={HD465:[5.4,8.5,25.5],HD785:[6.8,10.1,42],OHT773:[5.5,10.9],OHT777D:[6.1,14.2],'DT Volvo':[null,null,11]};
 const glossary=[
 ["Geometri & Material", "Highwall", "Dinding pit pada sisi batuan penutup di atas lapisan batubara.", ""],
@@ -384,14 +1182,18 @@ const source='<p class="hint">Parameter kerja GPE. Sesuaikan angka dengan spesif
 const icon=name=>'<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-'+name+'"/></svg>';
 const details=(title,copy)=>'<details class="glass hub-card"><summary>'+escapeHtml(title)+'</summary>'+copy+'</details>';
 const paragraph=str=>'<p>'+escapeHtml(str)+'</p>';
+const inputNumber=v=>String(v).replace('.',',');
+const minuteText=v=>v.toLocaleString('id-ID',{maximumFractionDigits:6});
 const number=v=>new Intl.NumberFormat('id-ID',{maximumFractionDigits:2}).format(v);
-const dock=[['measure','Ukur','time'],['calc','Hitung','calc'],['dashboard','Beranda','home'],['reference','Referensi','book'],['safety','Pengawas','shield']];
+const dock=[['measure','Kalkulator PTY','time'],['calc','Hitung','calc'],['dashboard','Beranda','home'],['reference','Referensi','book'],['safety','Pengawas','shield']];
 $('dock').innerHTML=dock.map(([page,label,i])=>'<button data-page="'+page+'" class="'+(page==='dashboard'?'dock-home':'')+'">'+icon(i)+label+'</button>').join('');
 let calcKey='loader';
+let pendingNavigation=null;
 function show(page, fromHistory=false){
  if(!fromHistory){
+  if(history.state?.gpePage==='results'){pendingNavigation=page;history.back();return}
   if(page==='dashboard'&&history.state?.gpePage==='inner'){history.back();return}
-  if(page!=='dashboard'&&history.state?.gpePage!=='inner')history.pushState({gpePage:'inner'},'');
+  if(page!=='dashboard'){if(history.state?.gpePage!=='inner')history.pushState({gpePage:'inner',page},'');else history.replaceState({gpePage:'inner',page},'')}
  }
 
  const isMeasure=page==='measure';
@@ -421,7 +1223,7 @@ function show(page, fromHistory=false){
   hub.innerHTML='<h1>Parameter</h1>'+source+Object.entries(parameters).map(([title,rows])=>details(title,parameterRows(title,rows))).join('')+'<div class="glass hub-card"><h2>Standar waktu fleet</h2><p>Setiap baris memasangkan satu excavator dengan satu jenis hauler serta menampilkan target spotting, loading, dan estimasi pass.</p><button class="action-btn" id="hubStandards">Lihat standar spotting dan loading</button></div>';
   $('hubStandards').onclick=openStandards;
  }else if(page==='formula'){
-  hub.innerHTML='<h1>Rumus</h1>'+source+calcs.map(([key,label,formula])=>details(label,paragraph(formula)+(referenceOnly.has(key)?'':'<button class="action-btn secondary" data-calc="'+key+'">Buka Hitung Cepat</button>'))).join('');
+  hub.innerHTML='<h1>Rumus</h1>'+renderReferenceFormulas();
  }else if(page==='terms'){
   hub.innerHTML='<h1>Terminologi Tambang</h1><label for="termSearch">Cari istilah</label><input type="search" id="termSearch" placeholder="Contoh: spotting, BCM, disposal"><div id="termRows" style="margin-top:12px"></div>';
   function filterTerms(){
@@ -473,7 +1275,9 @@ function renderCalculator(){
  const autoTarget=calcKey==='loader';
  const choices=Object.entries(fleetSpecs).filter(([,v])=>payload?v[2]:v[0]&&v[1]);
  const visible=fields.filter(f=>!geometry||!['w','r'].includes(f.key));
- const input=(key,label,value='',optional=false)=>'<div><label for="field-'+key+'">'+escapeHtml(label)+'</label><input type="text" inputmode="decimal" id="field-'+key+'" value="'+value+'" '+(optional?'placeholder="Opsional"':'')+'></div>';
+ const timedFields=payload?[autoTarget?'interval':'t']:[];
+ const input=(key,label,value='',optional=false)=>'<div><label for="field-'+key+'">'+escapeHtml(label)+'</label><input type="text" inputmode="decimal" id="field-'+key+'" value="'+value+'" '+(optional?'placeholder="Opsional"':'')+'>'+(timedFields.includes(key)
+  ?'<select id="unit-'+key+'" aria-label="Satuan '+escapeHtml(label)+'"><option value="min">menit</option><option value="sec">detik</option></select>':'')+'</div>';
  $('calcDetail').innerHTML='<h2>'+escapeHtml(title)+'</h2><form id="calcForm" novalidate><div class="calc-grid">'+
   ((payload||geometry)?'<div><label for="calcHauler">Jenis hauler</label><select id="calcHauler">'+choices.map(([k])=>'<option>'+k+'</option>').join('')+(payload?'<option>Kapasitas vessel manual</option>':'')+'</select></div>':'')+
   (autoTarget?'<div><label for="calcLoader">Excavator</label><select id="calcLoader">'+[...new Set(PAIRS.map(p=>p.loader))].map(x=>'<option>'+x+'</option>').join('')+'</select></div>':'')+
@@ -481,6 +1285,13 @@ function renderCalculator(){
   (autoTarget?'<div><label for="targetMode">Mode target</label><select id="targetMode"><option value="auto">Otomatis</option><option value="custom">Custom</option></select></div>':'')+
   (compare?input('benchmark',geometry?'Lebar aktual (m)':'Target (BCM/jam)','',true):'')+
   '</div><p id="calcPreset" class="hint"></p><button class="action-btn" id="calcRun" type="button">Hitung</button></form><div id="calcOutput" role="status" aria-live="polite"></div><p class="hint">'+escapeHtml(formula)+'</p>';
+ for(const key of timedFields){
+  const selector=$('unit-'+key);
+  selector.parentElement.classList.add('calc-time-field');
+  selector.addEventListener('change',()=>{$('calcOutput').innerHTML=''});
+ }
+ if(autoTarget)$('calcLoader').value='PC1250';
+ if(payload&&choices.some(([key])=>key==='HD465'))$('calcHauler').value='HD465';
  const output=$('calcOutput');
  const setPreset=()=>{
   const spec=fleetSpecs[$('calcHauler').value];
@@ -499,7 +1310,7 @@ function renderCalculator(){
  }
  function targetPair(){
   const hauler=$('calcHauler').value;
-  return PAIRS.find(p=>p.loader===$('calcLoader').value&&p.hauler===(hauler==='DT Volvo'?'Volvo DT / Umum':hauler));
+  return PAIRS.find(p=>!p.pending&&p.loader===$('calcLoader').value&&p.hauler===(hauler==='DT Volvo'?'Volvo DT / Umum':hauler));
  }
  if(autoTarget){$('targetMode').onchange=refreshTarget;$('calcLoader').onchange=refreshTarget}
  if(payload||geometry){$('calcHauler').onchange=setPreset;setPreset()}
@@ -517,7 +1328,7 @@ function renderCalculator(){
    for(const f of visible){
     const v=f.key==='s'&&f.value===0&&!$('field-s').value.trim()?0:read(f.key,f.label);
     if(!Number.isFinite(v)||v<f.min||(v===0&&f.key!=='s')||(f.max!==undefined&&v>f.max))throw Error('Periksa nilai '+f.label+'.');
-    values[f.key]=v;
+    values[f.key]=timedFields.includes(f.key)&&$('unit-'+f.key).value==='sec'?v/60:v;
    }
    if(geometry)[values.w,values.r]=fleetSpecs[$('calcHauler').value];
    if(['dozer','disposal'].includes(calcKey)&&!Number.isInteger(values[calcKey==='dozer'?'p':'f']))throw Error('Masukkan jumlah dalam bilangan bulat.');
@@ -526,7 +1337,7 @@ function renderCalculator(){
    if(!Number.isFinite(value)||value<0)throw Error('Periksa kembali angka yang dimasukkan.');
    const automatic=autoTarget&&$('targetMode').value==='auto';
    const pair=automatic?targetPair():null;
-   const target=automatic?(pair?calculate({...values,t:(pair.spot+pair.load)/60}):null):compare?read('benchmark',geometry?'lebar aktual':'target',true):null;
+   const target=automatic?(pair?calculate({...values,interval:(pair.spot+pair.load)/60}):null):compare?read('benchmark',geometry?'lebar aktual':'target',true):null;
    const resultUnit=payload?'BCM/jam':unit;
    let advice='';
    if(target!==null){
@@ -537,9 +1348,11 @@ function renderCalculator(){
    }else if(compare){
     advice=geometry?'Isi lebar aktual untuk melihat analisa.':automatic?'Pilih Custom untuk memasukkan target produksi.':'Isi target produksi untuk melihat analisa.';
    }
+   const equation=payload?ptyEquation(title,autoTarget?minuteText(values.interval)+' menit':minuteText(values.t)+' menit',values.v,value,
+    autoTarget?' × EWH '+minuteText((60-values.s)/60):''):'';
    output.innerHTML='<section class="calc-result"><h3>Hasil Perhitungan</h3><strong>'+number(value)+'</strong><span>'+escapeHtml(resultUnit)+'</span>'+
     (target!==null?paragraph((geometry?'Lebar aktual':automatic?'Target otomatis':'Target custom')+' '+number(target)+' '+(geometry?'m':'BCM/jam')):'')+
-    (note?paragraph(note):'')+(advice?'<div class="calc-advice"><h3>Rekomendasi</h3>'+paragraph(advice)+'</div>':'')+'</section>';
+    (note?paragraph(note):'') +equation+(advice?'<div class="calc-advice"><h3>Rekomendasi</h3>'+paragraph(advice)+'</div>':'')+'</section>';
   }catch(err){output.textContent=err.message}
   requestAnimationFrame(()=>output.scrollIntoView({block:'nearest'}));
  }
@@ -554,12 +1367,15 @@ document.addEventListener('click',e=>{
 $('continueMeasure').onclick=()=>{closeModal('endModal');$('resultsBtn').focus()};
 $('finishMeasure').onclick=()=>{
  clearInterval(ticker);ticker=null;
- data.active=null;save();renderHome();closeModal('endModal');displayResults();$('backBtn').focus();
+ if(data.active?.phase==='waiting')recordPhase('waiting',(Date.now()-data.active.startedAt)/1000,data.active);
+ data.active=null;archiveMeasurement(Date.now());save();renderHome();closeModal('endModal');displayResults();$('backBtn').focus();
 };
-if(history.state?.gpePage==='inner')history.replaceState({gpePage:'home'},'');
-window.addEventListener('popstate',()=>{
+if(['inner','results'].includes(history.state?.gpePage))history.replaceState({gpePage:'home'},'');
+window.addEventListener('popstate',event=>{
  document.querySelectorAll('.modal-backdrop.show').forEach(el=>el.classList.remove('show'));
- if(history.state?.gpePage==='inner')history.replaceState({gpePage:'home'},'');
+ if(pendingNavigation){const page=pendingNavigation;pendingNavigation=null;show(page);return}
+ if(event.state?.gpePage==='results'){displayResults(true);return}
+ if(event.state?.gpePage==='inner'){show(event.state.page||'measure',true);return}
  show('dashboard',true);
 });
 const themeToggle=document.getElementById('themeToggle');
@@ -579,6 +1395,7 @@ themeToggle.onclick=()=>{
  try{localStorage.setItem('gpe-loader-theme',darkTheme?'dark':'light')}catch{}
 };
 applyTheme();
+migrateSessions();
 show('dashboard',true);
 
 })();

@@ -545,6 +545,68 @@ html[data-theme=dark] .app .app-background-photo{opacity:.10;filter:brightness(.
 .card-watermark{opacity:.10}
 .param-with-photo .param-photo{display:block;object-fit:contain}
 </style>
+<style id="soft3d-menu-icon-surfaces">
+/* Raised icon holders only: retain all original dimensions, assets and menu layout. */
+.tile .tile-square{
+ background:linear-gradient(145deg,color-mix(in srgb,var(--tile) 77%,white),var(--tile));
+ box-shadow:5px 5px 10px rgba(40,59,82,.17),-3px -3px 8px rgba(255,255,255,.86),inset 0 1px 1px rgba(255,255,255,.52),inset 0 -2px 3px rgba(0,16,40,.12);
+ transition:box-shadow .15s ease,transform .15s ease;
+}
+.tile .tile-square::after{
+ content:"";position:absolute;inset:0;border-radius:inherit;z-index:2;pointer-events:none;
+ box-shadow:inset 1px 1px 1px rgba(255,255,255,.65),inset -1px -1px 2px rgba(22,40,65,.17);
+ background:linear-gradient(155deg,rgba(255,255,255,.10),transparent 40%);
+}
+.tile .tile-square .unit-photo{display:block;object-fit:contain;border-radius:inherit}
+.tile .tile-square:has(img) svg{visibility:hidden}
+.tile:active .tile-square{
+ transform:translateY(1px) scale(.97);
+ box-shadow:inset 3px 3px 6px rgba(17,39,65,.23),inset -2px -2px 5px rgba(255,255,255,.40),1px 1px 3px rgba(35,56,81,.08);
+}
+html[data-theme=dark] .tile .tile-square{
+ box-shadow:5px 5px 11px rgba(0,5,12,.38),-2px -2px 7px rgba(112,141,173,.08),inset 0 1px 1px rgba(255,255,255,.35),inset 0 -2px 3px rgba(0,8,22,.25);
+}
+html[data-theme=dark] .tile:active .tile-square{
+ box-shadow:inset 3px 3px 7px rgba(0,7,19,.42),inset -2px -2px 5px rgba(154,183,210,.15),1px 1px 3px rgba(0,5,12,.12);
+}
+@media(prefers-reduced-motion:reduce){.tile .tile-square{transition:none}.tile:active .tile-square{transform:none}}
+</style>
+<style id="soft3d-controls-and-metrics">
+/* Complete the Soft 3D treatment without altering dimensions or behavior. */
+html:not([data-theme=dark]) .icon-btn,.icon-btn,.info-button,.back-btn,.modal-close,.tiny-action,#guideToggle{
+ background:linear-gradient(145deg,#ffffff,#edf1f6);color:var(--ink2);
+ box-shadow:3px 3px 7px rgba(40,59,82,.12),-2px -2px 6px rgba(255,255,255,.85),inset 0 1px 0 rgba(255,255,255,.8);
+ transition:box-shadow .15s ease,transform .15s ease;
+}
+html[data-theme=dark] .icon-btn,html[data-theme=dark] .info-button,html[data-theme=dark] .back-btn,html[data-theme=dark] .modal-close,html[data-theme=dark] .tiny-action,html[data-theme=dark] #guideToggle{
+ background:linear-gradient(145deg,#2a323e,#202732);color:var(--ink2);
+ box-shadow:3px 3px 7px rgba(0,5,12,.33),-2px -2px 6px rgba(133,155,183,.06),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.icon-btn:active,.info-button:active,.back-btn:active,.modal-close:active,.tiny-action:active,#guideToggle:active{
+ transform:translateY(1px);box-shadow:inset 2px 2px 5px rgba(25,43,67,.18),inset -2px -2px 4px rgba(255,255,255,.62);
+}
+html[data-theme=dark] .icon-btn:active,html[data-theme=dark] .info-button:active,html[data-theme=dark] .back-btn:active,html[data-theme=dark] .modal-close:active,html[data-theme=dark] .tiny-action:active,html[data-theme=dark] #guideToggle:active{
+ box-shadow:inset 2px 2px 5px rgba(0,5,12,.38),inset -2px -2px 4px rgba(147,168,192,.10);
+}
+/* Recessed pair selectors: retain the existing dropdown arrow. */
+#loaderSelect,#haulerSelect{background-color:#f0f3f7;box-shadow:inset 3px 3px 6px rgba(51,75,103,.12),inset -3px -3px 6px rgba(255,255,255,.9)}
+html[data-theme=dark] #loaderSelect,html[data-theme=dark] #haulerSelect{background-color:#1b222c;box-shadow:inset 3px 3px 6px rgba(0,6,15,.33),inset -2px -2px 5px rgba(141,162,188,.06)}
+#loaderSelect:focus-visible,#haulerSelect:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+/* Convex measurement buttons: opaque phase gradients and active orbit remain. */
+.controls .activity-button{box-shadow:inset 0 2px 2px rgba(255,255,255,.37),inset 0 -4px 5px rgba(0,21,43,.16),0 5px 9px rgba(0,5,15,.23);transition:box-shadow .15s ease,transform .15s ease,opacity .18s}
+.controls .activity-button.is-active{box-shadow:inset 0 2px 2px rgba(255,255,255,.48),inset 0 -4px 5px rgba(0,21,43,.13),0 6px 11px rgba(0,5,15,.26)}
+.controls .activity-button.is-muted{box-shadow:inset 0 1px 1px rgba(255,255,255,.18),inset 0 -3px 4px rgba(0,15,32,.12),0 2px 5px rgba(0,5,15,.14)}
+.controls .activity-button:active{transform:scale(.975) translateY(1px);box-shadow:inset 3px 4px 8px rgba(0,23,46,.30),inset -2px -2px 5px rgba(255,255,255,.23),0 1px 2px rgba(0,5,15,.14)}
+/* Pastel summary surfaces gain depth; text stays dark and sharp. */
+.summary-card{box-shadow:4px 5px 11px rgba(41,58,83,.08),-3px -3px 8px rgba(255,255,255,.7),inset 0 2px 2px rgba(255,255,255,.66),inset 0 -2px 3px rgba(58,78,104,.045)}
+html[data-theme=dark] .summary-card{box-shadow:4px 5px 11px rgba(0,4,12,.24),-2px -2px 6px rgba(134,157,189,.04),inset 0 2px 2px rgba(255,255,255,.53),inset 0 -2px 3px rgba(32,54,83,.08)}
+/* Physical Home orb: black in light mode, white in dark mode. */
+.dock .dock-home,.dock .dock-home[aria-current=page]{background:linear-gradient(145deg,#2a323e,#10151d);box-shadow:4px 5px 10px rgba(0,7,19,.23),-3px -3px 7px rgba(255,255,255,.70),inset 0 2px 2px rgba(255,255,255,.20),inset 0 -3px 4px rgba(0,0,0,.30)}
+html[data-theme=dark] .dock .dock-home,html[data-theme=dark] .dock .dock-home[aria-current=page]{background:linear-gradient(145deg,#ffffff,#dee4ed);box-shadow:4px 5px 10px rgba(0,5,12,.32),-2px -2px 7px rgba(147,169,196,.05),inset 0 2px 2px rgba(255,255,255,.85),inset 0 -3px 4px rgba(43,67,100,.16)}
+.dock .dock-home:active,.dock .dock-home[aria-current=page]:active{transform:translateY(1px);box-shadow:inset 3px 3px 6px rgba(0,0,0,.45),inset -2px -2px 5px rgba(255,255,255,.14),0 1px 3px rgba(0,5,15,.16)}
+html[data-theme=dark] .dock .dock-home:active,html[data-theme=dark] .dock .dock-home[aria-current=page]:active{box-shadow:inset 3px 3px 6px rgba(43,67,100,.20),inset -2px -2px 5px rgba(255,255,255,.83),0 1px 3px rgba(0,5,15,.16)}
+@media(prefers-reduced-motion:reduce){.controls .activity-button,.icon-btn,.info-button,.back-btn,.modal-close,.tiny-action,#guideToggle{transition:none}}
+</style>
 </head>
 <body>
 <div class="app" id="app">

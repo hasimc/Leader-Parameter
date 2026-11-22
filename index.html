@@ -578,6 +578,10 @@ html[data-theme=dark] .modal{background:linear-gradient(145deg,rgba(30,55,78,.95
 .waiting-button.is-active .phase-label,.waiting-button.is-active .timer-value,.waiting-button.is-active .button-action,.waiting-button.is-active small{color:#352600;text-shadow:none}
 .waiting-button.is-active .phase-label::before{background:#594100;box-shadow:none}
 </style>
+<style id="restore-original-background-photo">
+.app .app-background-photo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.48;z-index:0;pointer-events:none;filter:saturate(.95)}
+html[data-theme=dark] .app .app-background-photo{opacity:.36;filter:brightness(.76) saturate(.9)}
+</style>
 </head>
 <body>
 <div class="app" id="app">
